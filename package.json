@@ -25,7 +25,8 @@
     "url": "git+https://github.com/huanxiaomang/nano-ui.git"
   },
   "scripts": {
-    "dev": "pnpm -C play dev"
+    "dev": "pnpm -C play dev",
+    "release": "release-it"
   },
   "peerDependencies": {
     "vue": "^3.2.0"
@@ -77,6 +78,7 @@
     "lint-staged": "^13.0.3",
     "npm-run-all2": "^5.0.0",
     "puppeteer": "^17.1.3",
+    "release-it": "^17.11.0",
     "resize-observer-polyfill": "^1.5.1",
     "rimraf": "^3.0.2",
     "tsx": "^4.7.1",
