@@ -1,0 +1,4 @@
+{
+  "root": true,
+  "extends": ["@nano-ui/eslint-config"]
+}
