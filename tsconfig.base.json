@@ -16,8 +16,8 @@
     "rootDir": ".",
     "types": [],
     "paths": {
-      "@element-plus/*": ["packages/*"],
-      "element-plus": ["packages/element-plus"]
+      "@nano-ui/*": ["packages/*"],
+      "nano-ui": ["packages/nano-ui"]
     },
     "preserveSymlinks": true
   }

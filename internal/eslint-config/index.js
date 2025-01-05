@@ -245,7 +245,7 @@ module.exports = defineConfig({
             position: 'before',
           },
           {
-            pattern: '@element-plus/**',
+            pattern: '@nano-ui/**',
             group: 'internal',
           },
         ],

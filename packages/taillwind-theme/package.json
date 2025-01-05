@@ -13,10 +13,6 @@
   "main": "index.css",
   "unpkg": "index.css",
   "jsdelivr": "index.css",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/element-plus/element-plus.git"
-  },
   "style": "index.css",
   "scripts": {
     "clean": "rimraf dist",
