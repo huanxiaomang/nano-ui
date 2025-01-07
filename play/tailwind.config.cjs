@@ -1,7 +1,7 @@
 const plugin = require('tailwindcss/plugin');
 
 module.exports = {
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx,less,css}','../packages/components/**/*.{vue,js,ts,jsx,tsx,less,css}'],
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx,less,css}','../packages/components/**/*.{vue,ts,jsx,tsx,less,css}'],
   darkMode: 'class', // or 'media' or 'class'
   corePlugins: {
     preflight: false,

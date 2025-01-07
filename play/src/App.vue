@@ -4,7 +4,7 @@ import NButton from '../../packages/components/button/button.vue';
 
 <template>
   <div>
-    <n-button>123</n-button>
+    <n-button type="primary">123</n-button>
   </div>
 </template>
 
