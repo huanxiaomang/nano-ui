@@ -20,3 +20,7 @@ cypress/screenshots/*
 cypress/videos/*
 tmp
 docs/.vitepress/cache
+
+my-ui
+
+my-ui

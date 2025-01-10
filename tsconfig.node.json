@@ -10,7 +10,7 @@
     "internal/**/*",
     "internal/**/*.json",
     "scripts/**/*",
-    "packages/theme-chalk/*",
+    "packages/theme/*",
     "packages/nano-ui/version.ts",
     "packages/nano-ui/package.json"
   ],
