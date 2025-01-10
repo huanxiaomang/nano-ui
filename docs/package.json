@@ -1,0 +1,24 @@
+{
+  "name": "@nano-ui/docs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "type": "module",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress dev ./",
+    "build": "vitepress build ./"
+  },
+  "dependencies": {
+    "@vitepress-demo-preview/component": "^2.3.2"
+  },
+  "devDependencies": {
+    "@vitepress-demo-preview/plugin": "^1.2.3",
+    "nano-ui-vue": "workspace:*",
+    "vitepress": "1.0.0-rc.44",
+    "vitepress-api-table": "workspace:*"
+  }
+}

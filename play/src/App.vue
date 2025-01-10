@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import NButton from '../../packages/components/button/button.vue';
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>

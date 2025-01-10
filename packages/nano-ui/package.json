@@ -2,6 +2,7 @@
   "name": "nano-ui-vue",
   "version": "0.0.0-dev.1",
   "description": "A Component Library for Vue 3 with tailwindcss",
+  "type": "module",
   "keywords": [
     "nano-ui",
     "component library",
@@ -10,52 +11,26 @@
     "vue"
   ],
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "es/index.mjs",
-  "types": "es/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/types/core/index.d.ts",
+  "main": "./dist/umd/index.umd.cjs",
+  "module": "./dist/es/index.js",
   "exports": {
     ".": {
-      "types": "./es/index.d.ts",
-      "import": "./es/index.mjs",
-      "require": "./lib/index.js"
+      "types": "./dist/types/core/index.d.ts",
+      "import": "./dist/es/index.js",
+      "require": "./dist/umd/index.umd.cjs"
     },
-    "./global": {
-      "types": "./global.d.ts"
-    },
-    "./es": {
-      "types": "./es/index.d.ts",
-      "import": "./es/index.mjs"
-    },
-    "./lib": {
-      "types": "./lib/index.d.ts",
-      "require": "./lib/index.js"
-    },
-    "./es/*.mjs": {
-      "types": "./es/*.d.ts",
-      "import": "./es/*.mjs"
-    },
-    "./es/*": {
-      "types": [
-        "./es/*.d.ts",
-        "./es/*/index.d.ts"
-      ],
-      "import": "./es/*.mjs"
-    },
-    "./lib/*.js": {
-      "types": "./lib/*.d.ts",
-      "require": "./lib/*.js"
-    },
-    "./lib/*": {
-      "types": [
-        "./lib/*.d.ts",
-        "./lib/*/index.d.ts"
-      ],
-      "require": "./lib/*.js"
-    },
-    "./*": "./*"
+    "./dist/": {
+      "import": "./dist/",
+      "require": "./dist/"
+    }
   },
-  "unpkg": "dist/index.full.js",
-  "jsdelivr": "dist/index.full.js",
+  "sideEffects": [
+    "./dist/index.css"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nano-ui/nano-ui.git"
@@ -63,21 +38,32 @@
   "publishConfig": {
     "access": "public"
   },
-  "style": "dist/index.css",
-  "sideEffects": [
-    "dist/*",
-    "es/components/*/style/*",
-    "lib/components/*/style/*"
-  ],
+  "scripts": {
+    "build": "run-p build-es build-umd",
+    "build:watch": "run-p build-es:watch build-umd:watch",
+    "build-umd": "vite build --config build/vite.umd.config.ts",
+    "build-es": "vite build --config build/vite.es.config.ts",
+    "build-umd:watch": "vite build --watch --config build/vite.umd.config.ts",
+    "build-es:watch": "vite build --watch --config build/vite.es.config.ts",
+    "release": "release-it"
+  },
   "peerDependencies": {
     "vue": "^3.2.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/vue-fontawesome": "^3.0.8",
+    "@nano-ui/components": "workspace:*",
+    "@popperjs/core": "^2.11.8",
+    "async-validator": "^4.2.5"
+  },
   "devDependencies": {
-    "@types/node": "*",
-    "csstype": "^2.6.20",
-    "vue": "^3.2.37",
-    "vue-router": "^4.0.16"
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup-plugin-visualizer": "^5.12.0",
+    "terser": "^5.31.1",
+    "unbuild": "^2.0.0",
+    "vite-plugin-compression2": "^1.1.1"
   },
   "web-types": "web-types.json",
   "browserslist": [

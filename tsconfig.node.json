@@ -11,8 +11,8 @@
     "internal/**/*.json",
     "scripts/**/*",
     "packages/theme/*",
-    "packages/nano-ui/version.ts",
-    "packages/nano-ui/package.json"
+    "packages/nano-ui/package.json",
+    "packages/nano-ui/build/hooksPlugin.ts"
   ],
   "exclude": ["**/__tests__/**", "**/tests/**", "**/dist"]
 }

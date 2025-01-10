@@ -17,7 +17,7 @@
     "types": [],
     "paths": {
       "@nano-ui/*": ["packages/*"],
-      "nano-ui": ["packages/nano-ui"]
+      "nano-ui-vue": ["packages/nano-ui-vue"]
     },
     "preserveSymlinks": true
   }
