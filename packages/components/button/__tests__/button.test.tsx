@@ -41,6 +41,43 @@ describe('NButton.vue', () => {
     expect(wrapper.attributes('disabled')).toBeDefined();
   });
 
+  it('should render correct tag when tag is provided', () => {
+    const wrapper = mount(() => <NButton tag="a" />);
+    expect(wrapper.element.tagName).toBe('A');
+  });
+
+  it('should render as button by default when no tag is provided', () => {
+    const wrapper = mount(() => <NButton />);
+    expect(wrapper.element.tagName).toBe('BUTTON');
+  });
+
+  it('should inherit disabled state from NButtonGroup', () => {
+    const wrapper = mount(() => (
+      <NButtonGroup disabled>
+        <NButton />
+      </NButtonGroup>
+    ));
+    const button = wrapper.findComponent(NButton);
+    expect(button.classes()).toContain('is-disabled');
+    expect(button.attributes('disabled')).toBeDefined();
+  });
+
+  it('should respect the disabled prop when not inside NButtonGroup', () => {
+    const wrapper = mount(() => <NButton disabled />);
+    expect(wrapper.classes()).toContain('is-disabled');
+    expect(wrapper.attributes('disabled')).toBeDefined();
+  });
+
+  it('should apply correct marginRight style based on default slot', () => {
+    const wrapperWithSlot = mount(() => (
+      <NButton icon="check-circle">Click Me</NButton>
+    ));
+    const iconStyleWithSlot = wrapperWithSlot
+      .findComponent(NIcon)
+      .attributes('style');
+    expect(iconStyleWithSlot).toContain('margin-right: 6px');
+  });
+
   it('click event', async () => {
     const clickHandler = vi.fn();
     const wrapper = mount(() => <NButton onClick={clickHandler} />);
