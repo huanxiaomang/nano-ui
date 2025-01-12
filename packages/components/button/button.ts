@@ -65,7 +65,7 @@ export const buttonProps = buildProps({
    */
   loadingIcon: {
     type: iconPropType,
-    default: () => '图标',
+    default: () => 'spinner',
   },
   /**
    * @description determine whether it's a plain button

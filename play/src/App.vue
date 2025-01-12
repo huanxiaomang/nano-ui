@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import NButton from './../../packages/components/button/button.vue';
+import NButtonGroup from './../../packages/components/button/button-group.vue';
 import NIcon from './../../packages/components/icon/icon.vue';
 </script>
 
 <template>
   <div>
+    <n-button-group type="primary" disabled size="small">
+      <n-button type="primary" icon="share">--nano-button1</n-button>
+      <n-button type="primary" icon="share">--nano-button2</n-button>
+      <n-button type="primary" icon="share">--nano-button3</n-button>
+      <n-button type="primary" icon="share">--nano-button4</n-button>
+    </n-button-group>
     <div>默认按钮，primary 类型</div>
     <n-icon icon="share" />
     <n-button type="primary" icon="share">--nano-button</n-button>
@@ -70,7 +77,7 @@ import NIcon from './../../packages/components/icon/icon.vue';
     <n-button plain autoInsertSpace>--nano-button</n-button>
 
     <div>自定义标签，a标签按钮</div>
-    <n-button tag="a" href="#">--nano-button</n-button>
+    <n-button tag="a" href="baod">--nano-button</n-button>
   </div>
 </template>
 

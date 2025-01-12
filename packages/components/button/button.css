@@ -63,7 +63,7 @@
     border-color: var(--nano-button-active-border-color);
     background-color: var(--nano-button-active-bg-color);
     outline: none;
-    transform: scale(0.95); /* 按钮点击时缩小 */
+    transform: scale(0.98); /* 按钮点击时缩小 */
   }
 
   /*plain*/
@@ -100,10 +100,13 @@
   &.is-disabled:hover,
   &.is-disabled:focus,
   &.is-disabled:active,
-  &[disabled],
-  &[disabled]:hover,
-  &[disabled]:focus,
-  &[disabled]:active {
+  &.is-loading:hover,
+  &.is-loading:focus,
+  &.is-loading:active,
+  &[disabled="true"],
+  &[disabled="true"]:hover,
+  &[disabled="true"]:focus,
+  &[disabled="true"]:active {
     color: var(--nano-button-disabled-text-color);
     cursor: not-allowed;
     background-image: none;
@@ -112,7 +115,7 @@
     transform: scale(1); /* 按钮点击时缩小 */
   }
 
-  [class*="er-icon"] {
+  [class*="nano-icon"] {
     width: 1em;
     height: 1em;
   }
