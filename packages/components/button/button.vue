@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="tag !== 'button' ? tag : nativeType"
+    :is="tag ?? 'button'"
     class="nano-button"
     :disabled="_disabled"
     :autofocus="autofocus"
@@ -14,7 +14,7 @@
       'is-loading': loading,
       'is-link': link,
     }"
-    @click="useThrottle ? handleClickWithThrottle : handleClick"
+    @click="handleClick"
   >
     <template v-if="loading">
       <slot name="loading">
@@ -51,14 +51,17 @@ const _size = computed(() => ctx?.size ?? props?.size);
 const iconStyle = computed(() => ({
   marginRight: slots.default ? '6px' : '0px',
 }));
-
-const handleClick = (e: MouseEvent) => {
+const { useThrottle } = props;
+const emitClick = (e: MouseEvent) => {
   emits('click', e);
 };
 
-const handleClickWithThrottle = throttle(handleClick, props.throttleDuration, {
+const handleClickWithThrottle = throttle(emitClick, props.throttleDuration, {
   trailing: false,
 });
+const handleClick = computed(() =>
+  useThrottle ? handleClickWithThrottle : emitClick
+);
 </script>
 
 <style scoped>

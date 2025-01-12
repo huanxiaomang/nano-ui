@@ -14,7 +14,9 @@ import NIcon from './../../packages/components/icon/icon.vue';
     </n-button-group>
     <div>默认按钮，primary 类型</div>
     <n-icon icon="share" />
-    <n-button type="primary" icon="share">--nano-button</n-button>
+    <n-button type="primary" icon="share" @click="console.log(1)">
+      --nano-button1
+    </n-button>
 
     <div>禁用按钮</div>
     <n-button disabled>Button</n-button>

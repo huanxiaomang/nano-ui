@@ -19,8 +19,6 @@ export const buttonTypes = [
 
 export type ButtonType = (typeof buttonTypes)[number];
 
-export const buttonNativeTypes = ['button', 'submit', 'reset'] as const;
-
 export const buttonProps = buildProps({
   /**
    * @description button size
@@ -47,14 +45,6 @@ export const buttonProps = buildProps({
    */
   icon: {
     type: String,
-  },
-  /**
-   * @description native button type
-   */
-  nativeType: {
-    type: String,
-    values: buttonNativeTypes,
-    default: 'button',
   },
   /**
    * @description determine whether it's loading

@@ -28,7 +28,9 @@
     "dev": "pnpm -C play dev",
     "release": "release-it",
     "docs:dev": "pnpm --filter @nano-ui/docs dev",
-    "docs:build": "pnpm --filter @nano-ui/docs build"
+    "docs:build": "pnpm --filter @nano-ui/docs build",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage"
   },
   "peerDependencies": {
     "vue": "^3.2.0"
