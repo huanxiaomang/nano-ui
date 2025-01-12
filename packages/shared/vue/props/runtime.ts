@@ -1,7 +1,7 @@
 import { warn } from 'vue';
 import { fromPairs } from 'lodash-unified';
-import { isObject } from '../types';
-import { hasOwn } from '../objects';
+import { isObject } from '../../utils/is';
+import { hasOwn } from '../../utils/objects';
 
 import type { PropType } from 'vue';
 import type {

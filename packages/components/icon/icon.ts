@@ -1,5 +1,5 @@
 import { ExtractPropTypes, PropType } from 'vue';
-import { buildProps, definePropType } from '@nano-ui/shared';
+import { buildProps, definePropType } from '@nano-ui/shared/vue/props';
 
 export const flipTypes = ['horizontal', 'vertical', 'both'] as const;
 export type FlipType = (typeof flipTypes)[number];

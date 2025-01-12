@@ -1,6 +1,5 @@
-import { buildProp } from '@nano-ui/shared/buildProps';
-
-import { componentSizes } from '@nano-ui/shared';
+import { componentSizes } from '@nano-ui/shared/component';
+import { buildProp } from '@nano-ui/shared/vue/props';
 
 export const useSizeProp = () =>
   buildProp({

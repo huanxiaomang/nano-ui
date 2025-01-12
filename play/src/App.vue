@@ -6,8 +6,8 @@ import NIcon from './../../packages/components/icon/icon.vue';
 <template>
   <div>
     <div>默认按钮，primary 类型</div>
-    <n-icon icon="share">1</n-icon>
-    <n-button round icon="d">--nano-button</n-button>
+    <n-icon icon="share" />
+    <n-button type="primary" icon="share">--nano-button</n-button>
 
     <div>禁用按钮</div>
     <n-button disabled>Button</n-button>

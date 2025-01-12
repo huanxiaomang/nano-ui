@@ -1,9 +1,8 @@
 import { Component, ComputedRef, ExtractPropTypes, Ref } from 'vue';
-import { definePropType, iconPropType } from '@nano-ui/shared/props';
 
 import { useSizeProp } from '@nano-ui/hooks/use-size';
-import { ComponentSize } from '@nano-ui/shared/constants';
-import { buildProps } from '@nano-ui/shared/props/index';
+import { buildProps, definePropType } from '@nano-ui/shared/vue/props';
+import { ComponentSize, iconPropType } from '@nano-ui/shared/component';
 
 export const buttonTypes = [
   'primary',
