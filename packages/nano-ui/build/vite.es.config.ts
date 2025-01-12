@@ -78,7 +78,7 @@ export default defineConfig({
     cssCodeSplit: true,
     lib: {
       entry: resolve(__dirname, '../index.ts'),
-      name: 'ToyElement',
+      name: 'NanoUI',
       fileName: 'index',
       formats: ['es'],
     },
@@ -109,11 +109,14 @@ export default defineConfig({
           if (id.includes('/packages/hooks')) {
             return 'hooks';
           }
+          if (id.includes('/packages/constants')) {
+            return 'constants';
+          }
           if (
-            id.includes('/packages/utils') ||
+            id.includes('/packages/shared') ||
             id.includes('plugin-vue:export-helper')
           ) {
-            return 'utils';
+            return 'shared';
           }
           for (const dirName of getDirectoriesSync('../components')) {
             if (id.includes(`/packages/components/${dirName}`)) {
