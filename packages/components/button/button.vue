@@ -16,6 +16,19 @@
     }"
     @click="useThrottle ? handleClickWithThrottle : handleClick"
   >
+    <template v-if="loading">
+      <slot name="loading">
+        <n-icon
+          :icon="props.loadingIcon ?? 'spinner'"
+          :style="iconStyle"
+          size="1x"
+          spin
+        />
+      </slot>
+    </template>
+    <template v-if="props.icon && !loading">
+      <n-icon :icon="props.icon" :style="iconStyle" size="1x" />
+    </template>
     <slot />
   </component>
 </template>
@@ -24,6 +37,7 @@
 import { computed } from 'vue';
 import { throttle } from 'lodash-unified';
 import { buttonProps } from './button';
+import NIcon from './../icon/icon.vue';
 import type { ButtonEmits } from './button';
 
 defineOptions({
@@ -31,10 +45,14 @@ defineOptions({
 });
 
 const props = defineProps(buttonProps);
-
+const slots = defineSlots();
 const emits = defineEmits<ButtonEmits>();
 
 const _disabled = computed(() => props.disabled);
+
+const iconStyle = computed(() => ({
+  marginRight: slots.default ? '6px' : '0px',
+}));
 
 const handleClick = (e: MouseEvent) => {
   emits('click', e);

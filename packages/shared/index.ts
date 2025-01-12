@@ -1,1 +1,3 @@
-export * from './install';
+export * from './component';
+export * from './props';
+export * from './utils';

@@ -1,4 +1,4 @@
-import { withInstall } from '@nano-ui/shared/install';
+import { withInstall } from '@nano-ui/shared';
 import Icon from './icon.vue';
 import type IconType from './icon.vue';
 
