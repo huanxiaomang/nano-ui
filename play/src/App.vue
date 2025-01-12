@@ -1,15 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import NButton from './../../packages/components/button/button.vue';
+import NIcon from './../../packages/components/icon/icon.vue';
+</script>
 
 <template>
   <div>
     <div>默认按钮，primary 类型</div>
-    <n-button type="success" round>--nano-button</n-button>
+    <n-icon icon="share">1</n-icon>
+    <n-button round icon="d">--nano-button</n-button>
 
     <div>禁用按钮</div>
     <n-button disabled>Button</n-button>
 
     <div>带图标的按钮</div>
-    <n-button type="primary" icon="check-circle">按钮11你</n-button>
+    <n-button type="" icon="check-circle">按钮11你</n-button>
 
     <div>加载中状态按钮</div>
     <n-button type="primary" loading>button</n-button>

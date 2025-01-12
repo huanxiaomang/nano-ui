@@ -9,8 +9,8 @@ export type EpProp<
   Required extends boolean = false
 > = {
   readonly type: PropType<Type>;
-  // readonly required: Required;
-  readonly required: false;
+  readonly required: Required;
+  // readonly required: false;
   readonly validator?: (val: unknown) => boolean;
   [epPropKey]: true;
 } & (Default extends never ? object : { readonly default: Default });
@@ -21,6 +21,7 @@ export type EpPropInput<Type, Default, Required> = {
   values?: readonly any[];
   validator?: (val: any) => boolean;
   default?: Default;
+  [epPropKey]?: boolean;
 };
 
 export type NativePropType =
@@ -45,7 +46,7 @@ export const buildProp = <
 ): EpProp<Type, Default, Required> => {
   if (isEpProp(prop)) return prop as any; // 如果已是 EpProp 类型，直接返回
 
-  const { values, required, default: defaultValue, type, validator } = prop;
+  const { values, default: defaultValue, validator } = prop;
 
   // 创建 validator 函数
   const _validator =
@@ -89,13 +90,16 @@ export const buildProp = <
   //   [epPropKey]: true,
   // } as any;
 
-  Object.assign(prop, {
-    validator: _validator,
-    type,
-    required: required ?? false,
-    [epPropKey]: true,
-    default: defaultValue,
-  });
+  // Object.assign(prop, {
+  //   validator: _validator,
+  //   type,
+  //   required: required ?? false,
+  //   [epPropKey]: true,
+  //   default: defaultValue,
+  // });
+
+  prop.validator = _validator;
+  (prop as any)[epPropKey] = true;
 
   return prop as any;
 };

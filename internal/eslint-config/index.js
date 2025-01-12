@@ -168,7 +168,6 @@ module.exports = defineConfig({
     'no-case-declarations': 'error',
     'no-multi-str': 'error',
     'no-with': 'error',
-    'no-void': 'error',
 
     'sort-imports': [
       'warn',
