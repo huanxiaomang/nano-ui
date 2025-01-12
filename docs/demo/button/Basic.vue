@@ -1,37 +1,37 @@
 <template>
   <p>
-    <er-button>Default</er-button>
-    <er-button type="primary">Primary</er-button>
-    <er-button type="success">Success</er-button>
-    <er-button type="info">Info</er-button>
-    <er-button type="warning">Warning</er-button>
-    <er-button type="danger">Danger</er-button>
+    <n-button>Default</n-button>
+    <n-button type="primary">Primary</n-button>
+    <n-button type="success">Success</n-button>
+    <n-button type="info">Info</n-button>
+    <n-button type="warning">Warning</n-button>
+    <n-button type="danger">Danger</n-button>
   </p>
 
   <p>
-    <er-button plain>Plain</er-button>
-    <er-button type="primary" plain>Primary</er-button>
-    <er-button type="success" plain>Success</er-button>
-    <er-button type="info" plain>Info</er-button>
-    <er-button type="warning" plain>Warning</er-button>
-    <er-button type="danger" plain>Danger</er-button>
+    <n-button plain>Plain</n-button>
+    <n-button type="primary" plain>Primary</n-button>
+    <n-button type="success" plain>Success</n-button>
+    <n-button type="info" plain>Info</n-button>
+    <n-button type="warning" plain>Warning</n-button>
+    <n-button type="danger" plain>Danger</n-button>
   </p>
 
   <p>
-    <er-button round>Round</er-button>
-    <er-button type="primary" round>Primary</er-button>
-    <er-button type="success" round>Success</er-button>
-    <er-button type="info" round>Info</er-button>
-    <er-button type="warning" round>Warning</er-button>
-    <er-button type="danger" round>Danger</er-button>
+    <n-button round>Round</n-button>
+    <n-button type="primary" round>Primary</n-button>
+    <n-button type="success" round>Success</n-button>
+    <n-button type="info" round>Info</n-button>
+    <n-button type="warning" round>Warning</n-button>
+    <n-button type="danger" round>Danger</n-button>
   </p>
 
   <p>
-    <er-button icon="search" circle />
-    <er-button type="primary" icon="edit" circle />
-    <er-button type="success" icon="check" circle />
-    <er-button type="info" icon="message" circle />
-    <er-button type="warning" icon="star" circle />
-    <er-button type="danger" icon="trash" circle />
+    <n-button icon="search" circle />
+    <n-button type="primary" icon="edit" circle />
+    <n-button type="success" icon="check" circle />
+    <n-button type="info" icon="message" circle />
+    <n-button type="warning" icon="star" circle />
+    <n-button type="danger" icon="trash" circle />
   </p>
 </template>

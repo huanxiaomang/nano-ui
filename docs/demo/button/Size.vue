@@ -1,23 +1,23 @@
 <template>
   <p>
-    <er-button size="large">Large</er-button>
-    <er-button>Default</er-button>
-    <er-button size="small">Small</er-button>
-    <er-button size="large" icon="search">Search</er-button>
-    <er-button icon="search">Search</er-button>
-    <er-button size="small" icon="search">Search</er-button>
+    <n-button size="large">Large</n-button>
+    <n-button>Default</n-button>
+    <n-button size="small">Small</n-button>
+    <n-button size="large" icon="search">Search</n-button>
+    <n-button icon="search">Search</n-button>
+    <n-button size="small" icon="search">Search</n-button>
   </p>
   <p>
-    <er-button size="large" round>Large</er-button>
-    <er-button round>Default</er-button>
-    <er-button size="small" round>Small</er-button>
-    <er-button size="large" icon="search" round>Search</er-button>
-    <er-button icon="search" round>Search</er-button>
-    <er-button size="small" icon="search" round>Search</er-button>
+    <n-button size="large" round>Large</n-button>
+    <n-button round>Default</n-button>
+    <n-button size="small" round>Small</n-button>
+    <n-button size="large" icon="search" round>Search</n-button>
+    <n-button icon="search" round>Search</n-button>
+    <n-button size="small" icon="search" round>Search</n-button>
   </p>
   <p>
-    <er-button size="large" icon="search" circle />
-    <er-button icon="search" circle />
-    <er-button size="small" icon="search" circle />
+    <n-button size="large" icon="search" circle />
+    <n-button icon="search" circle />
+    <n-button size="small" icon="search" circle />
   </p>
 </template>

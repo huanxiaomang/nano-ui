@@ -1,14 +1,14 @@
 <script setup>
 function handleBtnClick() {
-  console.log("btn click");
+  console.log('btn click');
 }
 </script>
 
 <template>
   <p>
-    <er-button @click="handleBtnClick"> with throttle</er-button>
-    <er-button :use-throttle="false" @click="handleBtnClick"
-      >without throttle</er-button
+    <n-button @click="handleBtnClick"> with throttle</n-button>
+    <n-button :use-throttle="false" @click="handleBtnClick"
+      >without throttle</n-button
     >
   </p>
 </template>

@@ -7,7 +7,7 @@ import {
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'nano-ui',
-  description: '高仿 ElementPlus 组件库',
+  description: '一个vue3的组件库',
   base: '/docs/',
   appearance: false,
   themeConfig: {
@@ -33,7 +33,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/EricWXY/toy-element' },
+      { icon: 'github', link: 'https://github.com/huanxiaomang/nano-ui' },
     ],
   },
   markdown: {

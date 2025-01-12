@@ -1,14 +1,14 @@
 <template>
   <div>
-    <er-button type="primary" loading>Loading</er-button>
-    <er-button type="primary" loading-icon="circle-notch" loading
-      >Loading</er-button
+    <n-button type="primary" loading>Loading</n-button>
+    <n-button type="primary" loading-icon="circle-notch" loading
+      >Loading</n-button
     >
-    <er-button type="primary" loading>
+    <n-button type="primary" loading>
       <template #loading>
-        <er-icon style="margin-right: 6px" icon="star" spin />
+        <n-icon style="margin-right: 6px" icon="star" spin />
       </template>
       Loading
-    </er-button>
+    </n-button>
   </div>
 </template>

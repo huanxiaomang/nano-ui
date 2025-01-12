@@ -3,8 +3,8 @@ import DefaultTheme from 'vitepress/theme';
 import NanoUI from 'nano-ui-vue';
 import type { App } from 'vue';
 
-import 'vitepress-preview-component/style.css';
-import '@nano-ui/theme/index.css';
+import '@vitepress-demo-preview/component/dist/style.css';
+import 'nano-ui-vue/dist/index.css';
 
 export default {
   ...DefaultTheme,

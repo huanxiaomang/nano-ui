@@ -1,18 +1,18 @@
 <template>
   <p>
-    <er-button>Default</er-button>
-    <er-button type="primary">Primary</er-button>
-    <er-button type="success">Success</er-button>
-    <er-button type="info">Info</er-button>
-    <er-button type="warning">Warning</er-button>
-    <er-button type="danger">Danger</er-button>
+    <n-button>Default</n-button>
+    <n-button type="primary">Primary</n-button>
+    <n-button type="success">Success</n-button>
+    <n-button type="info">Info</n-button>
+    <n-button type="warning">Warning</n-button>
+    <n-button type="danger">Danger</n-button>
   </p>
   <p>
-    <er-button disabled>Default</er-button>
-    <er-button type="primary" disabled>Primary</er-button>
-    <er-button type="success" disabled>Success</er-button>
-    <er-button type="info" disabled>Info</er-button>
-    <er-button type="warning" disabled>Warning</er-button>
-    <er-button type="danger" disabled>Danger</er-button>
+    <n-button disabled>Default</n-button>
+    <n-button type="primary" disabled>Primary</n-button>
+    <n-button type="success" disabled>Success</n-button>
+    <n-button type="info" disabled>Info</n-button>
+    <n-button type="warning" disabled>Warning</n-button>
+    <n-button type="danger" disabled>Danger</n-button>
   </p>
 </template>

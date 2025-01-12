@@ -1,17 +1,17 @@
 <template>
   <p>
-    <er-button-group disabled>
-      <er-button type="primary" icon="arrow-left">Previous Page</er-button>
-      <er-button type="primary">
-        Next Page<er-icon icon="arrow-right" style="margin-left: 8px" />
-      </er-button>
-    </er-button-group>
+    <n-button-group disabled>
+      <n-button type="primary" icon="arrow-left">Previous Page</n-button>
+      <n-button type="primary">
+        Next Page<n-icon icon="arrow-right" style="margin-left: 8px" />
+      </n-button>
+    </n-button-group>
   </p>
   <p>
-    <er-button-group type="warning" size="small">
-      <er-button type="primary" icon="edit" round />
-      <er-button type="primary" icon="share" />
-      <er-button type="primary" icon="trash" round />
-    </er-button-group>
+    <n-button-group type="warning" size="small">
+      <n-button type="primary" icon="edit" round />
+      <n-button type="primary" icon="share" />
+      <n-button type="primary" icon="trash" round />
+    </n-button-group>
   </p>
 </template>
