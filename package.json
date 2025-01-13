@@ -26,6 +26,7 @@
   },
   "scripts": {
     "dev": "pnpm -C play dev",
+    "gen": "bash ./scripts/gc.sh",
     "release": "release-it",
     "docs:dev": "pnpm --filter @nano-ui/docs dev",
     "docs:build": "pnpm --filter @nano-ui/docs build",
