@@ -1,4 +1,4 @@
-@import './reset.css';
+@import "./reset.css";
 
 :root {
   --nano-color-white: #ffffff;
@@ -6,13 +6,13 @@
 
   --nano-color-primary: #409eff;
   --nano-color-success: #32cd32;
-  --nano-color-warning: #ffd700;
-  --nano-color-danger: #ff4500;
+  --nano-color-warning: #eac500;
+  --nano-color-danger: #ff6347;
   --nano-color-info: #00bfff;
 
   --nano-bg-color: #ffffff;
-  --nano-bg-color-page: #f0f8ff;
-  --nano-bg-color-overlay: rgba(0, 0, 0, 0.2);
+  --nano-bg-color-page: #f8f9fa;
+  --nano-bg-color-overlay: rgba(0, 0, 0, 0.15);
 
   --nano-text-color-primary: #333333;
   --nano-text-color-regular: #555555;
@@ -20,25 +20,24 @@
   --nano-text-color-placeholder: #a9a9a9;
   --nano-text-color-disabled: #d3d3d3;
 
-  --nano-border-color: #d3d3d3;
-  --nano-border-color-light: #e8e8e8;
-  --nano-border-color-lighter: #f5f5f5;
-  --nano-border-color-dark: #a9a9a9;
-  --nano-border-color-darker: #808080;
+  --nano-border-color: #e0e0e0;
+  --nano-border-color-light: #f1f1f1;
+  --nano-border-color-lighter: #f7f7f7;
+  --nano-border-color-dark: #bdbdbd;
+  --nano-border-color-darker: #9e9e9e;
 
-  --nano-fill-color: #fffaf0;
-  --nano-fill-color-light: #fffacd;
-  --nano-fill-color-lighter: #fff8dc;
-  --nano-fill-color-extra-light: #f0fff0;
-  --nano-fill-color-dark: #e6e6fa;
-  --nano-fill-color-darker: #f5f5f5;
+  --nano-fill-color: #f8f9fa;
+  --nano-fill-color-light: #f0f4f8;
+  --nano-fill-color-lighter: #f5f8fa;
+  --nano-fill-color-extra-light: #f9fafb;
+  --nano-fill-color-dark: #f1f3f5;
+  --nano-fill-color-darker: #f7f8f9;
   --nano-fill-color-blank: #ffffff;
 
   --nano-border-width: 1px;
   --nano-border-style: solid;
   --nano-border-color-hover: var(--nano-text-color-disabled);
-  --nano-border: var(--nano-border-width) var(--nano-border-style)
-    var(--nano-border-color);
+  --nano-border: var(--nano-border-width) var(--nano-border-style) var(--nano-border-color);
   --nano-border-radius-base: 4px;
   --nano-border-radius-small: 2px;
   --nano-border-radius-round: 20px;
@@ -50,7 +49,9 @@
   --nano-font-size-base: 14px;
   --nano-font-size-small: 13px;
   --nano-font-size-extra-small: 12px;
-  --nano-font-family:  LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, Helvetica Neue, Tahoma, PingFang SC, Microsoft Yahei, Arial, Hiragino Sans GB, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  --nano-font-family: LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, Helvetica Neue, Tahoma,
+    PingFang SC, Microsoft Yahei, Arial, Hiragino Sans GB, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol, Noto Color Emoji;
   --nano-font-weight-primary: 500;
 
   --nano-disabled-bg-color: var(--nano-fill-color-light);
@@ -62,48 +63,48 @@
 }
 
 :root {
-  --nano-color-primary-light-3: #7fc1ff;
-  --nano-color-primary-light-4: #99ccff;
-  --nano-color-primary-light-5: #b3d7ff;
-  --nano-color-primary-light-6: #cce3ff;
-  --nano-color-primary-light-7: #e6efff;
-  --nano-color-primary-light-8: #f2f7ff;
-  --nano-color-primary-light-9: #f7fcff;
-  --nano-color-primary-dark-2: #2f80b3;
+  --nano-color-primary-light-3: #73b8f7;
+  --nano-color-primary-light-4: #8cbaf0;
+  --nano-color-primary-light-5: #a3c6f5;
+  --nano-color-primary-light-6: #b8d2f9;
+  --nano-color-primary-light-7: #cce0fd;
+  --nano-color-primary-light-8: #e1ecff;
+  --nano-color-primary-light-9: #f2f6ff;
+  --nano-color-primary-dark-2: #3387d1;
 
-  --nano-color-success-light-3: #8bc34a;
-  --nano-color-success-light-4: #a3d76b;
-  --nano-color-success-light-5: #b8e77a;
-  --nano-color-success-light-6: #c9f787;
-  --nano-color-success-light-7: #d9ff96;
-  --nano-color-success-light-8: #e6ffb0;
-  --nano-color-success-light-9: #f2ffb8;
-  --nano-color-success-dark-2: #4caf50;
+  --nano-color-success-light-3: #66d29a;
+  --nano-color-success-light-4: #7bd8a8;
+  --nano-color-success-light-5: #90e1b4;
+  --nano-color-success-light-6: #a3ebc3;
+  --nano-color-success-light-7: #b8f2c3;
+  --nano-color-success-light-8: #c8f8d1;
+  --nano-color-success-light-9: #e0f9e1;
+  --nano-color-success-dark-2: #28a745;
 
-  --nano-color-warning-light-3: #ffd700;
-  --nano-color-warning-light-4: #ffdb58;
-  --nano-color-warning-light-5: #ffec8b;
-  --nano-color-warning-light-6: #ffe135;
-  --nano-color-warning-light-7: #ffea45;
-  --nano-color-warning-light-8: #fffb69;
-  --nano-color-warning-light-9: #fff7b8;
-  --nano-color-warning-dark-2: #f39c12;
+  --nano-color-warning-light-3: #f4d03f;
+  --nano-color-warning-light-4: #f7db6f;
+  --nano-color-warning-light-5: #f9e187;
+  --nano-color-warning-light-6: #fce28a;
+  --nano-color-warning-light-7: #fdf38b;
+  --nano-color-warning-light-8: #feebaa;
+  --nano-color-warning-light-9: #fef0d0;
+  --nano-color-warning-dark-2: #e0a50d;
 
-  --nano-color-danger-light-3: #ff6347;
+  --nano-color-danger-light-3: #ff6f61;
   --nano-color-danger-light-4: #ff826e;
   --nano-color-danger-light-5: #ff9e87;
   --nano-color-danger-light-6: #ffb6a3;
   --nano-color-danger-light-7: #ffc1b1;
   --nano-color-danger-light-8: #ffccbd;
   --nano-color-danger-light-9: #ffd7d7;
-  --nano-color-danger-dark-2: #e74c3c;
+  --nano-color-danger-dark-2: #d94c49;
 
-  --nano-color-info-light-3: #87ceeb;
-  --nano-color-info-light-4: #aeeeee;
-  --nano-color-info-light-5: #b2e5f1;
-  --nano-color-info-light-6: #c5e9f8;
-  --nano-color-info-light-7: #d6f2fa;
-  --nano-color-info-light-8: #e4f8fc;
-  --nano-color-info-light-9: #f1fbff;
-  --nano-color-info-dark-2: #4682b4;
+  --nano-color-info-light-3: #61c0ff;
+  --nano-color-info-light-4: #8cc4ff;
+  --nano-color-info-light-5: #a3d1ff;
+  --nano-color-info-light-6: #b7d9ff;
+  --nano-color-info-light-7: #cde4ff;
+  --nano-color-info-light-8: #e0e9ff;
+  --nano-color-info-light-9: #f0f4ff;
+  --nano-color-info-dark-2: #0b93c1;
 }
