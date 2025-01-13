@@ -1,2 +1,100 @@
 .nano-alert {
+  --nano-alert-padding: 8px 16px;
+  --nano-alert-border-radius-base: var(--nano-border-radius-base);
+  --nano-alert-bg-color: var(--nano-color-white);
+  --nano-alert-title-font-size: 14px;
+  --nano-alert-title-font-size-with-desc: 16px;
+  --nano-alert-desc-font-size: 14px;
+  --nano-alert-text-color: var(--nano-text-color-primary);
+  --nano-alert-top-margin: 20px;
+  --nano-alert-icon-size: 16px;
+  --nano-alert-icon-margin: 8px;
+  --nano-alert-big-icon-size: 28px;
+  --nano-alert-big-icon-margin: 12px;
+}
+.nano-alert {
+  padding: var(--nano-alert-padding);
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: var(--nano-alert-border-radius-base);
+  position: relative;
+  background-color: var(--nano-alert-bg-color);
+  overflow: hidden;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  transition: opacity var(--nano-transition-duration);
+  margin-top: var(--nano-alert-top-margin);
+  .nano-alert__icon {
+    color: var(--nano-alert-text-color);
+    font-size: var(--nano-alert-icon-size);
+    width: var(--nano-alert-icon-size);
+    margin-right: var(--nano-alert-icon-margin);
+    &.big-icon {
+      font-size: var(--nano-alert-big-icon-size);
+      width: var(--nano-alert-big-icon-size);
+      margin-right: var(--nano-alert-big-icon-margin);
+    }
+  }
+  .nano-alert__content {
+    color: var(--nano-alert-text-color);
+    vertical-align: text-top;
+    .nano-alert__title {
+      font-size: var(--nano-alert-title-font-size);
+      line-height: 24px;
+      &.with-desc {
+        font-size: var(--nano-alert-title-font-size-with-desc);
+      }
+    }
+    .nano-alert__description {
+      font-size: var(--nano-alert-desc-font-size);
+      margin: 0;
+    }
+
+    .nano-alert__close {
+      font-size: var(--nano-alert-close-font-size);
+      opacity: 1;
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      cursor: pointer;
+      :deep(.nano-icon) {
+        vertical-align: top;
+      }
+    }
+    &.nano-alert__light {
+      .nano-alert__close {
+        color: var(--nano-text-color-placeholder);
+      }
+    }
+    &.nano-alert__dark {
+      .nano-alert__close {
+        color: var(--nano-color-white);
+      }
+    }
+  }
+
+  &.text-center {
+    justify-content: center;
+    span,
+    p {
+      text-align: center;
+    }
+  }
+}
+
+.nano-alert-fade-enter-from,
+.nano-alert-fade-leave-to {
+  opacity: 0;
+}
+
+@each $val in success, warning, info, danger {
+  .nano-alert__$(val).nano-alert__light {
+    --nano-alert-text-color: var(--nano-color-$(val));
+    --nano-alert-bg-color: var(--nano-color-$(val)-light-9);
+  }
+  .nano-alert__$(val).nano-alert__dark {
+    --nano-alert-text-color: var(--nano-color-white);
+    --nano-alert-bg-color: var(--nano-color-$(val));
+  }
 }

@@ -2,10 +2,102 @@
 import NButton from './../../packages/components/button/button.vue';
 import NButtonGroup from './../../packages/components/button/button-group.vue';
 import NIcon from './../../packages/components/icon/icon.vue';
+import NAlert from './../../packages/components/alert/alert.vue';
 </script>
 
 <template>
   <div>
+    <div>
+      <!-- Success Alert with default configuration -->
+      <n-alert
+        title="Success Alert"
+        description="This is a success alert with default configuration."
+        type="success"
+        closable
+        effect="light"
+        center
+        showIcon
+      />
+      <n-alert
+        title="Success Alert"
+        description="This is a success alert with default configuration."
+        type="success"
+        closable
+        effect="dark"
+        center
+        showIcon
+      />
+      <!-- Info Alert with custom description -->
+      <n-alert
+        title="Info Alert"
+        description="This is an info alert with a custom description."
+        type="info"
+        closable
+        center
+        showIcon
+      />
+      <n-alert
+        title="Info Alert"
+        description="This is an info alert with a custom description."
+        type="info"
+        closable
+        center
+        showIcon
+        effect="dark"
+      />
+      <!-- Warning Alert with no icon and no center alignment -->
+      <n-alert
+        title="Warning Alert"
+        description="This is a warning alert without an icon and centered text."
+        type="warning"
+        closable
+        effect="light"
+      />
+      <n-alert
+        title="Warning Alert"
+        description="This is a warning alert without an icon and centered text."
+        type="warning"
+        closable
+        effect="dark"
+      />
+      <!-- Danger Alert with no closable -->
+      <n-alert
+        title="Danger Alert"
+        description="This is a danger alert without a close button."
+        type="danger"
+        effect="light"
+        center
+        showIcon
+      />
+      <n-alert
+        title="Danger Alert"
+        description="This is a danger alert without a close button."
+        type="danger"
+        effect="dark"
+        center
+        showIcon
+      />
+
+      <!-- Success Alert with custom title -->
+      <n-alert
+        title="Custom Success Alert"
+        description="This is a custom success alert."
+        type="success"
+        closable
+        effect="light"
+        center
+        showIcon
+      />
+      <n-alert
+        title="Custom Success Alert"
+        description="This is a custom success alert."
+        type="success"
+        closable
+        effect="dark"
+        center
+        showIcon
+      />
+    </div>
     <n-button-group type="primary" disabled size="small">
       <n-button type="primary" icon="share">--nano-button1</n-button>
       <n-button type="primary" icon="share">--nano-button2</n-button>

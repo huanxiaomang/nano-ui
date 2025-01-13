@@ -46,7 +46,7 @@ const emit = defineEmits(${PROP_NAME}Emits);
 </script>
 
 <style scoped>
-@import './button.css';
+@import './style.css';
 </style>
 EOF
 
