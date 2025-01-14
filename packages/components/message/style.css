@@ -1,0 +1,81 @@
+.nano-message {
+  --nano-message-bg-color: var(--nano-color-info-light-9);
+  --nano-message-border-color: var(--nano-border-color-lighter);
+  --nano-message-padding: 15px 19px;
+  --nano-message-close-size: 16px;
+  --nano-message-close-icon-color: var(--nano-text-color-placeholder);
+  --nano-message-close-hover-color: var(--nano-text-color-secondary);
+  --nano-message-icon-size: 16px;
+  --nano-message-icon-margin: 8px;
+}
+
+.nano-message {
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  box-sizing: border-box;
+  border-radius: var(--nano-border-radius-base);
+  border-width: var(--nano-border-width);
+  border-style: var(--nano-border-style);
+  border-color: var(--nano-message-border-color);
+  position: fixed;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  background-color: var(--nano-message-bg-color);
+  padding: var(--nano-message-padding);
+  display: flex;
+  align-items: center;
+  transition:
+    top var(--nano-transition-duration),
+    opacity var(--nano-transition-duration),
+    transform var(--nano-transition-duration);
+  .nano-message__icon {
+    color: var(--nano-message-text-color);
+    font-size: var(--nano-message-icon-size);
+    width: var(--nano-message-icon-size);
+    margin-right: var(--nano-message-icon-margin);
+  }
+  .nano-message__content {
+    color: var(--nano-message-text-color);
+    overflow-wrap: break-word;
+  }
+  &.is-close .nano-message__content {
+    padding-right: 10px;
+  }
+  &.text-center {
+    justify-content: center;
+  }
+  .nano-message__close {
+    display: flex;
+    align-items: center;
+  }
+  .nano-message__close .nano-icon {
+    cursor: pointer;
+  }
+}
+
+@each $val in info, success, warning, danger {
+  .nano-message--$(val) {
+    --nano-message-bg-color: var(--nano-color-$(val)-light-9);
+    --nano-message-border-color: var(--nano-color-$(val)-light-8);
+    --nano-message-text-color: var(--nano-color-$(val));
+    .nano-message__close {
+      --nano-icon-color: var(--nano-color-$(val));
+    }
+  }
+}
+
+.nano-message--error {
+  --nano-message-bg-color: var(--nano-color-danger-light-9);
+  --nano-message-border-color: var(--nano-color-danger-light-8);
+  --nano-message-text-color: var(--nano-color-danger);
+  .nano-message__close {
+    --nano-icon-color: var(--nano-color-danger);
+  }
+}
+
+.nano-message.fade-up-enter-from,
+.nano-message.fade-up-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -100%);
+}
