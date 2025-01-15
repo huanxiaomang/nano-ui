@@ -27,3 +27,17 @@ export const getLastBottomOffset = (id: string): number => {
   if (!prev) return 0;
   return prev.vm.exposed!.bottomOffset.value;
 };
+
+export const getOffset = (id: string, offset: number) => {
+  const isFirst = instances.findIndex((instance) => instance.id === id) === -1;
+  return isFirst ? offset : 16;
+};
+
+export const closeMessage = (id: string) => {
+  const idx = instances.findIndex((instance) => instance.id === id);
+  if (idx === -1) return;
+
+  const { handler } = instances[idx];
+  handler.close();
+  instances.splice(idx, 1);
+};

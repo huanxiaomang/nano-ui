@@ -1,6 +1,5 @@
-import { warn } from 'vue';
-import { fromPairs } from 'lodash-unified';
-import { isObject } from '../utils/is';
+import { warn as vueWarn } from 'vue';
+import { fromPairs, isObject } from 'lodash-unified';
 import { hasOwn } from '../utils/objects';
 
 import type { PropType } from 'vue';
@@ -76,7 +75,7 @@ export const buildProp = <
             const allowValuesText = [...new Set(allowedValues)]
               .map((value) => JSON.stringify(value))
               .join(', ');
-            warn(
+            vueWarn(
               `Invalid prop: validation failed${
                 key ? ` for prop "${key}"` : ''
               }. Expected one of [${allowValuesText}], got value ${JSON.stringify(

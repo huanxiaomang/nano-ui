@@ -12,4 +12,4 @@ library.add(fas);
 
 const app = createApp(App);
 app.use(NanoUI);
-app.mount('#app')
+app.mount('#app');

@@ -1,6 +1,6 @@
 import { Component, ComputedRef, ExtractPropTypes, Ref } from 'vue';
 
-import { useSizeProp } from '@nano-ui/hooks/use-size';
+import { useSizeProp } from '@nano-ui/hooks';
 import {
   ComponentSize,
   buildProps,

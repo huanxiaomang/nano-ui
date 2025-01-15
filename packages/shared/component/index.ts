@@ -1,5 +1,6 @@
 export * from './props';
 export * from './install';
+export * from './error';
 
 export const componentSizes = ['', 'default', 'small', 'large'] as const;
 

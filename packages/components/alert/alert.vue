@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { computed, readonly, ref } from 'vue';
 import { typeIconMap } from '@nano-ui/shared';
 import { alertEmits, alertProps } from './alert';
 import NIcon from './../icon/icon.vue';
@@ -67,9 +67,9 @@ const iconName = computed(() =>
 const withDescription = computed(() => props.description || slots.default);
 
 defineExpose({
+  getVisible: () => readonly(visible),
   close,
   open,
-  visible,
 });
 </script>
 

@@ -3,15 +3,25 @@ import NButton from './../../packages/components/button/button.vue';
 import NButtonGroup from './../../packages/components/button/button-group.vue';
 import NIcon from './../../packages/components/icon/icon.vue';
 import NAlert from './../../packages/components/alert/alert.vue';
-import { ref } from 'vue';
+import { h, ref } from 'vue';
+import NMessage from '@nano-ui/components/message';
 
-const domRef = ref();
-console.log(NAlert, domRef.value);
+const open = () => {
+  NMessage({
+    message: '<i>asd</i>',
+    type: 'success',
+    duration: 10000000,
+    dangerouslyUseHTMLString: true,
+    showClose: true,
+    onClose: () => console.log(1),
+  });
+};
 </script>
 
 <template>
   <div>
-    <div ref="domRef">
+    <n-button @click="open">click</n-button>
+    <div>
       <!-- Success Alert with default configuration -->
       <n-alert
         title="Success Alert"

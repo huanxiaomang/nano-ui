@@ -1,8 +1,10 @@
-import { buildProps, definePropType } from '@nano-ui/shared';
+import { Mutable, buildProps, definePropType } from '@nano-ui/shared';
 
-import type { ExtractPropTypes, VNode } from 'vue';
+import type { AppContext, ExtractPropTypes, VNode } from 'vue';
 
 export const messageTypes = ['success', 'info', 'warning', 'error'] as const;
+
+export type MessageType = (typeof messageTypes)[number];
 
 export const messageProps = buildProps({
   center: {
@@ -46,6 +48,10 @@ export const messageProps = buildProps({
     ]),
     default: '',
   },
+  offset: {
+    type: Number,
+    default: 16,
+  },
 } as const);
 export type MessageProps = ExtractPropTypes<typeof messageProps>;
 
@@ -54,9 +60,42 @@ export const messageEmits = {
 };
 export type MessageEmits = typeof messageEmits;
 
-export interface MessageHandler {
-  /**
-   * @description close the Message
-   */
+export type MessageOptions = Partial<
+  Mutable<
+    Omit<MessageProps, 'id'> & {
+      appendTo?: HTMLElement | string;
+    }
+  >
+>;
+
+export type MessageOptionsNormalized = MessageOptions & {
+  appendTo: HTMLElement;
+};
+
+export interface MessageConfigContext {
+  max?: number;
+  duration?: number;
+  offset?: number;
+  showClose?: boolean;
+}
+
+export type MessageHandler = {
   close: () => void;
+};
+
+export type MessageFn = {
+  (options: MessageOptions, appContext?: null | AppContext): MessageHandler;
+  closeAll: (type: MessageType) => void;
+};
+
+export type MessageTypedFn = (
+  options?: Omit<MessageOptions, 'type'>,
+  appContext?: null | AppContext
+) => MessageHandler;
+
+export interface Message extends MessageFn {
+  success: MessageTypedFn;
+  warning: MessageTypedFn;
+  info: MessageTypedFn;
+  error: MessageTypedFn;
 }

@@ -8,7 +8,7 @@
   --nano-color-success: #32cd32;
   --nano-color-warning: #eac500;
   --nano-color-danger: #ff6347;
-  --nano-color-info: #00bfff;
+  --nano-color-info: #2d8cac;
 
   --nano-bg-color: #ffffff;
   --nano-bg-color-page: #f8f9fa;
@@ -49,9 +49,8 @@
   --nano-font-size-base: 14px;
   --nano-font-size-small: 13px;
   --nano-font-size-extra-small: 12px;
-  --nano-font-family: LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, Helvetica Neue, Tahoma,
-    PingFang SC, Microsoft Yahei, Arial, Hiragino Sans GB, sans-serif, Apple Color Emoji, Segoe UI Emoji,
-    Segoe UI Symbol, Noto Color Emoji;
+  --nano-font-family: Inter, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    "微软雅黑", Arial, sans-serif;
   --nano-font-weight-primary: 500;
 
   --nano-disabled-bg-color: var(--nano-fill-color-light);
