@@ -1,18 +1,8 @@
 import { mount } from '@vue/test-utils';
-import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+import { describe, expect, it, vi } from 'vitest';
 import NButton from '../button.vue';
 import NButtonGroup from '../button-group.vue';
 import NIcon from '../../icon/icon.vue';
-
-beforeAll(() => {
-  library.add(fas);
-});
-
-afterAll(() => {
-  library.reset();
-});
 
 describe('NButton.vue', () => {
   it('create', () => {

@@ -69,6 +69,7 @@ const withDescription = computed(() => props.description || slots.default);
 defineExpose({
   close,
   open,
+  visible,
 });
 </script>
 

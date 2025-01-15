@@ -3,11 +3,15 @@ import NButton from './../../packages/components/button/button.vue';
 import NButtonGroup from './../../packages/components/button/button-group.vue';
 import NIcon from './../../packages/components/icon/icon.vue';
 import NAlert from './../../packages/components/alert/alert.vue';
+import { ref } from 'vue';
+
+const domRef = ref();
+console.log(NAlert, domRef.value);
 </script>
 
 <template>
   <div>
-    <div>
+    <div ref="domRef">
       <!-- Success Alert with default configuration -->
       <n-alert
         title="Success Alert"

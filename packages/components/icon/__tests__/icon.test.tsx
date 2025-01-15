@@ -1,16 +1,6 @@
 import { mount } from '@vue/test-utils';
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+import { describe, expect, it } from 'vitest';
 import NIcon from '../icon.vue';
-
-beforeAll(() => {
-  library.add(fas);
-});
-
-afterAll(() => {
-  library.reset();
-});
 
 describe('NIcon.vue', () => {
   it('create', () => {
