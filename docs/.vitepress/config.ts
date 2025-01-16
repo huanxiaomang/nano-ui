@@ -28,7 +28,11 @@ export default defineConfig({
       {
         text: '基础组件',
         collapsed: false,
-        items: [{ text: 'Button 按钮', link: 'components/button' }],
+        items: [
+          { text: 'Button', link: 'components/button' },
+          { text: 'Alert', link: 'components/alert' },
+          { text: 'Message', link: 'components/message' },
+        ],
       },
     ],
 

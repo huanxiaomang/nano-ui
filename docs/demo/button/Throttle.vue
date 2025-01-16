@@ -6,7 +6,9 @@ function handleBtnClick() {
 
 <template>
   <p>
-    <n-button @click="handleBtnClick"> with throttle</n-button>
+    <n-button use-throttle throttle-duration="3000" @click="handleBtnClick">
+      with throttle</n-button
+    >
     <n-button :use-throttle="false" @click="handleBtnClick"
       >without throttle</n-button
     >

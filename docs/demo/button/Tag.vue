@@ -4,7 +4,7 @@
   <n-button
     type="primary"
     tag="a"
-    href="https://github.com/EricWXY/eric-ui"
+    href="https://github.com/huanxiaomang/nano-ui"
     target="_blank"
     rel="noopener noreferrer"
   >
