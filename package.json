@@ -31,7 +31,8 @@
     "docs:dev": "pnpm --filter @nano-ui/docs dev",
     "docs:build": "pnpm --filter @nano-ui/docs build",
     "test": "vitest",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "esm-check": "pnpx are-we-esm --prod"
   },
   "peerDependencies": {
     "vue": "^3.2.0"
