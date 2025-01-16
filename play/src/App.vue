@@ -3,7 +3,6 @@ import NButton from './../../packages/components/button/button.vue';
 import NButtonGroup from './../../packages/components/button/button-group.vue';
 import NIcon from './../../packages/components/icon/icon.vue';
 import NAlert from './../../packages/components/alert/alert.vue';
-import { h, ref } from 'vue';
 import NMessage from '@nano-ui/components/message';
 
 const open = () => {

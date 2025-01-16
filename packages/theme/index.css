@@ -49,8 +49,9 @@
   --nano-font-size-base: 14px;
   --nano-font-size-small: 13px;
   --nano-font-size-extra-small: 12px;
-  --nano-font-family: Inter, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-    "微软雅黑", Arial, sans-serif;
+  --nano-font-family: DM Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, Noto Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol,
+    "Noto Color Emoji";
   --nano-font-weight-primary: 500;
 
   --nano-disabled-bg-color: var(--nano-fill-color-light);
