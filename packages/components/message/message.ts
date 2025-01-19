@@ -71,6 +71,10 @@ export type MessageOptions = Partial<
 export type MessageOptionsNormalized = MessageOptions & {
   appendTo: HTMLElement;
 };
+export type MessageOptionsTyped = Omit<MessageOptions, 'type'>;
+
+export type MessageParams = Partial<MessageOptions> | string | VNode;
+export type MessageParamsTyped = Partial<MessageOptionsTyped> | string | VNode;
 
 export interface MessageConfigContext {
   max?: number;
@@ -84,12 +88,12 @@ export type MessageHandler = {
 };
 
 export type MessageFn = {
-  (options: MessageOptions, appContext?: null | AppContext): MessageHandler;
+  (options: MessageParams, appContext?: null | AppContext): MessageHandler;
   closeAll: (type: MessageType) => void;
 };
 
 export type MessageTypedFn = (
-  options?: Omit<MessageOptions, 'type'>,
+  options?: MessageParamsTyped,
   appContext?: null | AppContext
 ) => MessageHandler;
 

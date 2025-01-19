@@ -6,8 +6,8 @@ import {
   Message,
   MessageFn,
   MessageHandler,
-  MessageOptions,
   MessageOptionsNormalized,
+  MessageParams,
   type MessageType,
   messageProps,
   messageTypes,
@@ -15,12 +15,13 @@ import {
 import { MessageContext, closeMessage, instances } from './instance';
 import MessageConstructor from './message.vue';
 
-const normalizeOptions = (
-  options: MessageOptions
-): MessageOptionsNormalized => {
+const normalizeOptions = (options: MessageParams): MessageOptionsNormalized => {
   const messageDefaults = fromPairs(
     Object.entries(messageProps).map(([key, prop]) => [key, prop.default])
   );
+  if (isString(options) || isVNode(options)) {
+    options = { message: options };
+  }
   const normalized = {
     ...messageDefaults,
     ...options,
@@ -126,9 +127,11 @@ messageTypes.forEach((type) => {
 });
 
 export function closeAll(type?: MessageType): void {
-  for (const instance of instances) {
+  for (let i = 0; i < instances.length; i++) {
+    const instance = instances[i];
     if (!type || instance.props.type === type) {
       instance.handler.close();
+      instances.splice(i, 1);
     }
   }
 }

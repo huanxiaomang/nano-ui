@@ -19,7 +19,7 @@ const open = () => {
     position: 'bottom-right',
     topOffset: 400,
   });
-  // NMessage('nihao');
+  NMessage('nihao');
   // NMessage({
   //   message: '<i>asd</i>',
   //   type: 'success',
