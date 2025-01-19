@@ -3,17 +3,31 @@ import NButton from './../../packages/components/button/button.vue';
 import NButtonGroup from './../../packages/components/button/button-group.vue';
 import NIcon from './../../packages/components/icon/icon.vue';
 import NAlert from './../../packages/components/alert/alert.vue';
-import NMessage from '@nano-ui/components/message';
+import { NMessage } from './../../packages/components/message';
+import { NNotify } from './../../packages/components/notification';
 
 const open = () => {
-  NMessage({
+  NNotify('nihao1');
+  NNotify({
+    title: 'nihao',
     message: '<i>asd</i>',
     type: 'success',
     duration: 10000000,
     dangerouslyUseHTMLString: true,
     showClose: true,
     onClose: () => console.log(1),
+    position: 'bottom-right',
+    topOffset: 400,
   });
+  // NMessage('nihao');
+  // NMessage({
+  //   message: '<i>asd</i>',
+  //   type: 'success',
+  //   duration: 10000000,
+  //   dangerouslyUseHTMLString: true,
+  //   showClose: true,
+  //   onClose: () => console.log(1),
+  // });
 };
 </script>
 

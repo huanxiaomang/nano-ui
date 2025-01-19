@@ -1,4 +1,4 @@
-import { NMessage } from '@nano-ui/components';
+import { NMessage, NNotify } from '@nano-ui/components';
 import type { Plugin } from 'vue';
 
-export default [NMessage] as Plugin[];
+export default [NMessage, NNotify] as Plugin[];

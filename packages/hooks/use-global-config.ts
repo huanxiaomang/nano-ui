@@ -3,7 +3,11 @@ import { MessageConfigContext } from '@nano-ui/components/message';
 
 const zIndex = ref(3000);
 export const messageConfig = reactive<MessageConfigContext>({
-  max: 500,
+  max: 5,
+});
+
+export const notifyConfig = reactive<MessageConfigContext>({
+  max: 5,
 });
 
 export function useGlobalComponentSettings() {
@@ -13,5 +17,6 @@ export function useGlobalComponentSettings() {
     currZIndex: zIndex,
     nextZIndex,
     messageConfig,
+    notifyConfig,
   };
 }

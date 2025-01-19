@@ -53,3 +53,7 @@ export default {
 };
 </script>
 ```
+
+::: component-prop
+component=NMessage
+:::

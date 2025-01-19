@@ -31,6 +31,12 @@
     bottom var(--nano-transition-duration);
   overflow-wrap: anywhere;
   overflow: hidden;
+  &.right {
+    right: 10px;
+  }
+  &.left {
+    left: 10px;
+  }
 
   .nano-notification__text {
     margin: 0 10px;

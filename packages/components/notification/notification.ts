@@ -1,6 +1,6 @@
-import { buildProps, definePropType } from '@nano-ui/shared';
+import { Mutable, buildProps, definePropType } from '@nano-ui/shared';
 
-import type { ExtractPropTypes, VNode } from 'vue';
+import type { AppContext, ExtractPropTypes, VNode } from 'vue';
 
 export const notificationTypes = [
   'success',
@@ -9,10 +9,21 @@ export const notificationTypes = [
   'error',
 ] as const;
 
+export type NotificationType = (typeof notificationTypes)[number];
+
+export const notificationPositions = [
+  'top-right',
+  'top-left',
+  'bottom-right',
+  'bottom-left',
+] as const;
+
+export type NotificationPosition = (typeof notificationPositions)[number];
+
 export const notificationProps = buildProps({
   position: {
     type: String,
-    values: ['top-right', 'top-left', 'bottom-right', 'bottom-left'],
+    values: notificationPositions,
     default: 'top-right',
   },
   dangerouslyUseHTMLString: {
@@ -52,7 +63,10 @@ export const notificationProps = buildProps({
     type: String,
     default: '',
   },
-  zIndex: Number,
+  zIndex: {
+    type: Number,
+    default: null,
+  },
   message: {
     type: definePropType<string | VNode | (() => VNode)>([
       String,
@@ -70,3 +84,48 @@ export type NotificationProps = ExtractPropTypes<typeof notificationProps>;
 
 export const notificationEmits = {};
 export type NotificationEmits = typeof notificationEmits;
+
+export type NotificationOptions = Partial<
+  Mutable<
+    Omit<NotificationProps, 'id'> & {
+      appendTo?: HTMLElement | string;
+    }
+  >
+>;
+
+export type NotificationOptionsTyped = Omit<NotificationOptions, 'type'>;
+
+export type NotificationParams = Partial<NotificationOptions> | string | VNode;
+export type NotificationParamsTyped =
+  | Partial<NotificationOptionsTyped>
+  | string
+  | VNode;
+
+export type NotificationOptionsNormalized = NotificationOptions & {
+  appendTo: HTMLElement;
+  position: NotificationPosition;
+};
+
+export type NotificationHandler = {
+  close: () => void;
+};
+
+export interface NotifyFn {
+  (
+    options: NotificationParams,
+    appContext?: null | AppContext
+  ): NotificationHandler;
+  closeAll: (type: NotificationType) => void;
+}
+
+export type NotifyTypedFn = (
+  options?: NotificationParamsTyped,
+  appContext?: null | AppContext
+) => NotificationHandler;
+
+export interface Notify extends NotifyFn {
+  success: NotifyTypedFn;
+  warning: NotifyTypedFn;
+  error: NotifyTypedFn;
+  info: NotifyTypedFn;
+}

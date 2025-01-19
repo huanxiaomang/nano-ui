@@ -1,9 +1,7 @@
-import { withInstall } from '@nano-ui/shared';
-import Notification from './notification.vue';
-import type { SFCWithInstall } from '@nano-ui/shared';
-
-export const NNotification: SFCWithInstall<typeof Notification> = withInstall(Notification);
-export default NNotification;
+import { withInstallFunction } from '@nano-ui/shared';
+import Notify from './method';
 
 export * from './notification';
-export type NotificationInstance = InstanceType<typeof Notification>;
+
+export const NNotify = withInstallFunction(Notify, '$notify');
+export default NNotify;

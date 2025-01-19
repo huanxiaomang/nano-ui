@@ -11,6 +11,7 @@
       :class="{
         [`nano-notification--${type}`]: type,
         'show-close': showClose,
+        [horizontalClass]: true,
       }"
       role="alert"
       :style="nativeStyle"
@@ -33,7 +34,7 @@
         </div>
       </div>
       <div v-if="showClose" class="nano-notification__close">
-        <er-icon icon="xmark" @click.stop="close" />
+        <n-icon icon="xmark" @click.stop="close" />
       </div>
     </div>
   </Transition>
@@ -46,8 +47,9 @@ import { delay } from 'lodash-unified';
 import { typeIconMap } from '@nano-ui/shared';
 import { useGlobalComponentSettings } from '@nano-ui/hooks';
 import { EVENT_CODE } from '@nano-ui/constants';
-import { getLastBottomOffset, getOffset } from '../message/instance';
 import { notificationEmits, notificationProps } from './notification';
+import { getLastBottomOffset, getOffset } from './instance';
+import NIcon from './../icon/icon.vue';
 import type { CSSProperties } from 'vue';
 
 defineOptions({
@@ -66,10 +68,11 @@ const { currZIndex, nextZIndex } = useGlobalComponentSettings();
 const lastOffset = computed(() => getLastBottomOffset(props.id));
 
 const topOffset = computed(
-  (): number => getOffset(props.id, props.topOffset) + lastOffset.value
+  (): number =>
+    getOffset(props.id, props.position, props.topOffset) + lastOffset.value
 );
 
-const horizonProperty = computed(() =>
+const horizontalClass = computed(() =>
   props.position.endsWith('right') ? 'right' : 'left'
 );
 
@@ -81,7 +84,6 @@ const bottomOffset = computed((): number => height.value + topOffset.value);
 
 const nativeStyle = computed<CSSProperties>(() => ({
   [verticalProperty.value]: `${topOffset.value}px`,
-  [horizonProperty.value]: `${horizonProperty.value}: 10px`,
   zIndex: props.zIndex ?? currZIndex.value,
 }));
 
