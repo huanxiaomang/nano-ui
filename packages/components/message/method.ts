@@ -4,6 +4,7 @@ import { debugWarn, isElement } from '@nano-ui/shared';
 import { useGlobalConfig } from '@nano-ui/hooks';
 import {
   Message,
+  MessageConfigContext,
   MessageFn,
   MessageHandler,
   MessageOptionsNormalized,
@@ -15,7 +16,10 @@ import {
 import { MessageContext, closeMessage, instances } from './instance';
 import MessageConstructor from './message.vue';
 
-const normalizeOptions = (options: MessageParams): MessageOptionsNormalized => {
+const normalizeOptions = (
+  options: MessageParams,
+  messageConfig?: MessageConfigContext
+): MessageOptionsNormalized => {
   const messageDefaults = fromPairs(
     Object.entries(messageProps).map(([key, prop]) => [key, prop.default])
   );
@@ -24,6 +28,7 @@ const normalizeOptions = (options: MessageParams): MessageOptionsNormalized => {
   }
   const normalized = {
     ...messageDefaults,
+    ...(messageConfig ?? {}),
     ...options,
   };
 
@@ -104,8 +109,12 @@ const createMessage = (
 };
 
 const message: MessageFn & Partial<Message> = (options, appContext = null) => {
-  const normalized = normalizeOptions(options);
   const messageConfig = useGlobalConfig('message');
+
+  const normalized =
+    messageConfig.value !== undefined
+      ? normalizeOptions(options, messageConfig.value)
+      : normalizeOptions(options);
   const max = messageConfig.value?.max;
 
   if (isNumber(max) && instances.length >= max) {
@@ -123,7 +132,11 @@ const message: MessageFn & Partial<Message> = (options, appContext = null) => {
 
 messageTypes.forEach((type) => {
   message[type] = (options = {}, appContext) => {
-    const normalized = normalizeOptions(options);
+    const messageConfig = useGlobalConfig('message');
+    const normalized =
+      messageConfig.value !== undefined
+        ? normalizeOptions(options, messageConfig.value)
+        : normalizeOptions(options);
     return message({ ...normalized, type }, appContext);
   };
 });

@@ -9,6 +9,7 @@ import {
 import { debugWarn } from '@nano-ui/shared';
 import { useGlobalConfig } from '@nano-ui/hooks';
 import {
+  NotificationConfigContext,
   NotificationHandler,
   NotificationOptionsNormalized,
   NotificationParams,
@@ -29,7 +30,8 @@ import {
 let seed = 1;
 
 const normalizeOptions = (
-  options: NotificationParams
+  options: NotificationParams,
+  notificationConfig?: NotificationConfigContext
 ): NotificationOptionsNormalized => {
   const notifyDefaults = fromPairs(
     Object.entries(notificationProps).map(([key, prop]) => [key, prop.default])
@@ -40,6 +42,7 @@ const normalizeOptions = (
 
   const normalized = {
     ...notifyDefaults,
+    ...(notificationConfig ?? {}),
     ...options,
   };
 
@@ -118,9 +121,13 @@ const createNotification = (
 };
 
 const notify: NotifyFn & Partial<Notify> = (options, appContext = null) => {
-  const normalized = normalizeOptions(options);
-  const { position } = normalized;
   const notifyConfig = useGlobalConfig('notification');
+
+  const normalized =
+    notifyConfig.value !== undefined
+      ? normalizeOptions(options, notifyConfig.value)
+      : normalizeOptions(options);
+  const { position } = normalized;
   const max = notifyConfig.value?.max;
 
   if (isNumber(max) && notifications[position].length >= max) {
@@ -138,7 +145,11 @@ const notify: NotifyFn & Partial<Notify> = (options, appContext = null) => {
 
 notificationTypes.forEach((type) => {
   notify[type] = (options = {}, appContext) => {
-    const normalized = normalizeOptions(options);
+    const notifyConfig = useGlobalConfig('notification');
+    const normalized =
+      notifyConfig.value !== undefined
+        ? normalizeOptions(options, notifyConfig.value)
+        : normalizeOptions(options);
     return notify({ ...normalized, type }, appContext);
   };
 });

@@ -7,7 +7,7 @@ import { keysOf } from '@nano-ui/shared';
 import { useLocale } from './use-locale';
 import useZIndex, { defaultInitialZIndex } from './use-z-index';
 
-export const globalConfig = ref<ConfigProviderContext>();
+export const globalConfig = ref<ConfigProviderContext>({});
 
 export function useGlobalConfig(): Ref<ConfigProviderContext>;
 export function useGlobalConfig<
