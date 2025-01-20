@@ -65,7 +65,6 @@ export const getOffset = (
 ) => {
   const isFirst =
     notifications[position].findIndex((instance) => instance.id === id) === -1;
-  console.log(1, isFirst);
   return isFirst ? offset : 16;
 };
 

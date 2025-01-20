@@ -18,7 +18,6 @@
   "devDependencies": {
     "@vitepress-demo-preview/plugin": "^1.2.3",
     "nano-ui-vue": "workspace:*",
-    "vitepress": "1.0.0-rc.44",
-    "vitepress-api-table": "workspace:*"
+    "vitepress": "1.0.0-rc.44"
   }
 }

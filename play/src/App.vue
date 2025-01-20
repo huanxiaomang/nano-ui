@@ -3,6 +3,7 @@ import NButton from './../../packages/components/button/button.vue';
 import NButtonGroup from './../../packages/components/button/button-group.vue';
 import NIcon from './../../packages/components/icon/icon.vue';
 import NAlert from './../../packages/components/alert/alert.vue';
+import ConfigProvider from './../../packages/components/config-provider/config-provider';
 import { NMessage } from './../../packages/components/message';
 import { NNotify } from './../../packages/components/notification';
 
@@ -33,7 +34,13 @@ const open = () => {
 
 <template>
   <div>
-    <n-button @click="open">click</n-button>
+    <config-provider
+      :message="{
+        max: 1,
+      }"
+    >
+      <n-button @click="open">click1</n-button>
+    </config-provider>
     <div>
       <!-- Success Alert with default configuration -->
       <n-alert
