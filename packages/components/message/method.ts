@@ -1,7 +1,7 @@
 import { AppContext, createVNode, isVNode, render } from 'vue';
 import { fromPairs, isFunction, isNumber, isString } from 'lodash-unified';
 import { debugWarn, isElement } from '@nano-ui/shared';
-import { messageConfig } from '@nano-ui/hooks';
+import { useGlobalConfig } from '@nano-ui/hooks';
 import {
   Message,
   MessageFn,
@@ -105,8 +105,10 @@ const createMessage = (
 
 const message: MessageFn & Partial<Message> = (options, appContext = null) => {
   const normalized = normalizeOptions(options);
+  const messageConfig = useGlobalConfig('message');
+  const max = messageConfig.value?.max;
 
-  if (isNumber(messageConfig.max) && instances.length >= messageConfig.max) {
+  if (isNumber(max) && instances.length >= max) {
     return {
       close: () => void 0,
     };

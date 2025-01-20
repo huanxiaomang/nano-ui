@@ -93,6 +93,13 @@ export type NotificationOptions = Partial<
   >
 >;
 
+export interface NotificationConfigContext {
+  max?: number;
+  duration?: number;
+  topOffset?: number;
+  showClose?: boolean;
+}
+
 export type NotificationOptionsTyped = Omit<NotificationOptions, 'type'>;
 
 export type NotificationParams = Partial<NotificationOptions> | string | VNode;

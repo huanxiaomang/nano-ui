@@ -56,7 +56,7 @@ const iconName = computed(() => typeIconMap.get(props.type) ?? 'circle-info');
 const height = ref(0);
 const messageRef = ref<HTMLDivElement>();
 
-const { currZIndex, nextZIndex } = useGlobalComponentSettings();
+const { currZIndex, nextZIndex } = useGlobalComponentSettings().zIndex;
 const lastOffset = computed(() => getLastBottomOffset(props.id));
 
 const offset = computed(

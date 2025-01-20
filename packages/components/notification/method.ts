@@ -7,7 +7,7 @@ import {
   isString,
 } from 'lodash-unified';
 import { debugWarn } from '@nano-ui/shared';
-import { notifyConfig } from '@nano-ui/hooks';
+import { useGlobalConfig } from '@nano-ui/hooks';
 import {
   NotificationHandler,
   NotificationOptionsNormalized,
@@ -120,11 +120,10 @@ const createNotification = (
 const notify: NotifyFn & Partial<Notify> = (options, appContext = null) => {
   const normalized = normalizeOptions(options);
   const { position } = normalized;
+  const notifyConfig = useGlobalConfig('notification');
+  const max = notifyConfig.value?.max;
 
-  if (
-    isNumber(notifyConfig.max) &&
-    notifications[position].length >= notifyConfig.max
-  ) {
+  if (isNumber(max) && notifications[position].length >= max) {
     return {
       close: () => void 0,
     };
