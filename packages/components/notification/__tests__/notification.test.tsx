@@ -9,5 +9,5 @@ describe('Notification.vue', () => {
     const wrapper = mount(() => <Notification>{AXIOM}</Notification>);
 
     expect(wrapper.text()).toEqual(AXIOM);
-  })
-})
+  });
+});
