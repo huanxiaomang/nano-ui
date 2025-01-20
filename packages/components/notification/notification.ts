@@ -82,7 +82,9 @@ export const notificationProps = buildProps({
 } as const);
 export type NotificationProps = ExtractPropTypes<typeof notificationProps>;
 
-export const notificationEmits = {};
+export const notificationEmits = {
+  destroy: () => true,
+};
 export type NotificationEmits = typeof notificationEmits;
 
 export type NotificationOptions = Partial<
