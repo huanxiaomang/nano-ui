@@ -5,4 +5,4 @@ export type ConfigProviderContext = Partial<ConfigProviderProps>;
 
 export const configProviderContextKey: InjectionKey<
   Ref<ConfigProviderContext>
-> = Symbol();
+> = Symbol('configProviderContextKey');

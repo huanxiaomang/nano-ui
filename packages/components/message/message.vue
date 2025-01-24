@@ -33,12 +33,20 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, readonly, ref } from 'vue';
+import {
+  computed,
+  getCurrentInstance,
+  inject,
+  onMounted,
+  readonly,
+  ref,
+} from 'vue';
 import { useEventListener, useResizeObserver } from '@vueuse/core';
 import { delay } from 'lodash-unified';
 import { typeIconMap } from '@nano-ui/shared';
 import { useGlobalComponentSettings } from '@nano-ui/hooks';
 import { EVENT_CODE } from '@nano-ui/constants';
+import { configProviderContextKey } from '../config-provider';
 import { messageEmits, messageProps } from './message';
 import { getLastBottomOffset, getOffset } from './instance';
 import NIcon from './../icon/icon.vue';

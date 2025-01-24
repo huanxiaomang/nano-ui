@@ -1,4 +1,12 @@
-import { App, computed, getCurrentInstance, provide, unref } from 'vue';
+import {
+  App,
+  Ref,
+  computed,
+  getCurrentInstance,
+  provide,
+  ref,
+  unref,
+} from 'vue';
 import { MaybeRef } from '@vueuse/core';
 import { debugWarn } from '@nano-ui/shared';
 import { globalConfig, mergeConfig, useGlobalConfig } from '@nano-ui/hooks';
@@ -8,7 +16,7 @@ export const provideGlobalConfig = (
   config: MaybeRef<ConfigProviderContext>,
   app?: App,
   global = false
-) => {
+): Ref<ConfigProviderContext> => {
   const inSetup = !!getCurrentInstance();
   const oldConfig = inSetup ? useGlobalConfig() : undefined;
 
@@ -19,7 +27,7 @@ export const provideGlobalConfig = (
       'provideGlobalConfig() can only be used inside setup() when the app parameter is not provided.'
     );
 
-    return;
+    return ref({});
   }
 
   const context = computed(() => {
@@ -27,7 +35,6 @@ export const provideGlobalConfig = (
     if (!oldConfig?.value) return configRaw;
     return mergeConfig(oldConfig.value, configRaw);
   });
-
   provideFn(configProviderContextKey, context);
 
   if (global || !globalConfig.value) {

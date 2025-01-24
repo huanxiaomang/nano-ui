@@ -34,6 +34,7 @@ import { throttle } from 'lodash-unified';
 import { buttonProps } from './button';
 import NIcon from './../icon/icon.vue';
 import { buttonGroupContextKey } from './constants';
+
 import type { ButtonEmits } from './button';
 
 defineOptions({
