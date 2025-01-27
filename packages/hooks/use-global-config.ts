@@ -1,4 +1,5 @@
 import { Ref, computed, getCurrentInstance, inject, ref } from 'vue';
+import { isObject } from 'lodash-unified';
 import {
   ConfigProviderContext,
   configProviderContextKey,
@@ -27,12 +28,24 @@ export function useGlobalConfig(
 }
 
 export const mergeConfig = (
-  a: ConfigProviderContext,
-  b: ConfigProviderContext
+  ...configs: ConfigProviderContext[]
 ): ConfigProviderContext => {
-  const keys = [...new Set([...keysOf(a), ...keysOf(b)])];
-  return keys.reduce((finalConfig: Record<string, any>, key) => {
-    finalConfig[key] = b[key] !== undefined ? b[key] : a[key];
-    return finalConfig;
-  }, {});
+  const merge = (a: object, b: object): object => {
+    const allKeys = [...new Set([...keysOf(a), ...keysOf(b)])];
+    const mergedConfig: Record<string, any> = {};
+
+    allKeys.forEach((key) => {
+      if (isObject(mergedConfig[key])) {
+        mergedConfig[key] = merge(a[key], b[key]);
+      } else {
+        mergedConfig[key] = b[key] !== undefined ? b[key] : a[key];
+      }
+    });
+
+    return mergedConfig;
+  };
+  return configs.reduce(
+    (finalConfig, config) => merge(finalConfig, config),
+    {}
+  );
 };

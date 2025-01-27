@@ -6,7 +6,7 @@ import NAlert from './../../packages/components/alert/alert.vue';
 import ConfigProvider from './../../packages/components/config-provider/config-provider.vue';
 import { NMessage } from './../../packages/components/message';
 import { NNotify } from './../../packages/components/notification';
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { en, ja, zhCn } from '@nano-ui/locale';
 import { useLocale } from '@nano-ui/hooks';
 
@@ -33,21 +33,22 @@ const open = () => {
   //   onClose: () => console.log(1),
   // });
 };
-
-const lan = ref([en, ja, zhCn]);
-const i = ref(0);
 </script>
 
 <template>
   <div>
     <config-provider
+      :locale="ja"
+      :zIndex="6666"
       :message="{
         max: 1,
+        showClose: true,
       }"
-      :locale="lan[i]"
+      :notification="{
+        max: 1,
+      }"
     >
       <n-button @click="open">123</n-button>
-      <n-button @click="() => i++">切换语言</n-button>
     </config-provider>
     <div>
       <!-- Success Alert with default configuration -->

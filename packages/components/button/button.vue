@@ -15,7 +15,7 @@
       'is-link': link,
     }"
     @click="handleClick"
-    >{{ locale.t('datepicker.now') }}
+  >
     <template v-if="loading">
       <slot name="loading">
         <n-icon :icon="props.loadingIcon" :style="iconStyle" size="1x" spin />
@@ -31,7 +31,6 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue';
 import { throttle } from 'lodash-unified';
-import { useLocale } from '@nano-ui/hooks';
 import { buttonProps } from './button';
 import NIcon from './../icon/icon.vue';
 import { buttonGroupContextKey } from './constants';
@@ -41,8 +40,6 @@ import type { ButtonEmits } from './button';
 defineOptions({
   name: 'NButton',
 });
-const locale = useLocale();
-console.log(locale);
 const props = defineProps(buttonProps);
 const slots = defineSlots();
 const emits = defineEmits<ButtonEmits>();

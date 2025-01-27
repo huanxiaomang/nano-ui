@@ -110,7 +110,6 @@ const createMessage = (
 
 const message: MessageFn & Partial<Message> = (options, appContext = null) => {
   const messageConfig = useGlobalConfig('message');
-  console.log(useGlobalConfig(), messageConfig);
 
   const normalized =
     messageConfig.value !== undefined

@@ -19,6 +19,7 @@ export const provideGlobalConfig = (
 ): Ref<ConfigProviderContext> => {
   const inSetup = !!getCurrentInstance();
   const oldConfig = inSetup ? useGlobalConfig() : undefined;
+  const configRaw = unref(config);
 
   const provideFn = app?.provide ?? (inSetup ? provide : undefined);
   if (!provideFn) {
@@ -31,7 +32,6 @@ export const provideGlobalConfig = (
   }
 
   const context = computed(() => {
-    const configRaw = unref(config);
     if (!oldConfig?.value) return configRaw;
     return mergeConfig(oldConfig.value, configRaw);
   });
@@ -40,6 +40,12 @@ export const provideGlobalConfig = (
   if (global || !globalConfig.value) {
     globalConfig.value = context.value;
   }
+
+  globalConfig.value = mergeConfig(
+    globalConfig.value,
+    { message: configRaw.message ?? {} },
+    { notification: configRaw.notification ?? {} }
+  );
 
   return context;
 };

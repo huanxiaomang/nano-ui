@@ -47,7 +47,7 @@ export const useLocale = (
   localeOverrides?: Ref<Language | undefined> | undefined
 ) => {
   localeOverrides = isUseGlobalConfig
-    ? ref(useGlobalConfig().value?.locale) ?? undefined
-    : undefined;
+    ? localeOverrides ?? ref(useGlobalConfig().value?.locale) ?? undefined
+    : localeOverrides;
   return buildLocaleContext(computed(() => localeOverrides?.value || English));
 };
