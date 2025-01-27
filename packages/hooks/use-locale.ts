@@ -16,11 +16,13 @@ export const translate = (
   path: string,
   option: TranslatorOption | undefined,
   locale: Language
-): string =>
-  get(locale, path, path).replace(
+): string => {
+  const text = (get(locale.el, path, path) as string).replace(
     /\{(\w+)\}/g,
     (_, key) => `${option?.[key] ?? `{${key}}`}`
   );
+  return text;
+};
 
 export const buildTranslator =
   (locale: MaybeRef<Language>): Translator =>

@@ -4,10 +4,11 @@ import NButtonGroup from './../../packages/components/button/button-group.vue';
 import NIcon from './../../packages/components/icon/icon.vue';
 import NAlert from './../../packages/components/alert/alert.vue';
 import ConfigProvider from './../../packages/components/config-provider/config-provider.vue';
-import AS from './../../packages/components/config-provider/AS.vue';
 import { NMessage } from './../../packages/components/message';
 import { NNotify } from './../../packages/components/notification';
 import { ref } from 'vue';
+import { en, zhCn } from '@nano-ui/locale';
+import { useLocale } from '@nano-ui/hooks';
 
 const open = () => {
   NNotify('nihao1');
@@ -40,9 +41,9 @@ const open = () => {
       :message="{
         max: 1,
       }"
+      :locale="zhCn"
     >
-      <AS></AS>
-      <n-button @click="open">click1</n-button>
+      <n-button @click="open">123</n-button>
     </config-provider>
     <div>
       <!-- Success Alert with default configuration -->
