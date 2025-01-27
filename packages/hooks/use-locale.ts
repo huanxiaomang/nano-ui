@@ -2,6 +2,7 @@ import { Ref, computed, isRef, ref, unref } from 'vue';
 import { get } from 'lodash-unified';
 import { Language } from '@nano-ui/locale';
 import English from '@nano-ui/locale/lang/en';
+import { useGlobalConfig } from './use-global-config';
 import type { MaybeRef } from '@vueuse/core';
 
 export type TranslatorOption = Record<string, string | number>;
@@ -41,6 +42,12 @@ export const buildLocaleContext = (
   };
 };
 
-export const useLocale = (localeOverrides?: Ref<Language | undefined>) => {
+export const useLocale = (
+  isUseGlobalConfig = true,
+  localeOverrides?: Ref<Language | undefined> | undefined
+) => {
+  localeOverrides = isUseGlobalConfig
+    ? ref(useGlobalConfig().value?.locale) ?? undefined
+    : undefined;
   return buildLocaleContext(computed(() => localeOverrides?.value || English));
 };

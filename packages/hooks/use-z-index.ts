@@ -1,10 +1,18 @@
 import { Ref, computed, ref, unref } from 'vue';
+import { useGlobalConfig } from './use-global-config';
 
 const zIndex = ref(0);
 
 export const defaultInitialZIndex = 2000;
 
-export default function useZIndex(zIndexOverrides?: Ref<number>) {
+export default function useZIndex(
+  isUseGlobalConfig = true,
+  zIndexOverrides?: Ref<number | undefined> | undefined
+) {
+  const config = useGlobalConfig();
+  zIndexOverrides = isUseGlobalConfig
+    ? zIndexOverrides ?? ref(config.value?.zIndex)
+    : zIndexOverrides;
   const _initVal = computed(
     () => unref(zIndexOverrides) ?? defaultInitialZIndex
   );

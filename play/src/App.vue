@@ -7,7 +7,7 @@ import ConfigProvider from './../../packages/components/config-provider/config-p
 import { NMessage } from './../../packages/components/message';
 import { NNotify } from './../../packages/components/notification';
 import { ref } from 'vue';
-import { en, zhCn } from '@nano-ui/locale';
+import { en, ja, zhCn } from '@nano-ui/locale';
 import { useLocale } from '@nano-ui/hooks';
 
 const open = () => {
@@ -33,6 +33,9 @@ const open = () => {
   //   onClose: () => console.log(1),
   // });
 };
+
+const lan = ref([en, ja, zhCn]);
+const i = ref(0);
 </script>
 
 <template>
@@ -41,9 +44,10 @@ const open = () => {
       :message="{
         max: 1,
       }"
-      :locale="zhCn"
+      :locale="lan[i]"
     >
       <n-button @click="open">123</n-button>
+      <n-button @click="() => i++">切换语言</n-button>
     </config-provider>
     <div>
       <!-- Success Alert with default configuration -->

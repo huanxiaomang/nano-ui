@@ -45,8 +45,8 @@ import { computed, onMounted, readonly, ref } from 'vue';
 import { useEventListener, useResizeObserver } from '@vueuse/core';
 import { delay } from 'lodash-unified';
 import { typeIconMap } from '@nano-ui/shared';
-import { useGlobalComponentSettings } from '@nano-ui/hooks';
 import { EVENT_CODE } from '@nano-ui/constants';
+import useZIndex from '@nano-ui/hooks/use-z-index';
 import { notificationEmits, notificationProps } from './notification';
 import { getLastBottomOffset, getOffset } from './instance';
 import NIcon from './../icon/icon.vue';
@@ -64,7 +64,7 @@ const iconName = computed(() => typeIconMap.get(props.type) ?? 'circle-info');
 const height = ref(0);
 const notifyRef = ref<HTMLDivElement>();
 
-const { currZIndex, nextZIndex } = useGlobalComponentSettings().zIndex;
+const { currZIndex, nextZIndex } = useZIndex();
 const lastOffset = computed(() => getLastBottomOffset(props.id));
 
 const topOffset = computed(
