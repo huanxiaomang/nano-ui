@@ -30,15 +30,18 @@ export function useGlobalConfig(
 export const mergeConfig = (
   ...configs: ConfigProviderContext[]
 ): ConfigProviderContext => {
-  const merge = (a: object, b: object): object => {
-    const allKeys = [...new Set([...keysOf(a), ...keysOf(b)])];
-    const mergedConfig: Record<string, any> = {};
+  const merge = <T extends object, U extends object>(a: T, b: U): T & U => {
+    const allKeys = [...new Set([...keysOf(a), ...keysOf(b)])] as (keyof (T &
+      U))[];
+    const mergedConfig = {} as T & U;
 
     allKeys.forEach((key) => {
-      if (isObject(mergedConfig[key])) {
-        mergedConfig[key] = merge(a[key], b[key]);
+      const aVal = a[key as keyof T];
+      const bVal = b[key as keyof U];
+      if (isObject(aVal) && isObject(bVal)) {
+        mergedConfig[key] = merge(aVal, bVal) as any;
       } else {
-        mergedConfig[key] = b[key] !== undefined ? b[key] : a[key];
+        mergedConfig[key] = (bVal !== undefined ? bVal : aVal) as any;
       }
     });
 
@@ -46,6 +49,6 @@ export const mergeConfig = (
   };
   return configs.reduce(
     (finalConfig, config) => merge(finalConfig, config),
-    {}
+    {} as ConfigProviderContext
   );
 };

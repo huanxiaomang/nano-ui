@@ -6,9 +6,7 @@ import NAlert from './../../packages/components/alert/alert.vue';
 import ConfigProvider from './../../packages/components/config-provider/config-provider.vue';
 import { NMessage } from './../../packages/components/message';
 import { NNotify } from './../../packages/components/notification';
-import { ref, watchEffect } from 'vue';
 import { en, ja, zhCn } from '@nano-ui/locale';
-import { useLocale } from '@nano-ui/hooks';
 
 const open = () => {
   NNotify('nihao1');
