@@ -106,7 +106,7 @@ useResizeObserver(messageRef, () => {
 });
 
 defineExpose({
-  getVisible: () => readonly(visible),
+  visible: readonly(visible),
   close,
   bottomOffset,
 });

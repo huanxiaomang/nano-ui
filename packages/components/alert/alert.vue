@@ -67,7 +67,7 @@ const iconName = computed(() =>
 const withDescription = computed(() => props.description || slots.default);
 
 defineExpose({
-  getVisible: () => readonly(visible),
+  visible: readonly(visible),
   close,
   open,
 });

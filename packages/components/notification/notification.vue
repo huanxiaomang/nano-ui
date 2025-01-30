@@ -125,7 +125,7 @@ useResizeObserver(notifyRef, () => {
 });
 
 defineExpose({
-  getVisible: () => readonly(visible),
+  visible: readonly(visible),
   close,
   bottomOffset,
 });
