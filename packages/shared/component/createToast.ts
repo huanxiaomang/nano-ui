@@ -37,12 +37,12 @@ export interface CompContext<CompProp> {
 }
 
 export const createToastFn = <
+  CompProp,
   CompOptions extends {
     message?: ToastMessage;
     onClose?: () => void;
     appendTo: HTMLElement;
-  },
-  CompProp
+  }
 >(
   toastContext: CreateToastContext
 ) => {

@@ -63,8 +63,8 @@ const toastContext: CreateToastContext = {
 };
 
 const createNotification = createToastFn<
-  NotificationOptionsNormalized,
-  NotificationProps
+  NotificationProps,
+  NotificationOptionsNormalized
 >(toastContext);
 
 // const createNotification = (
