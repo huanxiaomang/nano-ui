@@ -1,6 +1,5 @@
+import { type AppContext, type ExtractPropTypes, type VNode } from 'vue';
 import { Mutable, buildProps, definePropType } from '@nano-ui/shared';
-
-import type { AppContext, ExtractPropTypes, VNode } from 'vue';
 
 export const messageTypes = ['success', 'info', 'warning', 'error'] as const;
 

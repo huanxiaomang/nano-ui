@@ -1,14 +1,8 @@
-import { ComponentInternalInstance, VNode, shallowReactive } from 'vue';
-import { Mutable } from '@nano-ui/shared';
-import { MessageHandler, MessageProps } from './message';
+import { shallowReactive } from 'vue';
+import { CompContext } from '@nano-ui/shared/component/createToast';
+import { MessageProps } from './message';
 
-export type MessageContext = {
-  id: string;
-  vnode: VNode;
-  handler: MessageHandler;
-  vm: ComponentInternalInstance;
-  props: Mutable<MessageProps>;
-};
+export type MessageContext = CompContext<MessageProps>;
 
 export const instances: MessageContext[] = shallowReactive([]);
 

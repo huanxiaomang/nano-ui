@@ -1,19 +1,23 @@
-import { AppContext, createVNode, isVNode, render } from 'vue';
-import { fromPairs, isFunction, isNumber, isString } from 'lodash-unified';
+import { isVNode } from 'vue';
+import { fromPairs, isNumber, isString } from 'lodash-unified';
 import { debugWarn, isElement } from '@nano-ui/shared';
 import { useGlobalConfig } from '@nano-ui/hooks';
+import {
+  CreateToastContext,
+  createToastFn,
+} from '@nano-ui/shared/component/createToast';
 import {
   Message,
   MessageConfigContext,
   MessageFn,
-  MessageHandler,
   MessageOptionsNormalized,
   MessageParams,
+  MessageProps,
   type MessageType,
   messageProps,
   messageTypes,
 } from './message';
-import { MessageContext, closeMessage, instances } from './instance';
+import { closeMessage, instances } from './instance';
 import MessageConstructor from './message.vue';
 
 const normalizeOptions = (
@@ -51,62 +55,69 @@ const normalizeOptions = (
   return normalized as MessageOptionsNormalized;
 };
 
-let seed = 0;
-
-const createMessage = (
-  { appendTo, ...options }: MessageOptionsNormalized,
-  context: AppContext | null
-): MessageContext => {
-  const id = `nano_message-${seed++}`;
-  const userOnClose = options.onClose;
-  const container = document.createElement('div');
-
-  const props = {
-    ...options,
-    id,
-    onClose: () => {
-      userOnClose?.();
-      closeMessage(id);
-    },
-    onDestroy: () => {
-      render(null, container);
-      return true;
-    },
-  };
-
-  const vnode = createVNode(
-    MessageConstructor,
-    props,
-    isFunction(props.message) || isVNode(props.message)
-      ? {
-          default: isFunction(props.message)
-            ? props.message
-            : () => props.message,
-        }
-      : null
-  );
-  vnode.appContext = context ?? null;
-
-  render(vnode, container);
-  appendTo.appendChild(container.firstElementChild!);
-
-  const vm = vnode.component!;
-
-  const handler: MessageHandler = {
-    // 这里不要直接调用props.onClose，否则内部声明周期过程会被跳过
-    close: () => vm.exposed!.close(),
-  };
-
-  const instance: MessageContext = {
-    id,
-    vnode,
-    vm,
-    handler,
-    props: (vnode.component as any).props,
-  };
-
-  return instance;
+const toastContext: CreateToastContext = {
+  componentConstructor: MessageConstructor,
+  onInstanceClose: (id) => closeMessage(id),
 };
+
+const createMessage = createToastFn<MessageOptionsNormalized, MessageProps>(
+  toastContext
+);
+
+// const createMessage = (
+//   { appendTo, ...options }: MessageOptionsNormalized,
+//   context: AppContext | null
+// ): MessageContext => {
+//   const id = `nano_message-${seed++}`;
+//   const userOnClose = options.onClose;
+//   const container = document.createElement('div');
+
+//   const props = {
+//     ...options,
+//     id,
+//     onClose: () => {
+//       userOnClose?.();
+//       closeMessage(id);
+//     },
+//     onDestroy: () => {
+//       render(null, container);
+//       return true;
+//     },
+//   };
+
+//   const vnode = createVNode(
+//     MessageConstructor,
+//     props,
+//     isFunction(props.message) || isVNode(props.message)
+//       ? {
+//           default: isFunction(props.message)
+//             ? props.message
+//             : () => props.message,
+//         }
+//       : null
+//   );
+//   vnode.appContext = context ?? null;
+
+//   render(vnode, container);
+//   appendTo.appendChild(container.firstElementChild!);
+
+//   const vm = vnode.component!;
+
+//   const handler: MessageHandler = {
+//     // 这里不要直接调用props.onClose，否则内部声明周期过程会被跳过
+//     close: () => vm.exposed!.close(),
+//   };
+
+//   const instance: MessageContext = {
+//     id,
+//     vnode,
+//     vm,
+//     handler,
+//     props: (vnode.component as any).props,
+//   };
+
+//   return instance;
+// };
 
 const message: MessageFn & Partial<Message> = (options, appContext = null) => {
   const messageConfig = useGlobalConfig('message');

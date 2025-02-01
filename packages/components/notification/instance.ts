@@ -1,23 +1,8 @@
-import {
-  ComponentInternalInstance,
-  Reactive,
-  VNode,
-  shallowReactive,
-} from 'vue';
-import { Mutable } from '@nano-ui/shared';
-import {
-  NotificationHandler,
-  NotificationPosition,
-  NotificationProps,
-} from './notification';
+import { Reactive, shallowReactive } from 'vue';
+import { CompContext } from '@nano-ui/shared/component/createToast';
+import { NotificationPosition, NotificationProps } from './notification';
 
-export type NotificationContext = {
-  id: string;
-  vnode: VNode;
-  handler: NotificationHandler;
-  vm: ComponentInternalInstance;
-  props: Mutable<NotificationProps>;
-};
+export type NotificationContext = CompContext<NotificationProps>;
 
 export const notifications: Record<
   NotificationPosition,

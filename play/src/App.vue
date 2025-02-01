@@ -39,11 +39,11 @@ const open = () => {
       :locale="ja"
       :zIndex="6666"
       :message="{
-        max: 1,
+        max: 10,
         showClose: true,
       }"
       :notification="{
-        max: 1,
+        max: 10,
       }"
     >
       <n-button @click="open">123</n-button>
