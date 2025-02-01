@@ -8,7 +8,7 @@ import {
   render,
 } from 'vue';
 import { isFunction } from 'lodash-unified';
-import { Mutable } from '..';
+import { Mutable, definePropType } from '..';
 
 export interface CreateToastContext {
   componentConstructor: Component;
@@ -17,6 +17,14 @@ export interface CreateToastContext {
   beforeInstanceClose?: (id: string) => any;
   beforeInstanceDestroy?: (id: string) => any;
 }
+
+export type ToastMessage = string | VNode | (() => VNode);
+
+export const ToastMessagePropType = definePropType<ToastMessage>([
+  String,
+  Object,
+  Function,
+]);
 
 export interface CompContext<CompProp> {
   id: string;
@@ -30,7 +38,7 @@ export interface CompContext<CompProp> {
 
 export const createToastFn = <
   CompOptions extends {
-    message?: string | VNode | (() => VNode);
+    message?: ToastMessage;
     onClose?: () => void;
     appendTo: HTMLElement;
   },
@@ -70,9 +78,7 @@ export const createToastFn = <
       },
     };
 
-    const getMessageVNode = (
-      message: string | VNode | (() => VNode) | undefined
-    ) => {
+    const getMessageVNode = (message: ToastMessage | undefined) => {
       return isFunction(message) || isVNode(message)
         ? { default: isFunction(message) ? message : () => message }
         : null;

@@ -1,5 +1,6 @@
 import { type AppContext, type ExtractPropTypes, type VNode } from 'vue';
 import { Mutable, buildProps, definePropType } from '@nano-ui/shared';
+import { ToastMessagePropType } from '@nano-ui/shared/component/createToast';
 
 export const messageTypes = ['success', 'info', 'warning', 'error'] as const;
 
@@ -40,11 +41,7 @@ export const messageProps = buildProps({
     default: 'info',
   },
   message: {
-    type: definePropType<string | VNode | (() => VNode)>([
-      String,
-      Object,
-      Function,
-    ]),
+    type: ToastMessagePropType,
     default: '',
   },
   offset: {
