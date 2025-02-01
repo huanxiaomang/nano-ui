@@ -36,16 +36,13 @@ export interface CompContext<CompProp> {
   props: Mutable<CompProp>;
 }
 
-export const createToastFn = <
-  CompProp,
-  CompOptions extends {
-    message?: ToastMessage;
-    onClose?: () => void;
-    appendTo: HTMLElement;
-  }
->(
-  toastContext: CreateToastContext
-) => {
+export interface CompOptions {
+  message?: ToastMessage;
+  onClose?: () => void;
+  appendTo: HTMLElement;
+}
+
+export const createToastFn = <CompProp>(toastContext: CreateToastContext) => {
   let seed = 0;
   return (
     { appendTo, ...options }: CompOptions,

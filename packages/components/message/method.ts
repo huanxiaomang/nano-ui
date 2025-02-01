@@ -60,9 +60,7 @@ const toastContext: CreateToastContext = {
   onInstanceClose: (id) => closeMessage(id),
 };
 
-const createMessage = createToastFn<MessageProps, MessageOptionsNormalized>(
-  toastContext
-);
+const createMessage = createToastFn<MessageProps>(toastContext);
 
 // const createMessage = (
 //   { appendTo, ...options }: MessageOptionsNormalized,

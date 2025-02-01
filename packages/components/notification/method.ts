@@ -62,10 +62,7 @@ const toastContext: CreateToastContext = {
   onInstanceClose: (id) => closeNotification(id),
 };
 
-const createNotification = createToastFn<
-  NotificationProps,
-  NotificationOptionsNormalized
->(toastContext);
+const createNotification = createToastFn<NotificationProps>(toastContext);
 
 // const createNotification = (
 //   { appendTo, ...options }: NotificationOptionsNormalized,
