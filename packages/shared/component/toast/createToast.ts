@@ -80,7 +80,6 @@ export const createToastFn = <CompProp extends ToastCompPropType>(
       ...options,
       id,
       onClose: () => {
-        beforeInstanceClose?.(id);
         userOnClose?.();
         onInstanceClose?.(id);
       },
@@ -109,7 +108,10 @@ export const createToastFn = <CompProp extends ToastCompPropType>(
 
     const handler = {
       // 这里不要直接调用props.onClose，否则内部声明周期过程会被跳过
-      close: () => vm.exposed!.close(),
+      close: () => {
+        beforeInstanceClose?.(id);
+        vm.exposed!.close();
+      },
     };
 
     const instance = {
