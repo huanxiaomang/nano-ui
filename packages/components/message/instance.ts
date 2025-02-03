@@ -1,8 +1,8 @@
 import { shallowReactive } from 'vue';
-import { CompContext } from '@nano-ui/shared/component/createToast';
+import { ToastCompContext } from '@nano-ui/shared/component/toast';
 import { MessageProps } from './message';
 
-export type MessageContext = CompContext<MessageProps>;
+export type MessageContext = ToastCompContext<MessageProps>;
 
 export const instances: MessageContext[] = shallowReactive([]);
 

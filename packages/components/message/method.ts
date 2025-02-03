@@ -1,17 +1,13 @@
 import { isVNode } from 'vue';
 import { fromPairs, isNumber, isString } from 'lodash-unified';
-import { debugWarn, isElement } from '@nano-ui/shared';
 import { useGlobalConfig } from '@nano-ui/hooks';
 import {
   CreateToastContext,
   createToastFn,
-} from '@nano-ui/shared/component/createToast';
+} from '@nano-ui/shared/component/toast/createToast';
 import {
   Message,
-  MessageConfigContext,
   MessageFn,
-  MessageOptionsNormalized,
-  MessageParams,
   MessageProps,
   type MessageType,
   messageProps,
@@ -19,41 +15,6 @@ import {
 } from './message';
 import { closeMessage, instances } from './instance';
 import MessageConstructor from './message.vue';
-
-const normalizeOptions = (
-  options: MessageParams,
-  messageConfig?: MessageConfigContext
-): MessageOptionsNormalized => {
-  const messageDefaults = fromPairs(
-    Object.entries(messageProps).map(([key, prop]) => [key, prop.default])
-  );
-  if (isString(options) || isVNode(options)) {
-    options = { message: options };
-  }
-  const normalized = {
-    ...messageDefaults,
-    ...(messageConfig ?? {}),
-    ...options,
-  };
-
-  if (!normalized.appendTo) {
-    normalized.appendTo = document.body;
-  } else if (isString(normalized.appendTo)) {
-    let appendTo = document.querySelector<HTMLElement>(normalized.appendTo);
-
-    if (!isElement) {
-      debugWarn(
-        'NanoMessage',
-        'the appendTo option is not an HTMLElement. Falling back to document.body.'
-      );
-      appendTo = document.body;
-    }
-
-    normalized.appendTo = appendTo!;
-  }
-
-  return normalized as MessageOptionsNormalized;
-};
 
 const toastContext: CreateToastContext = {
   componentConstructor: MessageConstructor,
@@ -119,11 +80,17 @@ const createMessage = createToastFn<MessageProps>(toastContext);
 
 const message: MessageFn & Partial<Message> = (options, appContext = null) => {
   const messageConfig = useGlobalConfig('message');
-
-  const normalized =
-    messageConfig.value !== undefined
-      ? normalizeOptions(options, messageConfig.value)
-      : normalizeOptions(options);
+  if (isString(options) || isVNode(options)) {
+    options = { message: options };
+  }
+  const messageDefaults = fromPairs(
+    Object.entries(messageProps).map(([key, prop]) => [key, prop.default])
+  );
+  const mergedOptions = {
+    ...messageDefaults,
+    ...(messageConfig.value ?? {}),
+    ...options,
+  };
   const max = messageConfig.value?.max;
 
   if (isNumber(max) && instances.length >= max) {
@@ -132,7 +99,7 @@ const message: MessageFn & Partial<Message> = (options, appContext = null) => {
     };
   }
 
-  const instance = createMessage(normalized, appContext);
+  const instance = createMessage(mergedOptions, appContext);
 
   instances.push(instance);
 
@@ -141,12 +108,10 @@ const message: MessageFn & Partial<Message> = (options, appContext = null) => {
 
 messageTypes.forEach((type) => {
   message[type] = (options = {}, appContext) => {
-    const messageConfig = useGlobalConfig('message');
-    const normalized =
-      messageConfig.value !== undefined
-        ? normalizeOptions(options, messageConfig.value)
-        : normalizeOptions(options);
-    return message({ ...normalized, type }, appContext);
+    if (isString(options) || isVNode(options)) {
+      options = { message: options };
+    }
+    return message({ ...options, type }, appContext);
   };
 });
 

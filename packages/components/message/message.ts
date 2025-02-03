@@ -1,6 +1,11 @@
 import { type AppContext, type ExtractPropTypes, type VNode } from 'vue';
-import { Mutable, buildProps, definePropType } from '@nano-ui/shared';
-import { ToastMessagePropType } from '@nano-ui/shared/component/createToast';
+import { buildProps, definePropType } from '@nano-ui/shared';
+import {
+  ToastCompOptions,
+  ToastCompPropType,
+  ToastMessagePropType,
+  ToastParams,
+} from '@nano-ui/shared/component/toast';
 
 export const messageTypes = ['success', 'info', 'warning', 'error'] as const;
 
@@ -49,27 +54,19 @@ export const messageProps = buildProps({
     default: 16,
   },
 } as const);
-export type MessageProps = ExtractPropTypes<typeof messageProps>;
+export type MessageProps = ExtractPropTypes<typeof messageProps> &
+  ToastCompPropType;
 
 export const messageEmits = {
   destroy: () => true,
 };
 export type MessageEmits = typeof messageEmits;
 
-export type MessageOptions = Partial<
-  Mutable<
-    Omit<MessageProps, 'id'> & {
-      appendTo?: HTMLElement | string;
-    }
-  >
->;
+export type MessageOptions = ToastCompOptions<MessageProps>;
 
-export type MessageOptionsNormalized = MessageOptions & {
-  appendTo: HTMLElement;
-};
 export type MessageOptionsTyped = Omit<MessageOptions, 'type'>;
 
-export type MessageParams = Partial<MessageOptions> | string | VNode;
+export type MessageParams = ToastParams<MessageProps>;
 export type MessageParamsTyped = Partial<MessageOptionsTyped> | string | VNode;
 
 export interface MessageConfigContext {

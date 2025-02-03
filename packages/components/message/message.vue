@@ -26,7 +26,7 @@
         </slot>
       </div>
       <div v-if="showClose" class="nano-message__close">
-        <n-icon icon="xmark" @click.stop="close" />
+        <n-icon icon="xmark" :props @click.stop="close" />
       </div>
     </div>
   </Transition>

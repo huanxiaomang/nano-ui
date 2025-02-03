@@ -1,15 +1,11 @@
 import { isVNode } from 'vue';
-import { fromPairs, isElement, isNumber, isString } from 'lodash-unified';
-import { debugWarn } from '@nano-ui/shared';
+import { fromPairs, isNumber, isString } from 'lodash-unified';
 import { useGlobalConfig } from '@nano-ui/hooks';
 import {
   CreateToastContext,
   createToastFn,
-} from '@nano-ui/shared/component/createToast';
+} from '@nano-ui/shared/component/toast/createToast';
 import {
-  NotificationConfigContext,
-  NotificationOptionsNormalized,
-  NotificationParams,
   NotificationPosition,
   NotificationProps,
   NotificationType,
@@ -20,42 +16,6 @@ import {
 } from './notification';
 import NotificationConstructor from './notification.vue';
 import { closeNotification, notifications } from './instance';
-
-const normalizeOptions = (
-  options: NotificationParams,
-  notificationConfig?: NotificationConfigContext
-): NotificationOptionsNormalized => {
-  const notifyDefaults = fromPairs(
-    Object.entries(notificationProps).map(([key, prop]) => [key, prop.default])
-  );
-  if (isString(options) || isVNode(options)) {
-    options = { message: options };
-  }
-
-  const normalized = {
-    ...notifyDefaults,
-    ...(notificationConfig ?? {}),
-    ...options,
-  };
-
-  if (!normalized.appendTo) {
-    normalized.appendTo = document.body;
-  } else if (isString(normalized.appendTo)) {
-    let appendTo = document.querySelector<HTMLElement>(normalized.appendTo);
-
-    if (!isElement) {
-      debugWarn(
-        'NanoNotification',
-        'the appendTo option is not an HTMLElement. Falling back to document.body.'
-      );
-      appendTo = document.body;
-    }
-
-    normalized.appendTo = appendTo!;
-  }
-
-  return normalized as NotificationOptionsNormalized;
-};
 
 const toastContext: CreateToastContext = {
   componentConstructor: NotificationConstructor,
@@ -121,35 +81,39 @@ const createNotification = createToastFn<NotificationProps>(toastContext);
 
 const notify: NotifyFn & Partial<Notify> = (options, appContext = null) => {
   const notifyConfig = useGlobalConfig('notification');
-
-  const normalized =
-    notifyConfig.value !== undefined
-      ? normalizeOptions(options, notifyConfig.value)
-      : normalizeOptions(options);
-  const { position } = normalized;
+  if (isString(options) || isVNode(options)) {
+    options = { message: options };
+  }
+  const notifyDefaults = fromPairs(
+    Object.entries(notificationProps).map(([key, prop]) => [key, prop.default])
+  );
+  const mergedOptions = {
+    ...notifyDefaults,
+    ...(notifyConfig.value ?? {}),
+    ...options,
+  };
+  const { position } = mergedOptions;
   const max = notifyConfig.value?.max;
 
-  if (isNumber(max) && notifications[position].length >= max) {
+  if (isNumber(max) && notifications[position!].length >= max) {
     return {
       close: () => void 0,
     };
   }
 
-  const instance = createNotification(normalized, appContext);
+  const instance = createNotification(mergedOptions, appContext);
 
-  notifications[position].push(instance);
+  notifications[position!].push(instance);
 
   return instance.handler;
 };
 
 notificationTypes.forEach((type) => {
   notify[type] = (options = {}, appContext) => {
-    const notifyConfig = useGlobalConfig('notification');
-    const normalized =
-      notifyConfig.value !== undefined
-        ? normalizeOptions(options, notifyConfig.value)
-        : normalizeOptions(options);
-    return notify({ ...normalized, type }, appContext);
+    if (isString(options) || isVNode(options)) {
+      options = { message: options };
+    }
+    return notify({ ...options, type }, appContext);
   };
 });
 

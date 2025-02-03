@@ -1,5 +1,10 @@
-import { Mutable, buildProps, definePropType } from '@nano-ui/shared';
-import { ToastMessagePropType } from '@nano-ui/shared/component/createToast';
+import { buildProps, definePropType } from '@nano-ui/shared';
+import {
+  ToastCompOptions,
+  ToastCompPropType,
+  ToastMessagePropType,
+  ToastParams,
+} from '@nano-ui/shared/component/toast';
 
 import type { AppContext, ExtractPropTypes, VNode } from 'vue';
 
@@ -77,20 +82,15 @@ export const notificationProps = buildProps({
     default: 16,
   },
 } as const);
-export type NotificationProps = ExtractPropTypes<typeof notificationProps>;
+export type NotificationProps = ExtractPropTypes<typeof notificationProps> &
+  ToastCompPropType;
 
 export const notificationEmits = {
   destroy: () => true,
 };
 export type NotificationEmits = typeof notificationEmits;
 
-export type NotificationOptions = Partial<
-  Mutable<
-    Omit<NotificationProps, 'id'> & {
-      appendTo?: HTMLElement | string;
-    }
-  >
->;
+export type NotificationOptions = ToastCompOptions<NotificationProps>;
 
 export interface NotificationConfigContext {
   max?: number;
@@ -101,16 +101,11 @@ export interface NotificationConfigContext {
 
 export type NotificationOptionsTyped = Omit<NotificationOptions, 'type'>;
 
-export type NotificationParams = Partial<NotificationOptions> | string | VNode;
+export type NotificationParams = ToastParams<NotificationProps>;
 export type NotificationParamsTyped =
   | Partial<NotificationOptionsTyped>
   | string
   | VNode;
-
-export type NotificationOptionsNormalized = NotificationOptions & {
-  appendTo: HTMLElement;
-  position: NotificationPosition;
-};
 
 export type NotificationHandler = {
   close: () => void;

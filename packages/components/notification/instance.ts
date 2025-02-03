@@ -1,8 +1,8 @@
 import { Reactive, shallowReactive } from 'vue';
-import { CompContext } from '@nano-ui/shared/component/createToast';
+import { ToastCompContext } from '@nano-ui/shared/component/toast';
 import { NotificationPosition, NotificationProps } from './notification';
 
-export type NotificationContext = CompContext<NotificationProps>;
+export type NotificationContext = ToastCompContext<NotificationProps>;
 
 export const notifications: Record<
   NotificationPosition,
