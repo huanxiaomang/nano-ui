@@ -1,5 +1,5 @@
 import { type SFCWithInstall, withInstall } from '@nano-ui/shared';
-import ConfigProvider from './-config-provider';
+import ConfigProvider from './config-provider.vue';
 
 export * from './constants';
 export * from './type';
