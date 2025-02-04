@@ -87,6 +87,7 @@ export type EpPropInput<
   values?: readonly Value[];
   validator?: ((val: any) => val is Validator) | ((val: any) => boolean);
   default?: EpPropInputDefault<Required, Default>;
+  [epPropKey]?: true;
 };
 
 /**

@@ -152,7 +152,7 @@ const open = () => {
     </n-button>
 
     <div>禁用按钮</div>
-    <n-button disabled>Button</n-button>
+    <n-button :disabled="true">Button</n-button>
 
     <div>带图标的按钮</div>
     <n-button type="" icon="check-circle">按钮11你</n-button>
