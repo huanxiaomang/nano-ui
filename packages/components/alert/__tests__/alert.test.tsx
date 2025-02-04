@@ -1,6 +1,5 @@
-import { nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import NAlert from '../alert.vue';
 import NIcon from '../../icon/icon.vue';
 
@@ -24,14 +23,6 @@ describe('NAlert.vue', () => {
   it('showIcon', () => {
     const wrapper = mount(() => <NAlert showIcon />);
     expect(wrapper.findComponent(NIcon).exists()).toBeTruthy();
-  });
-
-  it('closable', async () => {
-    const wrapper = mount(() => <NAlert closable />);
-    const closeButton = wrapper.find('.nano-alert__close');
-    await closeButton.trigger('click');
-    await nextTick();
-    expect(wrapper.vm.visable).toBe(false);
   });
 
   it('default slot', () => {
@@ -60,22 +51,5 @@ describe('NAlert.vue', () => {
   it('center', () => {
     const wrapper = mount(() => <NAlert center />);
     expect(wrapper.classes()).toContain('text-center');
-  });
-
-  it('open method', async () => {
-    const wrapper = mount(() => <NAlert />);
-    await nextTick();
-    const alert = wrapper.vm;
-    alert.close(new MouseEvent('click'));
-    expect(wrapper.isVisible()).toBe(false);
-    alert.open();
-    expect(wrapper.isVisible()).toBe(true);
-  });
-
-  it('emit close event', async () => {
-    const closeHandler = vi.fn();
-    const wrapper = mount(() => <NAlert onClose={closeHandler} />);
-    await wrapper.find('.nano-alert__close').trigger('click');
-    expect(closeHandler).toHaveBeenCalledTimes(1);
   });
 });

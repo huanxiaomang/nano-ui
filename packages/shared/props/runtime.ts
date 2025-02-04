@@ -21,14 +21,12 @@ export const definePropType = <T>(val: any): PropType<T> => val;
 export const isEpProp = (val: unknown): val is EpProp<any, any, any> =>
   isObject(val) && !!(val as any)[epPropKey];
 
-const createValidator = (
+export const createValidator = (
   values: readonly unknown[] | undefined,
   validator: ((val: unknown) => boolean) | undefined,
   defaultValue: unknown,
   key?: string
 ) => {
-  if (!values && !validator) return undefined;
-
   return (val: unknown) => {
     let valid = false;
     let allowedValues: unknown[] = [];
@@ -93,7 +91,10 @@ export const buildProp = <
 
   const { values, required, default: defaultValue, type, validator } = prop;
 
-  const _validator = createValidator(values, validator, defaultValue, key);
+  const _validator =
+    values || validator
+      ? createValidator(values, validator, defaultValue, key)
+      : undefined;
 
   assign(prop, {
     type,
