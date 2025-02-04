@@ -32,7 +32,11 @@
     "docs:build": "pnpm --filter @nano-ui/docs build",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
-    "esm-check": "pnpx are-we-esm --prod"
+    "esm-check": "pnpx are-we-esm --prod",
+    "build": "run-s build-hooks build-comp",
+    "build-comp": "cross-env NODE_ENV=production pnpm --filter nano-ui-vue build",
+    "build-hooks": "cross-env NODE_ENV=production pnpm --filter @nano-ui/hooks build",
+    "build:dev": "cross-env NODE_ENV=development pnpm --filter nano-ui-vue build:watch"
   },
   "peerDependencies": {
     "vue": "^3.2.0"
@@ -79,6 +83,7 @@
     "chalk": "^5.0.1",
     "concurrently": "^7.2.2",
     "consola": "^2.15.3",
+    "cross-env": "^7.0.3",
     "csstype": "^2.6.20",
     "eslint": "^8.57.1",
     "eslint-define-config": "^1.5.1",
