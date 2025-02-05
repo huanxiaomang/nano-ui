@@ -419,6 +419,12 @@ importers:
       '@nano-ui/components':
         specifier: workspace:*
         version: link:../components
+      '@nano-ui/constants':
+        specifier: workspace:*
+        version: link:../constants
+      '@nano-ui/hooks':
+        specifier: workspace:*
+        version: link:../hooks
       '@popperjs/core':
         specifier: ^2.11.8
         version: 2.11.8
