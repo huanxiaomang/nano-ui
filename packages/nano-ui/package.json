@@ -55,6 +55,8 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@nano-ui/components": "workspace:*",
+    "@nano-ui/constants": "workspace:*",
+    "@nano-ui/hooks": "workspace:*",
     "@popperjs/core": "^2.11.8",
     "async-validator": "^4.2.5"
   },

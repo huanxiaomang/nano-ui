@@ -70,4 +70,9 @@ export default defineConfig({
       },
     },
   },
+  resolve: {
+    alias: {
+      '@nano-ui/constants': resolve(__dirname, '../../constants/index.ts'),
+    },
+  },
 });
