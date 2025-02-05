@@ -90,7 +90,6 @@ export default defineConfig({
         '@fortawesome/vue-fontawesome',
         '@popperjs/core',
         'async-validator',
-        /^@nano-ui\/.*/,
       ],
       output: {
         assetFileNames: (assetInfo) => {
@@ -125,15 +124,7 @@ export default defineConfig({
             }
           }
         },
-        preserveModules: true,
-        exports: 'named',
       },
-    },
-  },
-  resolve: {
-    alias: {
-      '@nano-ui/constants': resolve(__dirname, '../../constants/index.ts'),
-      // 添加其他内部模块的别名
     },
   },
 });
