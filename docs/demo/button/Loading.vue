@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="demo-button">
     <n-button type="primary" loading>Loading</n-button>
     <n-button type="primary" loading-icon="circle-notch" loading
       >Loading</n-button
@@ -12,3 +12,9 @@
     </n-button>
   </div>
 </template>
+
+<style scoped>
+.demo-button .n-button {
+  margin: 0 8px 8px 0;
+}
+</style>

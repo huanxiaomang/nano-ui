@@ -26,6 +26,11 @@ export default defineConfig({
         items: [{ text: '快速开始', link: '/get-started' }],
       },
       {
+        text: '配置组件',
+        collapsed: false,
+        items: [{ text: 'ConfigProvider', link: 'components/config-provider' }],
+      },
+      {
         text: '基础组件',
         collapsed: false,
         items: [
