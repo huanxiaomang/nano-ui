@@ -54,6 +54,8 @@
   user-select: none;
   vertical-align: middle;
   -webkit-appearance: none;
+  margin-right: 8px;
+  margin-bottom: 8px;
   
   padding: var(--nano-button-padding-vertical) var(--nano-button-padding-horizontal);
   font-size: var(--nano-button-font-size);
@@ -62,6 +64,10 @@
   border: 1px solid var(--nano-button-border-color);
   background-color: var(--nano-button-bg-color);
   
+  &:last-child {
+    margin-right: 0;
+  }
+
   &:hover {
     color: var(--nano-button-hover-text-color);
     border-color: var(--nano-button-hover-border-color);
@@ -78,13 +84,7 @@
   /* 图标样式 */
   .nano-icon {
     font-size: var(--nano-button-icon-size);
-    margin-right: var(--nano-button-icon-margin);
     vertical-align: middle;
-    
-    &:last-child {
-      margin-right: 0;
-      margin-left: var(--nano-button-icon-margin);
-    }
   }
 
   /* 尺寸变体 */
@@ -167,7 +167,21 @@
 
   &.is-circle {
     border-radius: 50%;
-    padding: var(--nano-button-padding-vertical);
+    padding: 8px;
+    width: 32px;
+    height: 32px;
+
+    &.nano-button--large {
+      padding: 11px;
+      width: 40px;
+      height: 40px;
+    }
+
+    &.nano-button--small {
+      padding: 5px;
+      width: 24px;
+      height: 24px;
+    }
   }
 
   /* 链接按钮 */
@@ -176,6 +190,30 @@
     background: none;
     padding: 0;
     height: auto;
+  }
+
+  /* 按钮组样式 */
+  .nano-button-group & {
+    margin: 0;
+    
+    &:not(:first-child) {
+      margin-left: -1px;
+      border-left-color: rgba(255, 255, 255, 0.5);
+    }
+    
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    
+    &:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0;
+    }
   }
 }
 
