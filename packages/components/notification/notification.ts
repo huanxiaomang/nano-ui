@@ -58,7 +58,7 @@ export const notificationProps = buildProps({
   },
   showClose: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   type: {
     type: String,
