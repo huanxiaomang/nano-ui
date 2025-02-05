@@ -1,25 +1,43 @@
 .nano-message {
   /* 基础变量 */
-  --nano-message-padding: 12px 20px;
+  --nano-message-padding: 0.75rem 1rem;
   --nano-message-min-width: 300px;
-  --nano-message-max-width: calc(100% - 32px);
-  --nano-message-font-size: 14px;
-  --nano-message-line-height: 1.4;
-  --nano-message-border-radius: var(--nano-border-radius-base);
+  --nano-message-max-width: calc(100% - 2rem);
+  --nano-message-font-size: 0.875rem;
+  --nano-message-line-height: 1.25;
+  --nano-message-border-radius: 0.375rem;
+  --nano-message-border-width: 1px;
   
   /* 图标相关 */
-  --nano-message-icon-size: 16px;
-  --nano-message-icon-margin: 10px;
+  --nano-message-icon-size: 1rem;
+  --nano-message-icon-margin: 0.5rem;
   
   /* 关闭按钮 */
-  --nano-message-close-size: 16px;
-  --nano-message-close-margin: 0 0 0 12px;
-  --nano-message-close-color: var(--nano-text-color-placeholder);
-  --nano-message-close-hover-color: var(--nano-text-color-secondary);
+  --nano-message-close-size: 1rem;
+  --nano-message-close-margin: 0 0 0 0.75rem;
+  --nano-message-close-color: var(--nano-text-color-secondary);
+  --nano-message-close-hover-color: var(--nano-text-color-regular);
   
   /* 阴影和过渡 */
-  --nano-message-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  --nano-message-transition: all 0.3s ease-in-out;
+  --nano-message-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --nano-message-transition: all 0.2s ease-in-out;
+  
+  /* 类型变体颜色 */
+  --message-success-bg: var(--nano-color-success-light-9);
+  --message-success-border: var(--nano-color-success-light-5);
+  --message-success-text: var(--nano-color-success);
+  
+  --message-warning-bg: var(--nano-color-warning-light-9);
+  --message-warning-border: var(--nano-color-warning-light-5);
+  --message-warning-text: var(--nano-color-warning);
+  
+  --message-error-bg: var(--nano-color-danger-light-9);
+  --message-error-border: var(--nano-color-danger-light-5);
+  --message-error-text: var(--nano-color-danger);
+  
+  --message-info-bg: var(--nano-color-info-light-9);
+  --message-info-border: var(--nano-color-info-light-5);
+  --message-info-text: var(--nano-color-info);
 }
 
 .nano-message {
@@ -27,33 +45,41 @@
   left: 50%;
   top: 20px;
   transform: translateX(-50%);
+  z-index: var(--nano-message-z-index, 2000);
   
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: flex-start;
+  gap: var(--nano-message-icon-margin);
+  
   padding: var(--nano-message-padding);
   min-width: var(--nano-message-min-width);
   max-width: var(--nano-message-max-width);
   
   font-size: var(--nano-message-font-size);
   line-height: var(--nano-message-line-height);
+  font-weight: 500;
   
   border-radius: var(--nano-message-border-radius);
-  box-shadow: var(--nano-message-shadow);
+  border-width: var(--nano-message-border-width);
+  border-style: solid;
   
-  background-color: var(--nano-message-bg-color);
+  box-shadow: var(--nano-message-shadow);
   transition: var(--nano-message-transition);
+  
+  /* 默认为 info 类型 */
+  background-color: var(--message-info-bg);
+  border-color: var(--message-info-border);
+  color: var(--message-info-text);
   
   .nano-message__icon {
     font-size: var(--nano-message-icon-size);
-    margin-right: var(--nano-message-icon-margin);
+    flex-shrink: 0;
   }
   
   .nano-message__content {
     flex: 1;
-    p {
-      margin: 0;
-      padding: 0;
-    }
+    font-weight: 500;
   }
   
   .nano-message__close {
@@ -61,47 +87,85 @@
     margin: var(--nano-message-close-margin);
     color: var(--nano-message-close-color);
     cursor: pointer;
-    transition: color 0.3s;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
     
     &:hover {
+      opacity: 1;
       color: var(--nano-message-close-hover-color);
     }
   }
   
-  /* 文字居中样式 */
-  &.text-center {
-    justify-content: center;
-    text-align: center;
+  /* 类型变体 */
+  &.nano-message--success {
+    background-color: var(--message-success-bg);
+    border-color: var(--message-success-border);
+    color: var(--message-success-text);
+  }
+  
+  &.nano-message--warning {
+    background-color: var(--message-warning-bg);
+    border-color: var(--message-warning-border);
+    color: var(--message-warning-text);
+  }
+  
+  &.nano-message--error {
+    background-color: var(--message-error-bg);
+    border-color: var(--message-error-border);
+    color: var(--message-error-text);
+  }
+  
+  &.nano-message--info {
+    background-color: var(--message-info-bg);
+    border-color: var(--message-info-border);
+    color: var(--message-info-text);
+  }
+  
+  /* 动画相关 */
+  &.fade-up-enter-active,
+  &.fade-up-leave-active {
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translate(-50%, 0);
+  }
+  
+  &.fade-up-enter-from,
+  &.fade-up-leave-to {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  
+  /* 多条消息的位置偏移 */
+  &.nano-message-offset-enter-active {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  &.nano-message-offset-enter-from {
+    transform: translate(-50%, -100%);
+  }
+  
+  &.nano-message-offset-enter-to {
+    transform: translate(-50%, 0);
   }
 }
 
-/* 不同类型的消息样式 */
-@each $type in (success, warning, info, error) {
-  .nano-message--$(type) {
-    --nano-message-bg-color: var(--nano-color-$(type)-light-9);
-    --nano-message-border-color: var(--nano-color-$(type)-light-8);
-    --nano-message-text-color: var(--nano-color-$(type));
-    
-    border: 1px solid var(--nano-message-border-color);
-    
-    .nano-message__icon {
-      color: var(--nano-message-text-color);
-    }
-    
-    .nano-message__content {
-      color: var(--nano-message-text-color);
-    }
-  }
-}
-
-/* 动画相关 */
-.fade-up-enter-from,
-.fade-up-leave-to {
-  opacity: 0;
-  transform: translate(-50%, -100%);
-}
-
-.fade-up-enter-active,
-.fade-up-leave-active {
-  transition: opacity 0.3s, transform 0.3s;
+/* 暗色主题适配 */
+.dark .nano-message {
+  --message-success-bg: rgba(16, 185, 129, 0.1);
+  --message-success-border: rgba(16, 185, 129, 0.2);
+  --message-success-text: rgb(52, 211, 153);
+  
+  --message-warning-bg: rgba(245, 158, 11, 0.1);
+  --message-warning-border: rgba(245, 158, 11, 0.2);
+  --message-warning-text: rgb(251, 191, 36);
+  
+  --message-error-bg: rgba(239, 68, 68, 0.1);
+  --message-error-border: rgba(239, 68, 68, 0.2);
+  --message-error-text: rgb(248, 113, 113);
+  
+  --message-info-bg: rgba(59, 130, 246, 0.1);
+  --message-info-border: rgba(59, 130, 246, 0.2);
+  --message-info-text: rgb(96, 165, 250);
+  
+  --nano-message-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
 }

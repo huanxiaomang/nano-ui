@@ -1,39 +1,39 @@
 .nano-notification {
   /* 基础变量 */
   --nano-notification-width: 330px;
-  --nano-notification-padding: 14px 20px;
+  --nano-notification-padding: 12px 16px;
   --nano-notification-font-size: var(--nano-font-size-base);
   --nano-notification-line-height: 1.4;
-  --nano-notification-border-radius: 8px;
+  --nano-notification-border-radius: 4px;
   
   /* 图标相关 */
-  --nano-notification-icon-size: 24px;
-  --nano-notification-icon-margin: 10px;
+  --nano-notification-icon-size: 16px;
+  --nano-notification-icon-margin: 8px;
   
   /* 标题相关 */
-  --nano-notification-title-font-size: 16px;
-  --nano-notification-title-line-height: 24px;
-  --nano-notification-title-font-weight: 700;
+  --nano-notification-title-font-size: 14px;
+  --nano-notification-title-line-height: 20px;
+  --nano-notification-title-font-weight: 500;
   --nano-notification-title-color: var(--nano-text-color-primary);
   --nano-notification-title-margin: 0;
   
   /* 内容相关 */
   --nano-notification-content-font-size: var(--nano-font-size-base);
-  --nano-notification-content-line-height: 24px;
+  --nano-notification-content-line-height: 20px;
   --nano-notification-content-color: var(--nano-text-color-regular);
-  --nano-notification-content-margin: 6px 0 0;
+  --nano-notification-content-margin: 4px 0 0;
   
   /* 关闭按钮 */
-  --nano-notification-close-size: 16px;
+  --nano-notification-close-size: 14px;
   --nano-notification-close-color: var(--nano-text-color-secondary);
   --nano-notification-close-hover-color: var(--nano-text-color-regular);
   
   /* 阴影和边框 */
-  --nano-notification-shadow: var(--nano-box-shadow-light);
-  --nano-notification-border-color: var(--nano-border-color-lighter);
+  --nano-notification-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --nano-notification-border-color: transparent;
   
   /* 过渡动画 */
-  --nano-notification-transition: all 0.3s ease-in-out;
+  --nano-notification-transition: all 0.2s ease-in-out;
 }
 
 .nano-notification {
@@ -46,14 +46,14 @@
   
   border-radius: var(--nano-notification-border-radius);
   border: 1px solid var(--nano-notification-border-color);
-  background-color: var(--nano-bg-color-overlay);
+  background-color: var(--nano-color-white);
   box-shadow: var(--nano-notification-shadow);
   
   font-size: var(--nano-notification-font-size);
   line-height: var(--nano-notification-line-height);
   
   transition: var(--nano-notification-transition);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   overflow: hidden;
 
   /* 位置相关 */
@@ -70,12 +70,14 @@
     width: var(--nano-notification-icon-size);
     font-size: var(--nano-notification-icon-size);
     color: var(--nano-notification-icon-color);
+    margin-right: var(--nano-notification-icon-margin);
+    flex-shrink: 0;
   }
 
   /* 文本区域 */
   .nano-notification__text {
     flex: 1;
-    margin: 0 var(--nano-notification-icon-margin);
+    margin: 0;
   }
 
   /* 标题 */
@@ -93,20 +95,21 @@
     line-height: var(--nano-notification-content-line-height);
     margin: var(--nano-notification-content-margin);
     color: var(--nano-notification-content-color);
-    text-align: justify;
   }
 
   /* 关闭按钮 */
   .nano-notification__close {
     position: absolute;
-    top: 14px;
-    right: 14px;
+    top: 12px;
+    right: 12px;
     cursor: pointer;
     color: var(--nano-notification-close-color);
     font-size: var(--nano-notification-close-size);
-    transition: color 0.3s;
+    transition: color 0.2s;
+    opacity: 0.7;
     
     &:hover {
+      opacity: 1;
       color: var(--nano-notification-close-hover-color);
     }
   }
@@ -116,6 +119,8 @@
 @each $type in (success, warning, info, error) {
   .nano-notification--$(type) {
     --nano-notification-icon-color: var(--nano-color-$(type));
+    background-color: var(--nano-color-$(type)-light-9);
+    border-color: var(--nano-color-$(type)-light-8);
     
     .nano-notification__icon {
       color: var(--nano-notification-icon-color);
@@ -126,20 +131,21 @@
 /* 动画相关 */
 .nano-notification-fade-enter-from {
   &.right {
-    transform: translateX(100%);
+    transform: translateX(20px);
     opacity: 0;
   }
   &.left {
-    transform: translateX(-100%);
+    transform: translateX(-20px);
     opacity: 0;
   }
 }
 
 .nano-notification-fade-leave-to {
   opacity: 0;
+  transform: translateY(-8px);
 }
 
 .nano-notification-fade-enter-active,
 .nano-notification-fade-leave-active {
-  transition: opacity 0.3s, transform 0.3s;
+  transition: opacity 0.2s, transform 0.2s;
 }
