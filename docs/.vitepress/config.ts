@@ -8,7 +8,7 @@ import {
 export default defineConfig({
   title: 'nano-ui',
   description: '一个vue3的组件库',
-  base: '/docs/',
+  base: '/nano-ui/',
   appearance: false,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
