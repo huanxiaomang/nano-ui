@@ -5,10 +5,11 @@ hero:
   name: 'Nano-UI'
   text: '一款基于Vue3的组件库'
   tagline: '高度仿造ElementPlus的组件库'
-actions:
-  - theme: brand
-    text: 开始使用
-    link: /get-started
+  actions:
+    - theme: brand
+      text: 开始使用
+      link: /get-started
+
 features:
   - icon: 📚
     title: 全面的功能覆盖与高度兼容性

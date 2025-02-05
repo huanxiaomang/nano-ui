@@ -31,7 +31,7 @@
   --nano-button-disabled-border-color: var(--nano-border-color-lighter);
   
   /* 图标相关 */
-  --nano-button-icon-size: 16px;
+  --nano-button-icon-size: 1em;
   --nano-button-icon-margin: 4px;
   
   /* 过渡动画 */
@@ -44,6 +44,7 @@
   align-items: center;
   line-height: 1;
   height: 32px;
+  min-width: 32px;
   white-space: nowrap;
   cursor: pointer;
   color: var(--nano-button-text-color);
@@ -78,13 +79,8 @@
   /* 图标样式 */
   .nano-icon {
     font-size: var(--nano-button-icon-size);
-    margin-right: var(--nano-button-icon-margin);
     vertical-align: middle;
-    
-    &:last-child {
-      margin-right: 0;
-      margin-left: var(--nano-button-icon-margin);
-    }
+
   }
 
   /* 尺寸变体 */
