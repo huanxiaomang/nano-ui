@@ -44,6 +44,7 @@
   "dependencies": {
     "@icestack/cva": "^1.3.8",
     "@nano-ui/components": "workspace:*",
+    "@nano-ui/constants": "workspace:*",
     "@nano-ui/hooks": "workspace:*",
     "@nano-ui/locale": "workspace:*",
     "@nano-ui/shared": "workspace:*",
