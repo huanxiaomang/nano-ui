@@ -1,46 +1,70 @@
 .nano-notification {
+  /* 基础变量 */
   --nano-notification-width: 330px;
-  --nano-notification-padding: 14px 26px 14px 13px;
-  --nano-notification-radius: 8px;
-  --nano-notification-shadow: var(--nano-box-shadow-light);
-  --nano-notification-border-color: var(--nano-border-color-lighter);
+  --nano-notification-padding: 14px 20px;
+  --nano-notification-font-size: var(--nano-font-size-base);
+  --nano-notification-line-height: 1.4;
+  --nano-notification-border-radius: 8px;
+  
+  /* 图标相关 */
   --nano-notification-icon-size: 24px;
-  --nano-notification-close-font-size: var(--nano-message-close-size, 16px);
-  --nano-notification-content-font-size: var(--nano-font-size-base);
-  --nano-notification-content-color: var(--nano-text-color-regular);
+  --nano-notification-icon-margin: 10px;
+  
+  /* 标题相关 */
   --nano-notification-title-font-size: 16px;
+  --nano-notification-title-line-height: 24px;
+  --nano-notification-title-font-weight: 700;
   --nano-notification-title-color: var(--nano-text-color-primary);
+  --nano-notification-title-margin: 0;
+  
+  /* 内容相关 */
+  --nano-notification-content-font-size: var(--nano-font-size-base);
+  --nano-notification-content-line-height: 24px;
+  --nano-notification-content-color: var(--nano-text-color-regular);
+  --nano-notification-content-margin: 6px 0 0;
+  
+  /* 关闭按钮 */
+  --nano-notification-close-size: 16px;
   --nano-notification-close-color: var(--nano-text-color-secondary);
   --nano-notification-close-hover-color: var(--nano-text-color-regular);
+  
+  /* 阴影和边框 */
+  --nano-notification-shadow: var(--nano-box-shadow-light);
+  --nano-notification-border-color: var(--nano-border-color-lighter);
+  
+  /* 过渡动画 */
+  --nano-notification-transition: all 0.3s ease-in-out;
 }
+
 .nano-notification {
   display: flex;
   width: var(--nano-notification-width);
   padding: var(--nano-notification-padding);
-  border-radius: var(--nano-notification-radius);
-  box-sizing: border-box;
-  border: 1px solid var(--nano-notification-border-color);
+  
   position: fixed;
+  box-sizing: border-box;
+  
+  border-radius: var(--nano-notification-border-radius);
+  border: 1px solid var(--nano-notification-border-color);
   background-color: var(--nano-bg-color-overlay);
   box-shadow: var(--nano-notification-shadow);
-  transition:
-    opacity var(--nano-transition-duration),
-    transform var(--nano-transition-duration),
-    right var(--nano-transition-duration),
-    top 0.4s,
-    bottom var(--nano-transition-duration);
+  
+  font-size: var(--nano-notification-font-size);
+  line-height: var(--nano-notification-line-height);
+  
+  transition: var(--nano-notification-transition);
   overflow-wrap: anywhere;
   overflow: hidden;
+
+  /* 位置相关 */
   &.right {
-    right: 10px;
+    right: 16px;
   }
   &.left {
-    left: 10px;
+    left: 16px;
   }
 
-  .nano-notification__text {
-    margin: 0 10px;
-  }
+  /* 图标 */
   .nano-notification__icon {
     height: var(--nano-notification-icon-size);
     width: var(--nano-notification-icon-size);
@@ -48,50 +72,74 @@
     color: var(--nano-notification-icon-color);
   }
 
-  .nano-notification__title {
-    font-weight: 700;
-    font-size: var(--nano-notification-title-font-size);
-    line-height: var(--nano-notification-icon-size);
-    color: var(--nano-notification-title-color);
-    margin: 0;
+  /* 文本区域 */
+  .nano-notification__text {
+    flex: 1;
+    margin: 0 var(--nano-notification-icon-margin);
   }
+
+  /* 标题 */
+  .nano-notification__title {
+    font-weight: var(--nano-notification-title-font-weight);
+    font-size: var(--nano-notification-title-font-size);
+    line-height: var(--nano-notification-title-line-height);
+    color: var(--nano-notification-title-color);
+    margin: var(--nano-notification-title-margin);
+  }
+
+  /* 内容 */
   .nano-notification__content {
     font-size: var(--nano-notification-content-font-size);
-    line-height: 24px;
-    margin: 6px 0 0;
+    line-height: var(--nano-notification-content-line-height);
+    margin: var(--nano-notification-content-margin);
     color: var(--nano-notification-content-color);
     text-align: justify;
   }
+
+  /* 关闭按钮 */
   .nano-notification__close {
     position: absolute;
-    top: 18px;
-    right: 15px;
+    top: 14px;
+    right: 14px;
     cursor: pointer;
     color: var(--nano-notification-close-color);
-    font-size: var(--nano-notification-close-font-size);
+    font-size: var(--nano-notification-close-size);
+    transition: color 0.3s;
+    
+    &:hover {
+      color: var(--nano-notification-close-hover-color);
+    }
   }
-}
-@each $val in info, success, warning, danger {
-  .nano-notification--$(val) {
-    --nano-notification-icon-color: var(--nano-color-$(val));
-    color: var(--el-notification-icon-color);
-  }
-}
-.nano-notification--error {
-  --nano-notification-icon-color: var(--nano-color-danger);
-  color: var(--el-notification-icon-color);
 }
 
-.nano-notification-fade-enter-from {
-  &.right {
-    right: 0;
-    transform: translate(100%);
-  }
-  &.left {
-    left: 0;
-    transform: translate(-100%);
+/* 不同类型的通知样式 */
+@each $type in (success, warning, info, error) {
+  .nano-notification--$(type) {
+    --nano-notification-icon-color: var(--nano-color-$(type));
+    
+    .nano-notification__icon {
+      color: var(--nano-notification-icon-color);
+    }
   }
 }
+
+/* 动画相关 */
+.nano-notification-fade-enter-from {
+  &.right {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  &.left {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
 .nano-notification-fade-leave-to {
   opacity: 0;
+}
+
+.nano-notification-fade-enter-active,
+.nano-notification-fade-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
 }

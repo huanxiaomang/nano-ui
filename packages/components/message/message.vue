@@ -4,11 +4,14 @@
       v-show="visible"
       ref="messageRef"
       class="nano-message"
-      :class="{
-        [`nano-message--${type}`]: type,
-        'is-close': showClose,
-        'text-center': center,
-      }"
+      :class="[
+        `nano-message--${type}`,
+        {
+          'is-close': showClose,
+          'text-center': center,
+          'with-icon': true,
+        },
+      ]"
       role="alert"
       :style="nativeStyle"
       @mouseenter="clearTimer"

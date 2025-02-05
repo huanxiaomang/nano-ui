@@ -3,21 +3,39 @@
 }
 
 .nano-button {
-  --nano-button-font-weight: var(--nano-font-weight-primary);
-  --nano-button-border-color: var(--nano-border-color);
+  /* 基础变量 */
+  --nano-button-font-size: var(--nano-font-size-base);
+  --nano-button-font-weight: 500;
+  --nano-button-border-radius: var(--nano-border-radius-base);
+  --nano-button-padding-vertical: 8px;
+  --nano-button-padding-horizontal: 15px;
+  
+  /* 默认状态 */
   --nano-button-bg-color: var(--nano-fill-color-blank);
   --nano-button-text-color: var(--nano-text-color-regular);
-  --nano-button-disabled-text-color: var(--nano-disabled-text-color);
-  --nano-button-disabled-bg-color: var(--nano-fill-color-blank);
-  --nano-button-disabled-border-color: var(--nano-border-color-light);
+  --nano-button-border-color: var(--nano-border-color);
+  
+  /* 悬浮状态 */
   --nano-button-hover-text-color: var(--nano-color-primary);
   --nano-button-hover-bg-color: var(--nano-color-primary-light-9);
   --nano-button-hover-border-color: var(--nano-color-primary-light-7);
-  --nano-button-active-text-color: var(--nano-button-hover-text-color);
-  --nano-button-active-border-color: var(--nano-color-primary);
-  --nano-button-active-bg-color: var(--nano-button-hover-bg-color);
-  --nano-button-outline-color: var(--nano-color-primary-light-5);
-  --nano-button-active-color: var(--nano-text-color-primary);
+  
+  /* 激活状态 */
+  --nano-button-active-text-color: var(--nano-color-primary-dark-2);
+  --nano-button-active-bg-color: var(--nano-color-primary-light-9);
+  --nano-button-active-border-color: var(--nano-color-primary-dark-2);
+  
+  /* 禁用状态 */
+  --nano-button-disabled-text-color: var(--nano-text-color-placeholder);
+  --nano-button-disabled-bg-color: var(--nano-fill-color-blank);
+  --nano-button-disabled-border-color: var(--nano-border-color-lighter);
+  
+  /* 图标相关 */
+  --nano-button-icon-size: 16px;
+  --nano-button-icon-margin: 4px;
+  
+  /* 过渡动画 */
+  --nano-button-transition: all 0.3s ease-in-out;
 }
 
 .nano-button {
@@ -32,209 +50,161 @@
   text-align: center;
   box-sizing: border-box;
   outline: none;
-  transition:
-    0.1s transform ease-in-out,
-    0.1s background-color ease;
-  font-weight: var(--nano-button-font-weight);
+  transition: var(--nano-button-transition);
   user-select: none;
   vertical-align: middle;
   -webkit-appearance: none;
+  
+  padding: var(--nano-button-padding-vertical) var(--nano-button-padding-horizontal);
+  font-size: var(--nano-button-font-size);
+  font-weight: var(--nano-button-font-weight);
+  border-radius: var(--nano-button-border-radius);
+  border: 1px solid var(--nano-button-border-color);
   background-color: var(--nano-button-bg-color);
-  border: var(--nano-border);
-  border-color: var(--nano-button-border-color);
-  padding: 8px 15px;
-  font-size: var(--nano-font-size-base);
-  border-radius: var(--nano-border-radius-base);
-
-  & + & {
-    margin-left: 12px;
-  }
-
-  &:hover,
-  &:focus {
+  
+  &:hover {
     color: var(--nano-button-hover-text-color);
     border-color: var(--nano-button-hover-border-color);
     background-color: var(--nano-button-hover-bg-color);
-    outline: none;
   }
-
-  &:active:not(.is-disabled) {
+  
+  &:active {
     color: var(--nano-button-active-text-color);
     border-color: var(--nano-button-active-border-color);
     background-color: var(--nano-button-active-bg-color);
-    outline: none;
-    transform: scale(0.98); /* 按钮点击时缩小 */
+    transform: scale(0.98);
   }
 
-  /*plain*/
-  &.is-plain {
-    --nano-button-hover-text-color: var(--nano-color-primary);
-    --nano-button-hover-bg-color: var(--nano-fill-color-blank);
-    --nano-button-hover-border-color: var(--nano-color-primary);
+  /* 图标样式 */
+  .nano-icon {
+    font-size: var(--nano-button-icon-size);
+    margin-right: var(--nano-button-icon-margin);
+    vertical-align: middle;
+    
+    &:last-child {
+      margin-right: 0;
+      margin-left: var(--nano-button-icon-margin);
+    }
   }
 
-  /*link*/
-  &.is-link {
-    --nano-button-hover-text-color: var(--nano-color-primary);
-    --nano-button-hover-bg-color: var(--nano-fill-color-blank);
-    --nano-button-hover-border-color: transparent;
-    --nano-button-border-color: transparent;
-    --nano-button-active-border-color: transparent;
-    --nano-button-text-color: var(--nano-color-primary);
+  /* 尺寸变体 */
+  &.nano-button--large {
+    --nano-button-padding-vertical: 11px;
+    --nano-button-padding-horizontal: 19px;
+    --nano-button-font-size: var(--nano-font-size-large);
+    height: 40px;
   }
 
-  /*round*/
+  &.nano-button--small {
+    --nano-button-padding-vertical: 5px;
+    --nano-button-padding-horizontal: 11px;
+    --nano-button-font-size: var(--nano-font-size-small);
+    height: 24px;
+  }
+
+  /* 类型变体 */
+  @each $type in (primary, success, warning, danger, info) {
+    &.nano-button--$(type) {
+      --nano-button-text-color: var(--nano-color-white);
+      --nano-button-bg-color: var(--nano-color-$(type));
+      --nano-button-border-color: var(--nano-color-$(type));
+      
+      --nano-button-hover-text-color: var(--nano-color-white);
+      --nano-button-hover-bg-color: var(--nano-color-$(type)-light-3);
+      --nano-button-hover-border-color: var(--nano-color-$(type)-light-3);
+      
+      --nano-button-active-text-color: var(--nano-color-white);
+      --nano-button-active-bg-color: var(--nano-color-$(type)-dark-2);
+      --nano-button-active-border-color: var(--nano-color-$(type)-dark-2);
+      
+      &.is-plain {
+        --nano-button-text-color: var(--nano-color-$(type));
+        --nano-button-bg-color: var(--nano-color-$(type)-light-9);
+        --nano-button-border-color: var(--nano-color-$(type)-light-5);
+        
+        --nano-button-hover-text-color: var(--nano-color-white);
+        --nano-button-hover-bg-color: var(--nano-color-$(type));
+        --nano-button-hover-border-color: var(--nano-color-$(type));
+      }
+    }
+  }
+
+  /* 禁用状态 */
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus,
+  &.is-disabled:active {
+    color: var(--nano-button-disabled-text-color);
+    cursor: not-allowed;
+    background-color: var(--nano-button-disabled-bg-color);
+    border-color: var(--nano-button-disabled-border-color);
+    transform: none;
+  }
+
+  /* 加载状态 */
+  &.is-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.8;
+    
+    &::before {
+      pointer-events: none;
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      border-radius: inherit;
+      background-color: var(--nano-mask-color-extra-light);
+    }
+  }
+
+  /* 形状变体 */
   &.is-round {
     border-radius: var(--nano-border-radius-round);
   }
 
-  /*circle*/
   &.is-circle {
     border-radius: 50%;
-    padding: 8px;
+    padding: var(--nano-button-padding-vertical);
   }
 
-  /*disabled*/
-  &.is-loading,
-  &.is-disabled,
-  &.is-disabled:hover,
-  &.is-disabled:focus,
-  &.is-disabled:active,
-  &.is-loading:hover,
-  &.is-loading:focus,
-  &.is-loading:active,
-  &[disabled="true"],
-  &[disabled="true"]:hover,
-  &[disabled="true"]:focus,
-  &[disabled="true"]:active {
-    color: var(--nano-button-disabled-text-color);
-    cursor: not-allowed;
-    background-image: none;
-    background-color: var(--nano-button-disabled-bg-color);
-    border-color: var(--nano-button-disabled-border-color);
-    transform: scale(1); /* 按钮点击时缩小 */
-  }
-
-  [class*="nano-icon"] {
-    width: 1em;
-    height: 1em;
+  /* 链接按钮 */
+  &.is-link {
+    border-color: transparent;
+    background: none;
+    padding: 0;
+    height: auto;
   }
 }
 
-@each $val in primary, success, warning, info, danger {
-  .nano-button--$(val) {
-    --nano-button-text-color: var(--nano-color-white);
-    --nano-button-bg-color: var(--nano-color-$(val));
-    --nano-button-border-color: var(--nano-color-$(val));
-    --nano-button-outline-color: var(--nano-color-$(val)-light-5);
-    --nano-button-active-color: var(--nano-color-$(val)-dark-2);
-    --nano-button-hover-text-color: var(--nano-color-white);
-    --nano-button-hover-bg-color: var(--nano-color-$(val)-light-3);
-    --nano-button-hover-border-color: var(--nano-color-$(val)-light-3);
-    --nano-button-active-bg-color: var(--nano-color-$(val)-dark-2);
-    --nano-button-active-border-color: var(--nano-color-$(val)-dark-2);
-    --nano-button-disabled-text-color: var(--nano-color-white);
-    --nano-button-disabled-bg-color: var(--nano-color-$(val)-light-5);
-    --nano-button-disabled-border-color: var(--nano-color-$(val)-light-5);
-  }
-
-  .nano-button--$(val).is-plain {
-    --nano-button-text-color: var(--nano-color-$(val));
-    --nano-button-bg-color: var(--nano-color-$(val)-light-9);
-    --nano-button-border-color: var(--nano-color-$(val)-light-5);
-    --nano-button-hover-text-color: var(--nano-color-white);
-    --nano-button-hover-bg-color: var(--nano-color-$(val));
-    --nano-button-hover-border-color: var(--nano-color-$(val));
-    --nano-button-active-text-color: var(--nano-color-white);
-
-    --nano-button-disabled-text-color: var(--nano-color-$(val)-light-5);
-    --nano-button-disabled-bg-color: var(--nano-color-$(val)-light-9);
-    --nano-button-disabled-border-color: var(--nano-color-$(val)-light-8);
-  }
-}
-
-.nano-button--large {
-  --nano-button-size: 40px;
-  height: var(--nano-button-size);
-  padding: 12px 19px;
-  font-size: var(--nano-font-size-base);
-  border-radius: var(--nano-border-radius-base);
-
-  /*circle*/
-  &.is-circle {
-    border-radius: 50%;
-    padding: 12px;
-  }
-}
-
-.nano-button--small {
-  --nano-button-size: 24px;
-  height: var(--nano-button-size);
-  padding: 5px 11px;
-  font-size: 12px;
-  border-radius: calc(var(--nano-border-radius-base) - 1px);
-
-  /*circle*/
-  &.is-circle {
-    border-radius: 50%;
-    padding: 5px;
-  }
-
-  [class*="er-icon"] {
-    width: 12px;
-    height: 12px;
-  }
-}
-
+/* 按钮组样式 */
 .nano-button-group {
-  display: inline-block;
+  display: inline-flex;
   vertical-align: middle;
 
-  &::after {
-    clear: both;
-  }
-
-  & > :deep(.nano-button) {
-    float: left;
-    position: relative;
-    margin-left: 0;
-
+  & > .nano-button {
+    border-radius: 0;
+    
+    &:not(:first-child) {
+      margin-left: -1px;
+    }
+    
     &:first-child {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      border-right-color: var(--nano-button-group-border-color);
+      border-top-left-radius: var(--nano-button-border-radius);
+      border-bottom-left-radius: var(--nano-button-border-radius);
     }
-
+    
     &:last-child {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      border-left-color: var(--nano-button-group-border-color);
+      border-top-right-radius: var(--nano-button-border-radius);
+      border-bottom-right-radius: var(--nano-button-border-radius);
     }
-
-    &:not(:first-child):not(:last-child) {
-      border-radius: 0;
-
-      border-left-color: var(--nano-button-group-border-color);
-      border-right-color: var(--nano-button-group-border-color);
-    }
-
-    &:not(:last-child) {
-      margin-right: -1px;
-    }
-
-    &:first-child:last-child {
-      border-top-right-radius: var(--nano-border-radius-base);
-      border-bottom-right-radius: var(--nano-border-radius-base);
-      border-top-left-radius: var(--nano-border-radius-base);
-      border-bottom-left-radius: var(--nano-border-radius-base);
-
-      &.is-round {
-        border-radius: var(--nano-border-radius-round);
-      }
-
-      &.is-circle {
-        border-radius: 50%;
-      }
+    
+    &:hover,
+    &:focus,
+    &:active {
+      z-index: 1;
     }
   }
 }

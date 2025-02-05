@@ -1,81 +1,107 @@
 .nano-message {
-  --nano-message-bg-color: var(--nano-color-info-light-9);
-  --nano-message-border-color: var(--nano-border-color-lighter);
-  --nano-message-padding: 15px 19px;
-  --nano-message-close-size: 16px;
-  --nano-message-close-icon-color: var(--nano-text-color-placeholder);
-  --nano-message-close-hover-color: var(--nano-text-color-secondary);
+  /* 基础变量 */
+  --nano-message-padding: 12px 20px;
+  --nano-message-min-width: 300px;
+  --nano-message-max-width: calc(100% - 32px);
+  --nano-message-font-size: 14px;
+  --nano-message-line-height: 1.4;
+  --nano-message-border-radius: var(--nano-border-radius-base);
+  
+  /* 图标相关 */
   --nano-message-icon-size: 16px;
-  --nano-message-icon-margin: 8px;
+  --nano-message-icon-margin: 10px;
+  
+  /* 关闭按钮 */
+  --nano-message-close-size: 16px;
+  --nano-message-close-margin: 0 0 0 12px;
+  --nano-message-close-color: var(--nano-text-color-placeholder);
+  --nano-message-close-hover-color: var(--nano-text-color-secondary);
+  
+  /* 阴影和过渡 */
+  --nano-message-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  --nano-message-transition: all 0.3s ease-in-out;
 }
 
 .nano-message {
-  width: fit-content;
-  max-width: calc(100% - 32px);
-  box-sizing: border-box;
-  border-radius: var(--nano-border-radius-base);
-  border-width: var(--nano-border-width);
-  border-style: var(--nano-border-style);
-  border-color: var(--nano-message-border-color);
   position: fixed;
   left: 50%;
   top: 20px;
   transform: translateX(-50%);
-  background-color: var(--nano-message-bg-color);
-  padding: var(--nano-message-padding);
+  
   display: flex;
   align-items: center;
-  transition:
-    top var(--nano-transition-duration),
-    opacity var(--nano-transition-duration),
-    transform var(--nano-transition-duration);
+  padding: var(--nano-message-padding);
+  min-width: var(--nano-message-min-width);
+  max-width: var(--nano-message-max-width);
+  
+  font-size: var(--nano-message-font-size);
+  line-height: var(--nano-message-line-height);
+  
+  border-radius: var(--nano-message-border-radius);
+  box-shadow: var(--nano-message-shadow);
+  
+  background-color: var(--nano-message-bg-color);
+  transition: var(--nano-message-transition);
+  
   .nano-message__icon {
-    color: var(--nano-message-text-color);
     font-size: var(--nano-message-icon-size);
-    width: var(--nano-message-icon-size);
     margin-right: var(--nano-message-icon-margin);
   }
+  
   .nano-message__content {
-    color: var(--nano-message-text-color);
-    overflow-wrap: break-word;
+    flex: 1;
+    p {
+      margin: 0;
+      padding: 0;
+    }
   }
-  &.is-close .nano-message__content {
-    padding-right: 10px;
+  
+  .nano-message__close {
+    font-size: var(--nano-message-close-size);
+    margin: var(--nano-message-close-margin);
+    color: var(--nano-message-close-color);
+    cursor: pointer;
+    transition: color 0.3s;
+    
+    &:hover {
+      color: var(--nano-message-close-hover-color);
+    }
   }
+  
+  /* 文字居中样式 */
   &.text-center {
     justify-content: center;
-  }
-  .nano-message__close {
-    display: flex;
-    align-items: center;
-  }
-  .nano-message__close .nano-icon {
-    cursor: pointer;
+    text-align: center;
   }
 }
 
-@each $val in info, success, warning, danger {
-  .nano-message--$(val) {
-    --nano-message-bg-color: var(--nano-color-$(val)-light-9);
-    --nano-message-border-color: var(--nano-color-$(val)-light-8);
-    --nano-message-text-color: var(--nano-color-$(val));
-    .nano-message__close {
-      --nano-icon-color: var(--nano-color-$(val));
+/* 不同类型的消息样式 */
+@each $type in (success, warning, info, error) {
+  .nano-message--$(type) {
+    --nano-message-bg-color: var(--nano-color-$(type)-light-9);
+    --nano-message-border-color: var(--nano-color-$(type)-light-8);
+    --nano-message-text-color: var(--nano-color-$(type));
+    
+    border: 1px solid var(--nano-message-border-color);
+    
+    .nano-message__icon {
+      color: var(--nano-message-text-color);
+    }
+    
+    .nano-message__content {
+      color: var(--nano-message-text-color);
     }
   }
 }
 
-.nano-message--error {
-  --nano-message-bg-color: var(--nano-color-danger-light-9);
-  --nano-message-border-color: var(--nano-color-danger-light-8);
-  --nano-message-text-color: var(--nano-color-danger);
-  .nano-message__close {
-    --nano-icon-color: var(--nano-color-danger);
-  }
-}
-
-.nano-message.fade-up-enter-from,
-.nano-message.fade-up-leave-to {
+/* 动画相关 */
+.fade-up-enter-from,
+.fade-up-leave-to {
   opacity: 0;
   transform: translate(-50%, -100%);
+}
+
+.fade-up-enter-active,
+.fade-up-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
 }
