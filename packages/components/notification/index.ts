@@ -3,5 +3,5 @@ import Notify from './method';
 
 export * from './notification';
 
-export const NNotify = withInstallFunction(Notify, '$notify');
+export const NNotify = withInstallFunction(Notify, '$notification');
 export default NNotify;

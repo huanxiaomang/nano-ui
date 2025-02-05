@@ -1,10 +1,11 @@
 ---
-title: Button
-description: Button 组件文档
+title: Button 按钮
+description: 常用的操作按钮
+category: Basic 基础组件
 
 next:
-  link: /components/collapse
-  text: Collapse 折叠面板
+  link: /components/input
+  text: Input 输入框
 
 prev:
   link: /get-started
@@ -17,7 +18,7 @@ prev:
 
 ## 基础用法
 
-使用 `type`、`plain`、 `round`和 `circle`来定义按钮的样式。
+基础的按钮用法。使用 `type`、`plain`、`round` 和 `circle` 属性来定义按钮的样式。
 
 ::: preview
 demo-preview=../demo/button/Basic.vue
@@ -33,7 +34,7 @@ demo-preview=../demo/button/Disabled.vue
 
 ## 图标按钮
 
-使用 `icon`属性来定义按钮的图标。
+带图标的按钮可增强辨识度（有文字）或节省空间（无文字）。
 
 ::: preview
 demo-preview=../demo/button/Icon.vue
@@ -41,105 +42,94 @@ demo-preview=../demo/button/Icon.vue
 
 ## 按钮组
 
-使用 `<er-button-group>` 对多个按钮分组。
+以按钮组的方式出现，常用于多项类似操作。使用 `<n-button-group>` 标签来嵌套你的按钮。
 
 ::: preview
 demo-preview=../demo/button/Group.vue
 :::
 
-## 加载状态
+## 加载中
 
-使用 `loading`属性来定义按钮的加载状态。
-
-::: tip
-您可以使用 `loading` 插槽或 `loadingIcon` 属性自定义您的 loading 图标
-
-ps: `loading` 插槽优先级高于 `loadingIcon` 属性
-:::
+点击按钮后进行数据加载操作，在按钮上显示加载状态。
 
 ::: preview
 demo-preview=../demo/button/Loading.vue
 :::
 
-## 按钮尺寸
+## 不同尺寸
 
-使用 `size`属性来定义按钮的尺寸。
+除了默认尺寸，按钮组件还提供了额外的尺寸供选择。
 
 ::: preview
 demo-preview=../demo/button/Size.vue
 :::
 
-## Tag
+## API
 
-可以自定义元素标签。例如，按钮，div，路由链接，nuxt 链接。
+### Button Props
 
-::: preview
-demo-preview=../demo/button/Tag.vue
-:::
+| 名称        | 说明           | 类型                                                        | 默认值    |
+| ----------- | -------------- | ----------------------------------------------------------- | --------- |
+| type        | 类型           | `'primary' \| 'success' \| 'warning' \| 'danger' \| 'info'` | -         |
+| size        | 尺寸           | `'large' \| 'default' \| 'small'`                           | 'default' |
+| plain       | 是否朴素按钮   | `boolean`                                                   | false     |
+| round       | 是否圆角按钮   | `boolean`                                                   | false     |
+| circle      | 是否圆形按钮   | `boolean`                                                   | false     |
+| loading     | 是否加载中状态 | `boolean`                                                   | false     |
+| disabled    | 是否禁用状态   | `boolean`                                                   | false     |
+| icon        | 图标组件       | `string`                                                    | -         |
+| autofocus   | 是否默认聚焦   | `boolean`                                                   | false     |
+| native-type | 原生 type 属性 | `'button' \| 'submit' \| 'reset'`                           | 'button'  |
 
-## 节流模式
+### Button Events
 
-可以通过 `useThrottle` 属性来定义按钮是否使用节流模式 默认为 true。
+| 事件名 | 说明               | 类型                          |
+| ------ | ------------------ | ----------------------------- |
+| click  | 点击按钮时触发     | `(event: MouseEvent) => void` |
+| focus  | 按钮获得焦点时触发 | `(event: FocusEvent) => void` |
+| blur   | 按钮失去焦点时触发 | `(event: FocusEvent) => void` |
 
-::: preview
-demo-preview=../demo/button/Throttle.vue
-:::
+### Button Slots
 
-## Button API
+| 插槽名  | 说明             | 作用域参数 |
+| ------- | ---------------- | ---------- |
+| default | 按钮的内容       | -          |
+| icon    | 自定义图标       | -          |
+| loading | 自定义加载中图标 | -          |
 
-### Props
+### Button Expose
 
-| Name              | Description                       | Type                                                             | Default |
-| ----------------- | --------------------------------- | ---------------------------------------------------------------- | ------- |
-| size              | 尺寸                              | `enum` - `'large'\| 'default'\| 'small'`                         | —       |
-| type              | 类型                              | `enum` - `'primary'\| 'success'\| 'warning'\| 'danger'\| 'info'` | info    |
-| plain             | 是否为朴素按钮                    | `boolean`                                                        | false   |
-| round             | 是否为圆角按钮                    | `boolean`                                                        | false   |
-| circle            | 是否为圆形按钮                    | `boolean`                                                        | false   |
-| loading           | 是否为加载中状态                  | `boolean`                                                        | false   |
-| loading-icon      | 自定义加载中状态图标组件          | `string`                                                         | spinner |
-| disabled          | 按钮是否为禁用状态                | `boolean`                                                        | false   |
-| icon              | 按钮图标                          | `string`                                                         | -       |
-| autofocus         | 是否自动聚焦(原生`autofocus`属性) | `boolean`                                                        | false   |
-| native-type       | 原生 type 属性                    | `enum` - `'button'\| 'submit'\| 'reset'`                         | button  |
-| tag               | 自定义元素标签                    | `string`\/`Component`                                            | button  |
-| use-throttle      | 是否使用节流模式                  | `boolean`                                                        | true    |
-| throttle-duration | 节流模式下，节流时间间隔(ms)      | `number`                                                         | 500     |
+| 名称  | 说明           | 类型                     |
+| ----- | -------------- | ------------------------ |
+| ref   | 按钮元素的引用 | `Ref<HTMLButtonElement>` |
+| focus | 使按钮获得焦点 | `() => void`             |
+| blur  | 使按钮失去焦点 | `() => void`             |
 
-### Events
+### Button Group Props
 
-| Name  | Description  | Type                         |
-| ----- | ------------ | ---------------------------- |
-| click | 按钮点击事件 | `(event: MouseEvent)=> void` |
+| 名称 | 说明                         | 类型                              | 默认值    |
+| ---- | ---------------------------- | --------------------------------- | --------- |
+| size | 用于控制该按钮组内按钮的大小 | `'large' \| 'default' \| 'small'` | 'default' |
 
-### Slots
+### Button Group Slots
 
-| Name    | Description        |
-| ------- | ------------------ |
-| default | 默认插槽, 按钮内容 |
-| loading | 自定义加载图标     |
+| 插槽名  | 说明                         | 作用域参数 |
+| ------- | ---------------------------- | ---------- |
+| default | 按钮组的内容，通常是多个按钮 | -          |
 
-### Expose
+### 样式变量
 
-| Name     | Description    | Type                                 |
-| -------- | -------------- | ------------------------------------ |
-| ref      | 按钮 html 元素 | `Ref<HTMLButtonElement>`             |
-| size     | 按钮尺寸       | `ComputedRef<''\|'small' \|'large'>` |
-| type     | 按钮类型       | `ComputedRef<''\|'primary' \|...>`   |
-| disabled | 按钮禁用状态   | `ComputedRef<boolean>`               |
-
-## ButtonGroup API
-
-### Props
-
-| Name     | Description          | Type                                                             | Default |
-| -------- | -------------------- | ---------------------------------------------------------------- | ------- |
-| size     | 尺寸                 | `enum` - `'large'\| 'default'\| 'small'`                         | —       |
-| type     | 类型                 | `enum` - `'primary'\| 'success'\| 'warning'\| 'danger'\| 'info'` | info    |
-| disabled | 按钮组是否为禁用状态 | `boolean`                                                        | false   |
-
-### Slots
-
-| Name    | Description | Sub Component |
-| ------- | ----------- | ------------- |
-| default | 默认插槽    | Button        |
+| 变量名                              | 说明         | 默认值                             |
+| ----------------------------------- | ------------ | ---------------------------------- |
+| --nano-button-font-size             | 字体大小     | var(--nano-font-size-base)         |
+| --nano-button-font-weight           | 字重         | 500                                |
+| --nano-button-border-radius         | 圆角         | var(--nano-border-radius-base)     |
+| --nano-button-padding-vertical      | 垂直内边距   | 8px                                |
+| --nano-button-padding-horizontal    | 水平内边距   | 15px                               |
+| --nano-button-hover-text-color      | 悬浮文字颜色 | var(--nano-color-primary)          |
+| --nano-button-hover-bg-color        | 悬浮背景色   | var(--nano-color-primary-light-9)  |
+| --nano-button-hover-border-color    | 悬浮边框色   | var(--nano-color-primary-light-7)  |
+| --nano-button-active-text-color     | 激活文字颜色 | var(--nano-color-primary-dark-2)   |
+| --nano-button-disabled-text-color   | 禁用文字颜色 | var(--nano-text-color-placeholder) |
+| --nano-button-disabled-bg-color     | 禁用背景色   | var(--nano-fill-color-blank)       |
+| --nano-button-disabled-border-color | 禁用边框色   | var(--nano-border-color-lighter)   |

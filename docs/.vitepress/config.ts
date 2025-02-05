@@ -32,6 +32,7 @@ export default defineConfig({
           { text: 'Button', link: 'components/button' },
           { text: 'Alert', link: 'components/alert' },
           { text: 'Message', link: 'components/message' },
+          { text: 'Notification', link: 'components/notification' },
         ],
       },
     ],
