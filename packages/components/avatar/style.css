@@ -1,0 +1,83 @@
+.nano-avatar {
+  /* 基础变量 */
+  --nano-avatar-bg-color: var(--nano-fill-color-lighter);
+  --nano-avatar-text-color: var(--nano-text-color-regular);
+  --nano-avatar-border-radius: var(--nano-border-radius-base);
+  --nano-avatar-size-large: 56px;
+  --nano-avatar-size-default: 40px;
+  --nano-avatar-size-small: 24px;
+  
+  /* 字体大小 */
+  --nano-avatar-font-size-large: var(--nano-font-size-large);
+  --nano-avatar-font-size-default: var(--nano-font-size-base);
+  --nano-avatar-font-size-small: var(--nano-font-size-small);
+  
+  /* 图标大小 */
+  --nano-avatar-icon-size-large: 28px;
+  --nano-avatar-icon-size-default: 20px;
+  --nano-avatar-icon-size-small: 12px;
+}
+
+.nano-avatar {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: var(--nano-avatar-bg-color);
+  color: var(--nano-avatar-text-color);
+  
+  /* 默认尺寸 */
+  width: var(--nano-avatar-size-default);
+  height: var(--nano-avatar-size-default);
+  font-size: var(--nano-avatar-font-size-default);
+  
+  /* 形状 */
+  &.nano-avatar--circle {
+    border-radius: 50%;
+  }
+  
+  &.nano-avatar--square {
+    border-radius: var(--nano-avatar-border-radius);
+  }
+  
+  /* 尺寸变体 */
+  &.nano-avatar--large {
+    width: var(--nano-avatar-size-large);
+    height: var(--nano-avatar-size-large);
+    font-size: var(--nano-avatar-font-size-large);
+    
+    .nano-avatar__icon {
+      font-size: var(--nano-avatar-icon-size-large);
+    }
+  }
+  
+  &.nano-avatar--small {
+    width: var(--nano-avatar-size-small);
+    height: var(--nano-avatar-size-small);
+    font-size: var(--nano-avatar-font-size-small);
+    
+    .nano-avatar__icon {
+      font-size: var(--nano-avatar-icon-size-small);
+    }
+  }
+  
+  /* 图片样式 */
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  
+  /* 文本样式 */
+  .nano-avatar__text {
+    transform: scale(0.5);
+    white-space: nowrap;
+  }
+  
+  /* 图标样式 */
+  .nano-avatar__icon {
+    font-size: var(--nano-avatar-icon-size-default);
+  }
+} 

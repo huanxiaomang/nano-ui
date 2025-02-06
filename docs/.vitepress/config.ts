@@ -33,7 +33,10 @@ export default defineConfig({
       {
         text: '基础组件',
         collapsed: false,
-        items: [{ text: 'Button', link: 'components/button' }],
+        items: [
+          { text: 'Button', link: 'components/button' },
+          { text: 'Avatar', link: 'components/avatar' },
+        ],
       },
       {
         text: '反馈组件',

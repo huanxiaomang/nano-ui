@@ -9,7 +9,7 @@ next:
 
 名字来源于《日常》及其衍生作品中的登场角色东云名乃(Shinonome Nano、東雲 なの)。
 
-<img src="./.vitepress/public/nano.png" style="height:200px;">
+<img src="./public/nano.png" style="height:200px;">
 
 ## 安装
 

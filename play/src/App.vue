@@ -7,30 +7,7 @@ import ConfigProvider from './../../packages/components/config-provider/config-p
 import { NMessage } from './../../packages/components/message';
 import { NNotify } from './../../packages/components/notification';
 import { en, ja, zhCn } from '@nano-ui/locale';
-
-const open = () => {
-  NNotify('nihao1');
-  NNotify({
-    title: 'nihao',
-    message: '<i>asd</i>',
-    type: 'success',
-    duration: 10000000,
-    dangerouslyUseHTMLString: true,
-    showClose: true,
-    onClose: () => console.log(1),
-    position: 'bottom-right',
-    topOffset: 400,
-  });
-  NMessage('nihao');
-  // NMessage({
-  //   message: '<i>asd</i>',
-  //   type: 'success',
-  //   duration: 10000000,
-  //   dangerouslyUseHTMLString: true,
-  //   showClose: true,
-  //   onClose: () => console.log(1),
-  // });
-};
+import NAvatar from './../../packages/components/avatar/avatar.vue';
 </script>
 
 <template>
@@ -46,7 +23,6 @@ const open = () => {
         max: 10,
       }"
     >
-      <n-button @click="open">123</n-button>
     </config-provider>
     <div class="demo-button">
       <p>
@@ -250,6 +226,36 @@ const open = () => {
 
     <div>自定义标签，a标签按钮</div>
     <n-button tag="a" href="baod">--nano-button</n-button>
+
+    <h3>基础用法</h3>
+    <div class="demo-avatar">
+      <n-avatar>U</n-avatar>
+      <n-avatar src="https://avatars.githubusercontent.com/u/113403693?v=4" />
+      <n-avatar icon="user" />
+    </div>
+
+    <h3>不同尺寸</h3>
+    <div class="demo-avatar">
+      <n-avatar size="small">S</n-avatar>
+      <n-avatar>D</n-avatar>
+      <n-avatar size="large">L</n-avatar>
+      <n-avatar :size="60">60</n-avatar>
+    </div>
+
+    <h3>不同形状</h3>
+    <div class="demo-avatar">
+      <n-avatar shape="circle">圆</n-avatar>
+      <n-avatar shape="square">方</n-avatar>
+    </div>
+
+    <h3>图标头像</h3>
+    <div class="demo-avatar">
+      <n-avatar icon="user" />
+      <n-avatar icon="star" type="primary" />
+      <n-avatar icon="heart" type="success" />
+      <n-avatar icon="bell" type="warning" />
+      <n-avatar icon="trash" type="danger" />
+    </div>
   </div>
 </template>
 
@@ -265,5 +271,21 @@ const open = () => {
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+
+.demo-avatar {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid var(--nano-border-color-lighter);
+  border-radius: var(--nano-border-radius-base);
+}
+
+h3 {
+  margin: 20px 0 10px;
+  color: var(--nano-text-color-primary);
+  font-weight: 500;
 }
 </style>
