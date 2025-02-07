@@ -21,8 +21,8 @@
 
 <style scoped>
 .demo-button p {
-  margin: 0;
-  padding: 1rem 0;
+  display: flex;
+  gap: 5px;
 }
 
 .demo-button p:not(:last-child) {

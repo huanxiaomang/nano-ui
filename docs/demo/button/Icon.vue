@@ -14,4 +14,9 @@
 .demo-button .n-button {
   margin: 0 8px 8px 0;
 }
+
+.demo-button {
+  display: flex;
+  gap: 5px;
+}
 </style>
