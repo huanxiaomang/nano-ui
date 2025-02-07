@@ -2,23 +2,23 @@
   <div class="demo-avatar">
     <div class="demo-avatar-item">
       <span class="demo-avatar-title">fill</span>
-      <n-avatar src="./../public/nano.png" fit="fill" />
+      <n-avatar src="../nano.png" fit="fill" />
     </div>
     <div class="demo-avatar-item">
       <span class="demo-avatar-title">contain</span>
-      <n-avatar src="./../public/nano.png" fit="contain" />
+      <n-avatar src="../nano.png" fit="contain" />
     </div>
     <div class="demo-avatar-item">
       <span class="demo-avatar-title">cover</span>
-      <n-avatar src="./../public/nano.png" fit="cover" />
+      <n-avatar src="../nano.png" fit="cover" />
     </div>
     <div class="demo-avatar-item">
       <span class="demo-avatar-title">none</span>
-      <n-avatar src="./../public/nano.png" fit="none" />
+      <n-avatar src="../nano.png" fit="none" />
     </div>
     <div class="demo-avatar-item">
       <span class="demo-avatar-title">scale-down</span>
-      <n-avatar src="./../public/nano.png" fit="scale-down" />
+      <n-avatar src="../nano.png" fit="scale-down" />
     </div>
   </div>
 </template>

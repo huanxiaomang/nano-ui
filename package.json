@@ -30,6 +30,7 @@
     "release": "release-it",
     "docs:dev": "pnpm --filter @nano-ui/docs dev",
     "docs:build": "pnpm --filter @nano-ui/docs build",
+    "docs:preview": "pnpm --filter @nano-ui/docs preview",
     "test": "vitest",
     "test:cov": "vitest --coverage",
     "esm-check": "pnpx are-we-esm --prod",

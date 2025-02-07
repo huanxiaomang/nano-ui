@@ -1,7 +1,7 @@
 <template>
   <div class="demo-avatar">
     <n-avatar>U</n-avatar>
-    <n-avatar src="./../public/nano.png" />
+    <n-avatar src="../nano.png" />
     <n-avatar icon="user" />
   </div>
 </template>
