@@ -1,1 +1,1 @@
-export * from './path';
+export const a = 1;
