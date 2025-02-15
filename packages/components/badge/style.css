@@ -1,0 +1,76 @@
+.nano-badge {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.nano-badge__content {
+  background-color: var(--nano-color-danger);
+  border-radius: 10px;
+  color: var(--nano-color-white);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  height: 18px;
+  padding: 0 6px;
+  white-space: nowrap;
+  border: 1px solid var(--nano-color-white);
+  position: absolute;
+
+  &.is-fixed {
+    position: absolute;
+  }
+
+  &.is-dot {
+    height: 8px;
+    width: 8px;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  &.is-top-right {
+    top: 0;
+    right: 0;
+    transform: translate(30%, -50%);
+  }
+
+  &.is-top-left {
+    top: 0;
+    left: 0;
+    transform: translate(-30%, -50%);
+  }
+
+  &.is-bottom-right {
+    bottom: 0;
+    right: 0;
+    transform: translate(30%, 50%);
+  }
+
+  &.is-bottom-left {
+    bottom: 0;
+    left: 0;
+    transform: translate(-30%, 50%);
+  }
+}
+
+/* 类型变体 */
+.nano-badge__content--primary {
+  background-color: var(--nano-color-primary);
+}
+
+.nano-badge__content--success {
+  background-color: var(--nano-color-success);
+}
+
+.nano-badge__content--warning {
+  background-color: var(--nano-color-warning);
+}
+
+.nano-badge__content--info {
+  background-color: var(--nano-color-info);
+}
+
+.nano-badge__content--danger {
+  background-color: var(--nano-color-danger);
+}

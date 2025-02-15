@@ -1,6 +1,7 @@
 import {
   NAlert,
   NAvatar,
+  NBadge,
   NButton,
   NButtonGroup,
   NConfigProvider,
@@ -15,4 +16,5 @@ export default [
   NAlert,
   NConfigProvider,
   NAvatar,
+  NBadge,
 ] as Plugin[];
