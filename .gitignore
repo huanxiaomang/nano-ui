@@ -22,3 +22,4 @@ tmp
 docs/.vitepress/cache
 
 .cursorrules
+.cursor

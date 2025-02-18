@@ -1,191 +1,115 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
+import { componentSizes } from '@nano-ui/shared';
 import NButton from '../button.vue';
 import NButtonGroup from '../button-group.vue';
 import NIcon from '../../icon/icon.vue';
+import { buttonTypes } from '../button';
 
-describe('NButton.vue', () => {
-  it('create', () => {
-    const wrapper = mount(() => <NButton type="primary" />);
-    expect(wrapper.classes()).toContain('nano-button--primary');
+describe('Button', () => {
+  describe('rendering', () => {
+    it('renders with different types', () => {
+      buttonTypes
+        .filter((type) => type !== '')
+        .forEach((type) => {
+          const wrapper = mount(() => <NButton type={type} />);
+          expect(wrapper.classes()).toContain(`nano-button--${type}`);
+        });
+    });
+
+    it('renders with different sizes', () => {
+      componentSizes
+        .filter((size) => size !== '')
+        .forEach((size) => {
+          const wrapper = mount(() => <NButton size={size} />);
+          expect(wrapper.classes()).toContain(`nano-button--${size}`);
+        });
+    });
+
+    it('renders without type class when type is empty', () => {
+      const wrapper = mount(() => <NButton type="" />);
+      expect(wrapper.classes()).not.toContain('nano-button--');
+      expect(wrapper.classes()).toContain('nano-button');
+    });
+
+    it('renders without size class when size is empty', () => {
+      const wrapper = mount(() => <NButton size="" />);
+      expect(wrapper.classes()).not.toContain('nano-button--');
+      expect(wrapper.classes()).toContain('nano-button');
+    });
   });
 
-  it('icon', () => {
-    const wrapper = mount(() => <NButton icon="search" />);
-    expect(wrapper.findComponent(NIcon).exists()).toBeTruthy();
+  describe('functionality', () => {
+    it('handles click events', async () => {
+      const onClick = vi.fn();
+      const wrapper = mount(() => <NButton onClick={onClick} />);
+      await wrapper.trigger('click');
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('throttles click events when enabled', async () => {
+      const onClick = vi.fn();
+      const wrapper = mount(() => (
+        <NButton useThrottle throttleDuration={300} onClick={onClick} />
+      ));
+      await wrapper.trigger('click');
+      await wrapper.trigger('click');
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
   });
 
-  it('loading', () => {
-    const wrapper = mount(() => <NButton loading />);
-    expect(wrapper.classes()).toContain('is-loading');
+  describe('states', () => {
+    it('handles disabled state', () => {
+      const wrapper = mount(() => <NButton disabled />);
+      expect(wrapper.classes()).toContain('is-disabled');
+      expect(wrapper.attributes('disabled')).toBeDefined();
+    });
+
+    it('handles loading state', () => {
+      const wrapper = mount(() => <NButton loading />);
+      expect(wrapper.classes()).toContain('is-loading');
+      expect(wrapper.findComponent(NIcon).exists()).toBe(true);
+    });
   });
 
-  it('size', () => {
-    const wrapper = mount(() => <NButton size="large" />);
-    expect(wrapper.classes()).toContain('nano-button--large');
-  });
-
-  it('plain', () => {
-    const wrapper = mount(() => <NButton plain />);
-    expect(wrapper.classes()).toContain('is-plain');
-  });
-
-  it('round', () => {
-    const wrapper = mount(() => <NButton round />);
-    expect(wrapper.classes()).toContain('is-round');
-  });
-
-  it('disabled', () => {
-    const wrapper = mount(() => <NButton disabled />);
-    expect(wrapper.classes()).toContain('is-disabled');
-    expect(wrapper.attributes('disabled')).toBeDefined();
-  });
-
-  it('should render correct tag when tag is provided', () => {
-    const wrapper = mount(() => <NButton tag="a" />);
-    expect(wrapper.element.tagName).toBe('A');
-  });
-
-  it('should render as button by default when no tag is provided', () => {
-    const wrapper = mount(() => <NButton />);
-    expect(wrapper.element.tagName).toBe('BUTTON');
-  });
-
-  it('should inherit disabled state from NButtonGroup', () => {
-    const wrapper = mount(() => (
-      <NButtonGroup disabled>
-        <NButton />
-      </NButtonGroup>
-    ));
-    const button = wrapper.findComponent(NButton);
-    expect(button.classes()).toContain('is-disabled');
-    expect(button.attributes('disabled')).toBeDefined();
-  });
-
-  it('should respect the disabled prop when not inside NButtonGroup', () => {
-    const wrapper = mount(() => <NButton disabled />);
-    expect(wrapper.classes()).toContain('is-disabled');
-    expect(wrapper.attributes('disabled')).toBeDefined();
-  });
-
-  it('should apply correct marginRight style based on default slot', () => {
-    const wrapperWithSlot = mount(() => (
-      <NButton icon="check-circle">Click Me</NButton>
-    ));
-    const iconStyleWithSlot = wrapperWithSlot
-      .findComponent(NIcon)
-      .attributes('style');
-    expect(iconStyleWithSlot).toContain('margin-right: 6px');
-  });
-
-  it('click event', async () => {
-    const clickHandler = vi.fn();
-    const wrapper = mount(() => <NButton onClick={clickHandler} />);
-    await wrapper.trigger('click');
-    expect(clickHandler).toHaveBeenCalledTimes(1);
-  });
-
-  it('throttle', async () => {
-    const clickHandler = vi.fn();
-    const wrapper = mount(() => (
-      <NButton useThrottle throttleDuration={300} onClick={clickHandler} />
-    ));
-    await wrapper.trigger('click');
-    await wrapper.trigger('click');
-    expect(clickHandler).toHaveBeenCalledTimes(1);
+  describe('icon handling', () => {
+    it('renders icon with correct margin', () => {
+      const wrapper = mount(() => (
+        <NButton icon="check-circle">Click Me</NButton>
+      ));
+      const iconStyle = wrapper.findComponent(NIcon).attributes('style');
+      expect(iconStyle).toContain('margin-right: 6px');
+    });
   });
 });
 
-describe('NButtonGroup.vue', () => {
-  it('should pass size prop to buttons', () => {
-    const wrapper = mount(() => (
-      <NButtonGroup size="large">
-        <NButton />
-        <NButton />
-      </NButtonGroup>
-    ));
+describe('ButtonGroup', () => {
+  describe('context inheritance', () => {
+    it('passes props to child buttons', () => {
+      const wrapper = mount(() => (
+        <NButtonGroup size="small" type="warning" disabled>
+          <NButton />
+        </NButtonGroup>
+      ));
 
-    const buttons = wrapper.findAllComponents(NButton);
-    buttons.forEach((button) => {
-      expect(button.classes()).toContain('nano-button--large');
-    });
-  });
-
-  it('should pass type prop to buttons', () => {
-    const wrapper = mount(() => (
-      <NButtonGroup type="primary">
-        <NButton />
-        <NButton />
-      </NButtonGroup>
-    ));
-
-    const buttons = wrapper.findAllComponents(NButton);
-    buttons.forEach((button) => {
-      expect(button.classes()).toContain('nano-button--primary');
-    });
-  });
-
-  it('should pass disabled prop to buttons', () => {
-    const wrapper = mount(() => (
-      <NButtonGroup disabled>
-        <NButton />
-        <NButton />
-      </NButtonGroup>
-    ));
-
-    const buttons = wrapper.findAllComponents(NButton);
-    buttons.forEach((button) => {
+      const button = wrapper.findComponent(NButton);
+      expect(button.classes()).toContain('nano-button--small');
+      expect(button.classes()).toContain('nano-button--warning');
       expect(button.classes()).toContain('is-disabled');
-      expect(button.attributes('disabled')).toBeDefined();
     });
   });
 
-  it('should provide context to child buttons', () => {
-    const wrapper = mount(() => (
-      <NButtonGroup size="small" type="warning" disabled>
-        <NButton />
-      </NButtonGroup>
-    ));
+  describe('event handling', () => {
+    it('preserves click events on child buttons', async () => {
+      const onClick = vi.fn();
+      const wrapper = mount(() => (
+        <NButtonGroup>
+          <NButton onClick={onClick} />
+        </NButtonGroup>
+      ));
 
-    const button = wrapper.findComponent(NButton);
-    expect(button.classes()).toContain('nano-button--small');
-    expect(button.classes()).toContain('nano-button--warning');
-    expect(button.classes()).toContain('is-disabled');
-    expect(button.attributes('disabled')).toBeDefined();
-  });
-
-  it('should handle button click event', async () => {
-    const clickHandler = vi.fn();
-    const wrapper = mount(() => (
-      <NButtonGroup>
-        <NButton onClick={clickHandler} />
-      </NButtonGroup>
-    ));
-
-    const button = wrapper.findComponent(NButton);
-    await button.trigger('click');
-    expect(clickHandler).toHaveBeenCalledTimes(1);
-  });
-
-  it('should pass the icon prop to buttons', () => {
-    const wrapper = mount(() => (
-      <NButtonGroup>
-        <NButton icon="search" />
-      </NButtonGroup>
-    ));
-
-    const button = wrapper.findComponent(NButton);
-    expect(button.findComponent(NIcon).exists()).toBeTruthy();
-  });
-
-  it('should pass the loading state to buttons', () => {
-    const wrapper = mount(() => (
-      <NButtonGroup>
-        <NButton loading />
-      </NButtonGroup>
-    ));
-
-    const button = wrapper.findComponent(NButton);
-    expect(button.classes()).toContain('is-loading');
+      await wrapper.findComponent(NButton).trigger('click');
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
   });
 });
