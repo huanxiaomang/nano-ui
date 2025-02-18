@@ -8,8 +8,20 @@ import {
   ToastMessage,
 } from './types';
 
+export interface ToastComponentExpose {
+  close: () => void;
+}
+
+// 修改这里的类型定义
+export type ToastComponent = Component<any> & {
+  new (): {
+    expose: ToastComponentExpose;
+  };
+};
+
 export interface CreateToastContext {
-  componentConstructor: Component;
+  // 约束组件构造器必须是带有 close 方法的组件
+  componentConstructor: ToastComponent;
   onInstanceClose?: (id: string) => any;
   onInstanceDestroy?: (id: string) => any;
   beforeInstanceClose?: (id: string) => any;
@@ -110,7 +122,13 @@ export const createToastFn = <CompProp extends ToastCompPropType>(
       // 这里不要直接调用props.onClose，否则内部声明周期过程会被跳过
       close: () => {
         beforeInstanceClose?.(id);
-        vm.exposed!.close();
+        if (!vm.exposed?.close) {
+          debugWarn(
+            'NanoMessage',
+            'The close method is not found on the component instance.'
+          );
+        }
+        vm.exposed?.close();
       },
     };
 
