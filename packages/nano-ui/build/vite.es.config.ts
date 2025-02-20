@@ -50,6 +50,8 @@ function getPlugins(): PluginOption[] {
     vue(),
     visualizer({
       filename: 'dist/stats.es.html',
+      gzipSize: true,
+      brotliSize: true,
     }),
     dts({
       outDir: 'dist/types',
@@ -70,6 +72,9 @@ function getPlugins(): PluginOption[] {
         drop_console: env.isProd && ['log'],
         drop_debugger: env.isProd,
         passes: env.isProd ? 4 : 1,
+        pure_getters: env.isProd,
+        unsafe_methods: env.isProd,
+        module: true,
         global_defs: {
           '@DEV': JSON.stringify(env.isDev),
           '@PROD': JSON.stringify(env.isProd),
@@ -99,13 +104,12 @@ export default defineConfig({
     outDir: 'dist/es',
     minify: false,
     cssCodeSplit: true,
-    lib: {
-      entry: resolve(__dirname, '../index.ts'),
-      name: 'NanoUI',
-      fileName: 'index',
-      formats: ['es'],
-    },
     rollupOptions: {
+      treeshake: {
+        moduleSideEffects: false,
+        propertyReadSideEffects: false,
+        tryCatchDeoptimization: false,
+      },
       external: [
         'vue',
         '@fortawesome/fontawesome-svg-core',
@@ -113,6 +117,7 @@ export default defineConfig({
         '@fortawesome/vue-fontawesome',
         '@popperjs/core',
         'async-validator',
+        /^@babel\/runtime/,
       ],
       output: {
         assetFileNames: (assetInfo) => {
@@ -144,6 +149,12 @@ export default defineConfig({
           return getComponentChunkName(id);
         },
       },
+    },
+    lib: {
+      entry: resolve(__dirname, '../index.ts'),
+      name: 'NanoUI',
+      fileName: 'index',
+      formats: ['es'],
     },
   },
 });
