@@ -29,8 +29,6 @@ async function moveStyles() {
   } catch (err: any) {
     if (err.code === 'ENOENT') {
       setTimeout(moveStyles, TRY_MOVE_STYLES_DELAY);
-    } else {
-      console.error('Failed to move styles:', err);
     }
   }
 }
@@ -54,12 +52,8 @@ function getPlugins(): PluginOption[] {
       brotliSize: true,
     }),
     dts({
+      tsconfigPath: '../../tsconfig.build.json',
       outDir: 'dist/types',
-      include: ['packages/**/*.ts', 'packages/**/*.vue'],
-      exclude: ['node_modules'],
-      compilerOptions: {
-        skipLibCheck: true,
-      },
     }) as PluginOption,
     hooks({
       rmFiles: ['./dist/umd', './dist/index.css'],

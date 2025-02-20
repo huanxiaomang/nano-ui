@@ -25,8 +25,6 @@ async function moveStyles() {
   } catch (err: any) {
     if (err.code === 'ENOENT') {
       setTimeout(moveStyles, TRY_MOVE_STYLES_DELAY);
-    } else {
-      console.error('Failed to move styles:', err);
     }
   }
 }
