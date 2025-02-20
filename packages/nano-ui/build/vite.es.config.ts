@@ -1,77 +1,100 @@
 import { resolve } from 'path';
-import { readdir, readdirSync } from 'fs';
+import { promises as fs, readdirSync } from 'fs';
 import { PluginOption, defineConfig } from 'vite';
-import { defer, delay, filter, map } from 'lodash-unified';
 import { visualizer } from 'rollup-plugin-visualizer';
 import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
-import shell from 'shelljs';
 import terser from '@rollup/plugin-terser';
 import { hooksPlugin as hooks } from './hooksPlugin';
 
-const TRY_MOVE_STYLES_DELAY = 800 as const;
+const TRY_MOVE_STYLES_DELAY = 800;
 
-const isProd = process.env.NODE_ENV === 'production';
-const isDev = process.env.NODE_ENV === 'development';
-const isTest = process.env.NODE_ENV === 'test';
+const env = {
+  isProd: process.env.NODE_ENV === 'production',
+  isDev: process.env.NODE_ENV === 'development',
+  isTest: process.env.NODE_ENV === 'test',
+};
 
 function getDirectoriesSync(basePath: string) {
   const entries = readdirSync(basePath, { withFileTypes: true });
-
-  return map(
-    filter(entries, (entry) => entry.isDirectory()),
-    (entry) => entry.name
-  );
+  return entries
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name);
 }
 
-function moveStyles() {
-  readdir('./dist/es/theme', (err) => {
-    if (err) return delay(moveStyles, TRY_MOVE_STYLES_DELAY);
-    defer(() => shell.mv('./dist/es/theme', './dist'));
-  });
+async function moveStyles() {
+  try {
+    await fs.access('./dist/es/theme');
+    await fs.rename('./dist/es/theme', './dist/theme');
+  } catch (err: any) {
+    if (err.code === 'ENOENT') {
+      setTimeout(moveStyles, TRY_MOVE_STYLES_DELAY);
+    } else {
+      console.error('Failed to move styles:', err);
+    }
+  }
 }
 
-export default defineConfig({
-  plugins: [
+function getComponentChunkName(id: string) {
+  const dirNames = getDirectoriesSync('../components');
+  for (const dirName of dirNames) {
+    if (id.includes(`/packages/components/${dirName}`)) {
+      return dirName;
+    }
+  }
+  return null;
+}
+
+function getPlugins(): PluginOption[] {
+  return [
     vue(),
     visualizer({
       filename: 'dist/stats.es.html',
     }),
     dts({
       outDir: 'dist/types',
-    }),
+      include: ['packages/**/*.ts', 'packages/**/*.vue'],
+      exclude: ['node_modules'],
+      compilerOptions: {
+        skipLibCheck: true,
+      },
+    }) as PluginOption,
     hooks({
       rmFiles: ['./dist/umd', './dist/index.css'],
       afterBuild: moveStyles,
     }) as PluginOption,
     terser({
       compress: {
-        sequences: isProd,
-        arguments: isProd,
-        drop_console: isProd && ['log'],
-        drop_debugger: isProd,
-        passes: isProd ? 4 : 1,
+        sequences: env.isProd,
+        arguments: env.isProd,
+        drop_console: env.isProd && ['log'],
+        drop_debugger: env.isProd,
+        passes: env.isProd ? 4 : 1,
         global_defs: {
-          '@DEV': JSON.stringify(isDev),
-          '@PROD': JSON.stringify(isProd),
-          '@TEST': JSON.stringify(isTest),
+          '@DEV': JSON.stringify(env.isDev),
+          '@PROD': JSON.stringify(env.isProd),
+          '@TEST': JSON.stringify(env.isTest),
         },
       },
       format: {
         semicolons: false,
-        shorthand: isProd,
-        braces: !isProd,
-        beautify: !isProd,
-        comments: !isProd,
+        shorthand: env.isProd,
+        braces: !env.isProd,
+        beautify: !env.isProd,
+        comments: !env.isProd,
       },
       mangle: {
-        toplevel: isProd,
-        eval: isProd,
-        keep_classnames: isDev,
-        keep_fnames: isDev,
+        toplevel: env.isProd,
+        eval: env.isProd,
+        keep_classnames: env.isDev,
+        keep_fnames: env.isDev,
       },
     }),
-  ],
+  ];
+}
+
+export default defineConfig({
+  plugins: getPlugins(),
   build: {
     outDir: 'dist/es',
     minify: false,
@@ -96,7 +119,7 @@ export default defineConfig({
           if (assetInfo.name === 'style.css') return 'index.css';
           if (
             assetInfo.type === 'asset' &&
-            /\.(css)$/i.test(assetInfo.name as string)
+            /\.css$/i.test(assetInfo.name as string)
           ) {
             return 'theme/[name].[ext]';
           }
@@ -118,11 +141,7 @@ export default defineConfig({
           ) {
             return 'shared';
           }
-          for (const dirName of getDirectoriesSync('../components')) {
-            if (id.includes(`/packages/components/${dirName}`)) {
-              return dirName;
-            }
-          }
+          return getComponentChunkName(id);
         },
       },
     },
