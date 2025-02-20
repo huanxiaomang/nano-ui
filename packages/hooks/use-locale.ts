@@ -2,7 +2,7 @@ import { Ref, computed, isRef, ref, unref } from 'vue';
 import { get } from 'lodash-unified';
 import { Language } from '@nano-ui/locale';
 import English from '@nano-ui/locale/lang/en';
-import { useGlobalConfig } from './use-global-config';
+import { useGlobalConfig } from '../components/config-provider/hooks/use-global-config';
 import type { MaybeRef } from '@vueuse/core';
 
 export type TranslatorOption = Record<string, string | number>;

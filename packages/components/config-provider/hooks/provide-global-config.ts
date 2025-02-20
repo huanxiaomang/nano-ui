@@ -9,9 +9,12 @@ import {
 } from 'vue';
 import { MaybeRef } from '@vueuse/core';
 import { debugWarn } from '@nano-ui/shared';
-import { globalConfig, mergeConfig, useGlobalConfig } from '@nano-ui/hooks';
 import { ConfigProviderContext, configProviderContextKey } from '../constants';
-
+import {
+  globalConfig,
+  mergeConfig,
+  useGlobalConfig,
+} from './use-global-config';
 export const provideGlobalConfig = (
   config: MaybeRef<ConfigProviderContext>,
   app?: App,

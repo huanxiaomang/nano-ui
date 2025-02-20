@@ -1,10 +1,10 @@
 import { isVNode } from 'vue';
 import { fromPairs, isNumber, isString } from 'lodash-unified';
-import { useGlobalConfig } from '@nano-ui/hooks';
 import {
   CreateToastContext,
   createToastFn,
 } from '@nano-ui/shared/component/toast/createToast';
+import { useGlobalConfig } from '../config-provider/hooks/use-global-config';
 import {
   NotificationPosition,
   NotificationProps,

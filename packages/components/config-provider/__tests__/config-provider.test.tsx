@@ -1,8 +1,8 @@
 import { defineComponent, ref } from 'vue';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
-import { useGlobalConfig } from '@nano-ui/hooks';
 import { zhCn } from '@nano-ui/locale';
+import { useGlobalConfig } from '../hooks/use-global-config';
 import ConfigProvider from '../config-provider.vue';
 
 const TestComponent = defineComponent({
