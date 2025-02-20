@@ -8,20 +8,8 @@ import {
   ToastMessage,
 } from './types';
 
-export interface ToastComponentExpose {
-  close: () => void;
-}
-
-// 修改这里的类型定义
-export type ToastComponent = Component<any> & {
-  new (): {
-    expose: ToastComponentExpose;
-  };
-};
-
 export interface CreateToastContext {
-  // 约束组件构造器必须是带有 close 方法的组件
-  componentConstructor: ToastComponent;
+  componentConstructor: Component;
   onInstanceClose?: (id: string) => any;
   onInstanceDestroy?: (id: string) => any;
   beforeInstanceClose?: (id: string) => any;
