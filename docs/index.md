@@ -4,16 +4,16 @@ layout: home
 hero:
   name: 'Nano-UI'
   text: '一款基于Vue3的组件库'
-  tagline: '高度仿造ElementPlus的组件库'
+  tagline: '具备完善的组件文档、ts类型支持，参考element-plus'
   actions:
     - theme: brand
       text: 开始使用
       link: /get-started
+  image:
+    src: /logo.svg
+    alt: Md2HTML
 
 features:
-  - icon: 📚
-    title: 全面的功能覆盖与高度兼容性
-    details: '该组件库全方位覆盖了Element Plus的功能，且与Element Plus的API完全兼容。这使其能够完美替代Element Plus，为用户带来一致的功能体验，极大地方便了用户在项目中的迁移与使用。'
   - icon: 📦
     title: 出色的易用性与简化的开发流程
     details: '组件库设计了简洁直观的API以及清晰合理的组件结构，开发人员可以轻松快速地掌握并利用其进行高效的界面构建，有效减少开发所需的时间和精力。并且部分组件能适配多种开发模式。'
